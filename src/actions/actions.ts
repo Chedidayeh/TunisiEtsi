@@ -993,10 +993,10 @@ export async function addProductToCart(
 
     // Check if product with productId already exists in the cart
     const existingCartProduct = user?.cart?.selectedProducts.find(
-      (product) => (product.productId === productId || product.category === category
-        || product.size === size || product.color === color
-        || product.quantity === quantity
-        || product.price === price
+      (product) => (product.productId === productId && product.category === category
+        && product.size === size && product.color === color
+        && product.quantity === quantity
+        && product.price === price
       )
     );
 

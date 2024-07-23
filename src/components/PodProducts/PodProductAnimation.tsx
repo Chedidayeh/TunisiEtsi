@@ -157,8 +157,8 @@ function ReviewGrid() {
           />
         </>
       ) : null}
-      <div className='pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-gray-50' />
-      <div className='pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-gray-50' />
+      <div className='pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b ' />
+      <div className='pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t ' />
     </div>
   )
 }

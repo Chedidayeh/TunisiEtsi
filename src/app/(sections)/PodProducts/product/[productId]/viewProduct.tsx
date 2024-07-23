@@ -322,7 +322,7 @@ const combinedUrls = interleaveArrays(product.croppedFrontProduct, product.cropp
                  />
               </div>
               <div className="flex justify-center items-center mt-2">
-              <Link href="/MarketPlace/cart">
+              <Link href="/PodProducts/cart">
               <Button onClick={()=>setOpen(true)} variant="link" className="flex justify-center items-center">
                 View Cart
               </Button>

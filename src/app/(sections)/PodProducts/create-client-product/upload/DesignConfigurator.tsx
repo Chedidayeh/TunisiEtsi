@@ -61,7 +61,8 @@ import Link from "next/link"
 import { BackBorder, Category, Color, FrontBorder, Size, User } from "@prisma/client"
 import LoadingState from "@/components/LoadingState"
 import { getUserPreOrder } from "../preview/actions"
-import { useEdgeStore } from "@/lib/edgestore"
+import { useUploadThing } from "@/lib/uploadthing"
+import ProgressState from "@/components/ProgressState"
 
 
 
@@ -95,9 +96,6 @@ const DesignConfigurator: React.FC<DesignConfiguratorProps> = ({ SellersDesignsD
   const [categories, setCategories] = React.useState<fetchedCat[]>([])
   const [open, setOpen] = React.useState<boolean>(false);
 
-  const { edgestore } = useEdgeStore();
-
-  
   React.useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -136,9 +134,6 @@ const DesignConfigurator: React.FC<DesignConfiguratorProps> = ({ SellersDesignsD
   // to capture the mockups
   let FrontcontainerRef= useRef<HTMLDivElement>(null)
   let BackcontainerRef= useRef<HTMLDivElement>(null)
-  // to trigger the alert dialog
-  const alertDialogTriggerRef = useRef<HTMLButtonElement>(null);
-  const alertDialogCancelRef = useRef<HTMLButtonElement>(null);
 
   const [isBorderHidden, setIsBorderHidden] = useState(true);
   const [isBackBorderHidden, setisBackBorderHidden] = useState(true);
@@ -446,8 +441,14 @@ const handleFileChange = (file : File) => {
     
   
 
+    const [uploadProgress, setUploadProgress] = useState<number>(0)
 
 
+    const { startUpload, isUploading } = useUploadThing('imageUploader', {
+      onUploadProgress: (progressEvent) => {
+        setUploadProgress(progressEvent);
+        },
+    });
 
 
 
@@ -489,7 +490,6 @@ const handleFileChange = (file : File) => {
                   } catch (e) {
                     // Handle network errors or other exceptions
                     console.error('Error during file upload:', e)
-                    closeDialog()
                   }
               }
 
@@ -549,24 +549,10 @@ const handleFileChange = (file : File) => {
                     description: 'Error during client design upload. Please try again.',
                     variant: 'destructive',
                 });
-                  closeDialog()
                 }
               } 
               
               
-                
-                const openDialog = () => {
-                  if (alertDialogTriggerRef.current) {
-                    alertDialogTriggerRef.current.click();
-                  }
-                };
-
-                // function will cancel the dialog
-                const closeDialog = () => {
-                  if (alertDialogCancelRef.current) {
-                    alertDialogCancelRef.current.click();
-                  }
-                };
      
 
 
@@ -586,7 +572,6 @@ const handleFileChange = (file : File) => {
                       );
                       return;
                     }
-                    openDialog();
                     setIsBorderHidden(true);
                     setisBackBorderHidden(true);
                 
@@ -601,7 +586,6 @@ const handleFileChange = (file : File) => {
                   } catch (error) {
                     console.error(error);
                     showToast('Error!', 'Please try again later!', 'destructive');
-                    closeDialog();
             
                   }
                 };
@@ -611,8 +595,9 @@ const handleFileChange = (file : File) => {
                   img.src = selectedCatColors.frontImageUrl;
                 
                   if (frontDesignPrice === 0) {
-                    const res = await edgestore.publicFiles.upload({ file : FrontDesignFile! })
-                    await saveCapturedFrontDesign(user, res.url, 'front', false);
+                    const uploadedFile = await startUpload([FrontDesignFile!]);
+                    const frontDesignPath = uploadedFile![0].url
+                    await saveCapturedFrontDesign(user, frontDesignPath, 'front', false);
                   } else {
                     const design = document.querySelector(".front-design") as HTMLImageElement;
                     if (design) {
@@ -627,8 +612,9 @@ const handleFileChange = (file : File) => {
                   img.src = selectedCatColors.backImageUrl;
                 
                   if (backDesignPrice === 0) {
-                    const res = await edgestore.publicFiles.upload({ file : BackDesignFile! })
-                    await saveCapturedBackDesign(user, res.url, 'back', false);
+                    const uploadedFile = await startUpload([BackDesignFile!]);
+                    const backDesignPath = uploadedFile![0].url
+                    await saveCapturedBackDesign(user, backDesignPath, 'back', false);
                   } else {
                     const design = document.querySelector(".back-design") as HTMLImageElement;
                     if (design) {
@@ -645,23 +631,25 @@ const handleFileChange = (file : File) => {
                   backImg.src = selectedCatColors.backImageUrl;
             
                   if (frontDesignPrice === 0 && backDesignPrice !== 0) {
-                    const res = await edgestore.publicFiles.upload({ file : FrontDesignFile! })
+                    const uploadedFile = await startUpload([FrontDesignFile!]);
+                    const frontDesignPath = uploadedFile![0].url
                     const design = document.querySelector(".back-design") as HTMLImageElement;
                     if (design) {
                       design.src = selectedBackDesign;
                     }
                     const paths = await saveCapturedBothDesigns();
-                    const result = await savePreOrderFB1(user?.id!,res.url,selectedBackDesignId,totalPrice,productPrice,quantity,selectedColor,selectedSize,selectedP.label,paths)
+                    const result = await savePreOrderFB1(user?.id!,frontDesignPath,selectedBackDesignId,totalPrice,productPrice,quantity,selectedColor,selectedSize,selectedP.label,paths)
                     handleSaveResult(result);
                   }
                   else if (frontDesignPrice !== 0 && backDesignPrice === 0) {
-                    const backDesignPath = await edgestore.publicFiles.upload({ file : BackDesignFile! })
+                    const uploadedFile = await startUpload([BackDesignFile!]);
+                    const backDesignPath = uploadedFile![0].url
                     const design = document.querySelector(".front-design") as HTMLImageElement;
                     if (design) {
                       design.src = selectedFrontDesign;
                       } 
                     const paths = await saveCapturedBothDesigns();
-                    const result = await savePreOrderFB2(user?.id!,backDesignPath.url,selectedFrontDesignId,totalPrice,productPrice,quantity,selectedColor,selectedSize,selectedP.label,paths)
+                    const result = await savePreOrderFB2(user?.id!,backDesignPath,selectedFrontDesignId,totalPrice,productPrice,quantity,selectedColor,selectedSize,selectedP.label,paths)
                     handleSaveResult(result);
                   }
                   else if (frontDesignPrice !== 0 && backDesignPrice !== 0) {
@@ -678,10 +666,16 @@ const handleFileChange = (file : File) => {
                     handleSaveResult(result);
                   }
                   else if (frontDesignPrice === 0 && backDesignPrice === 0) {
-                    const frontDesignPath = await edgestore.publicFiles.upload({ file : FrontDesignFile! })
-                    const backDesignPath = await edgestore.publicFiles.upload({ file : BackDesignFile! })
+
+                    const uploadedFile1 = await startUpload([FrontDesignFile!]);
+                    const frontDesignPath = uploadedFile1![0].url
+
+                    const uploadedFile2 = await startUpload([BackDesignFile!]);
+                    const backDesignPath = uploadedFile2![0].url
+
+
                     const paths = await saveCapturedBothDesigns();
-                    const result = await savePreOrderFBClient(user?.id!,frontDesignPath.url,backDesignPath.url,totalPrice,productPrice,quantity,selectedColor,selectedSize,selectedP.label,paths)
+                    const result = await savePreOrderFBClient(user?.id!,frontDesignPath,backDesignPath,totalPrice,productPrice,quantity,selectedColor,selectedSize,selectedP.label,paths)
                     handleSaveResult(result);
                   }
                 
@@ -690,12 +684,12 @@ const handleFileChange = (file : File) => {
             
                 const saveCapturedFrontDesign = async (user : User, designPath : string, designType : string, isSellerDesign : boolean) => {
                   const containerRef = designType === 'front' ? FrontcontainerRef : BackcontainerRef;
-                  const dataUrl = await toPng(containerRef.current!, { cacheBust: false, pixelRatio: 10 });
+                  const dataUrl = await toPng(containerRef.current!, { cacheBust: false, pixelRatio: 5 });
                 
                   const file = getFile(dataUrl);
-                  const capturedProductPath = await edgestore.publicFiles.upload({ file : file })
-
-                  const paths = [capturedProductPath.url!];
+                  const uploadedFile = await startUpload([file!]);
+                  const capturedProductPath = uploadedFile![0].url
+                  const paths = [capturedProductPath!];
                 
                   const result = await savePreOrderF(user?.id!, designPath, totalPrice,productPrice, quantity, selectedColor, selectedSize, selectedP.label, paths, isSellerDesign);
                 
@@ -705,11 +699,12 @@ const handleFileChange = (file : File) => {
             
                 const saveCapturedBackDesign = async (user : User, designPath : string, designType : string, isSellerDesign : boolean) => {
                   const containerRef = designType === 'front' ? FrontcontainerRef : BackcontainerRef;
-                  const dataUrl = await toPng(containerRef.current!, { cacheBust: false, pixelRatio: 10 });
+                  const dataUrl = await toPng(containerRef.current!, { cacheBust: false, pixelRatio: 5 });
                 
                   const file = getFile(dataUrl);
-                  const capturedProductPath = await edgestore.publicFiles.upload({ file : file })
-                  const paths = [capturedProductPath.url!];
+                  const uploadedFile = await startUpload([file!]);
+                  const capturedProductPath = uploadedFile![0].url
+                  const paths = [capturedProductPath!];
                 
                   const result = await savePreOrderB(user?.id!, designPath, totalPrice,productPrice, quantity, selectedColor, selectedSize, selectedP.label, paths, isSellerDesign);
                 
@@ -718,16 +713,19 @@ const handleFileChange = (file : File) => {
                 
             
                 const saveCapturedBothDesigns = async () => {
-                  const frontDataUrl = await toPng(FrontcontainerRef.current!, { cacheBust: false, pixelRatio: 10 });
-                  const backDataUrl = await toPng(BackcontainerRef.current!, { cacheBust: false, pixelRatio: 10 });
+                  const frontDataUrl = await toPng(FrontcontainerRef.current!, { cacheBust: false, pixelRatio: 5 });
+                  const backDataUrl = await toPng(BackcontainerRef.current!, { cacheBust: false, pixelRatio: 5 });
                 
                   const frontFile = getFile(frontDataUrl);
                   const backFile = getFile(backDataUrl);
-                  const frontCapturedPath = await edgestore.publicFiles.upload({ file : frontFile })
-                  const backCapturedPath = await edgestore.publicFiles.upload({ file : backFile })
+                
 
-                                
-                  return [frontCapturedPath.url!, backCapturedPath.url!];
+                  const uploadedFile1 = await startUpload([frontFile!]);
+                  const frontCapturedPath = uploadedFile1![0].url
+                  const uploadedFile2 = await startUpload([backFile!]);
+                  const backCapturedPath = uploadedFile2![0].url
+                
+                  return [frontCapturedPath!, backCapturedPath!];
                 };
                 
                 const handleSaveResult = (result : any) => {
@@ -735,7 +733,6 @@ const handleFileChange = (file : File) => {
                     showToast('Great!', 'PreOrder Saved successfully.', 'default');
                     router.push("/PodProducts/create-client-product/preview?preOrderId=" + result.preOrderId);
                   } else {
-                    closeDialog();
                     showToast('Error', 'Failed to Save preOrder! Please try again later.', 'destructive');
                   }
                 };
@@ -777,28 +774,9 @@ const handleFileChange = (file : File) => {
 
     <>
     <LoadingState isOpen={open} />
+    <ProgressState isOpen={isUploading} progress={uploadProgress} />
 
 
-                      {/* The AlertDialog component */}
-                      <AlertDialog>
-                          <AlertDialogTrigger asChild ref={alertDialogTriggerRef}>
-                            <button className="hidden">Hidden Trigger</button>
-                          </AlertDialogTrigger>
-                          <AlertDialogContent>
-                            <AlertDialogHeader className="flex flex-col items-center">
-                              <div></div>
-                              <AlertDialogTitle className="text-2xl text-blue-700 font-bold text-center">
-                                Passing to shipping informations !
-                              </AlertDialogTitle>
-                              <AlertDialogDescription className="flex flex-col items-center">
-                                This will take a moment.
-                                {/* Replace Loader2 with your loader component */}
-                                <Loader2 className="text-blue-700 h-[50%] w-[50%] animate-spin mt-3" />
-                              </AlertDialogDescription>
-                            </AlertDialogHeader>
-                            <AlertDialogCancel className="hidden" ref={alertDialogCancelRef}>Cancel</AlertDialogCancel>
-                          </AlertDialogContent>
-                        </AlertDialog>
 
 
 
@@ -903,8 +881,6 @@ const handleFileChange = (file : File) => {
                                       }
                                       if (file) {
                                         handleFileChange(file);
-
-                                        
                                       }
                                     }}
                                   />

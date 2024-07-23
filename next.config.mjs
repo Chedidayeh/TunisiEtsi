@@ -2,8 +2,10 @@
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    reactStrictMode: true,
-    
+    reactStrictMode: true,   
+    images: {
+      domains: ['utfs.io'],
+    },
     experimental: {
       serverActions: {
         bodySizeLimit: '1000MB',

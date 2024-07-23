@@ -49,7 +49,8 @@ const NewReleased = ({ products, user , categories }: ProductReelProps) => {
   // Sorting function based on sortBy criteria
   const [sortBy, setSortBy] = useState<string>(''); // State for selected sort option
   const [sortByCategory, setSortByCategory] = useState<string>("");
-  const [priceRange, setPriceRange] = useState<[number, number]>([10, 20]); // State for selected price range
+  const [priceRange, setPriceRange] = useState<[number, number]>([1, 40]);
+  const [sliderInitialized, setSliderInitialized] = useState<boolean>(false); // Flag for slider interaction
 
   const sortedProducts = useMemo(() => {
     return [...(products || [])].sort((a, b) => {    switch (sortBy) {
@@ -78,14 +79,14 @@ const NewReleased = ({ products, user , categories }: ProductReelProps) => {
       );
     }
   
-    if (priceRange) {
-      result = result.filter((product) => 
+    if (sliderInitialized) { // Apply price range filter only if slider is interacted with
+      result = result.filter((product) =>
         product.price >= priceRange[0] && product.price <= priceRange[1]
       );
     }
 
     return result;
-  }, [sortedProducts, sortByCategory, priceRange]);
+  }, [sortedProducts, sortByCategory, priceRange, sliderInitialized]);
 
   const handleSortChange = (event: string) => {
     setSortBy(event); 
@@ -100,15 +101,14 @@ const NewReleased = ({ products, user , categories }: ProductReelProps) => {
 
   };
 
-  const handlePriceRangeChange = (value: number[]) => {
-    // Map slider value to price ranges
-    const ranges: [number, number][] = [
-      [10, 20],
-      [20, 30],
-      [30, 40],
-      [40, 50]
-    ];
-    setPriceRange(ranges[value[0]]);
+  const handlePriceRangeChange = (value: string) => {
+    const ranges: { [key: string]: [number, number] } = {
+      '1-10': [1, 10],
+      '10-20': [10, 20],
+      '20-40': [20, 40]
+    };
+    setPriceRange(ranges[value]);
+    setSliderInitialized(true)
     setCurrentPage(1); // Reset to first page on price range change
   };
   
@@ -273,21 +273,29 @@ const NewReleased = ({ products, user , categories }: ProductReelProps) => {
             </SelectContent>
         </Select> 
     </div>
+    <div className="mt-3 flex-1">
+    <Select onValueChange={handlePriceRangeChange}>
+    <SelectTrigger className="w-[180px] bg-white">
+      <SelectValue placeholder="Select Price Range" />
+    </SelectTrigger>
+    <SelectContent>
+      <SelectGroup>
+        <SelectLabel>Select Price Range</SelectLabel>
+        <SelectItem value="1-10">1 TND - 10 TND</SelectItem>
+        <SelectItem value="10-20">10 TND - 20 TND</SelectItem>
+        <SelectItem value="20-40">20 TND - 40 TND</SelectItem>
+      </SelectGroup>
+    </SelectContent>
+  </Select>
     </div>
-    <div className="mt-8 text-gray-600 text-sm flex-1">
-    <Slider
-        defaultValue={[0]} // Initial value corresponds to the first range [10, 20]
-        max={3} // There are 4 ranges, so max index is 3
-        step={1}
-        onValueChange={handlePriceRangeChange}
-        className={cn("w-full")}
-      />
-    <div className="mt-4">Price Range: {priceRange[0]} TND - {priceRange[1]} TND</div>
+  </div>
 
+  <div className="mt-4 text-gray-600 text-sm flex-1">
+    <div className="mt-4">Price Range: {priceRange[0]} TND - {priceRange[1]} TND</div>
     </div>
-    <div className="mt-3 text-gray-600 text-sm flex-1">
-        Total Products found: {paginatedProducts.length}
-    </div>
+  <div className="mt-3 text-gray-600 text-sm">
+    Total Products found: {paginatedProducts.length}
+  </div>
     
 </div>
 

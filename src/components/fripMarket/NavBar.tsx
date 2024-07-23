@@ -85,15 +85,26 @@ const Navbar = async () => {
                       Categories
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent className="w-40 mt-3">
-                    {categories.length > 0 ? (
-                      categories.map((category) => (
-                        <DropdownMenuItem key={category}>{category}</DropdownMenuItem>
-                      ))
-                    ) : (
-                      <DropdownMenuItem disabled>No data for now!</DropdownMenuItem>
-                    )}
-                  </DropdownMenuContent>
+                  <DropdownMenuContent className="w-40 mt-3 flex flex-col">
+                {categories.length > 0 ? (
+                  categories.map((category) => (
+                    <Link
+                      key={category}
+                      href={`/fripMarket/category/${category}`}
+                      className={buttonVariants({
+                        size: 'sm',
+                        variant: 'ghost',
+                      })}
+                    >
+                      {category}
+                    </Link>
+                  ))
+                ) : (
+                  <DropdownMenuItem disabled>No data for now!</DropdownMenuItem>
+                )}
+              </DropdownMenuContent>
+
+
                 </DropdownMenu>
 
                 </DialogClose>
@@ -152,15 +163,25 @@ const Navbar = async () => {
               Categories
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-40 mt-3">
+          <DropdownMenuContent className="w-40 mt-3 flex flex-col">
             {categories.length > 0 ? (
               categories.map((category) => (
-                <DropdownMenuItem key={category}>{category}</DropdownMenuItem>
+                <Link
+                  key={category}
+                  href={`/fripMarket/category/${category}`}
+                  className={buttonVariants({
+                    size: 'sm',
+                    variant: 'ghost',
+                  })}
+                >
+                  {category}
+                </Link>
               ))
             ) : (
               <DropdownMenuItem disabled>No data for now!</DropdownMenuItem>
             )}
           </DropdownMenuContent>
+
         </DropdownMenu>
 
 

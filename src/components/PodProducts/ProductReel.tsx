@@ -72,12 +72,14 @@ const ProductReel = (props: ProductReelProps) => {
         </div>
 
         {href ? (
+          <div className="text-center">
           <Link
             href={href}
-            className='hidden text-sm font-medium text-blue-600 hover:text-blue-500 md:block'>
+            className=' text-sm font-medium text-blue-600 hover:text-blue-500'>
             Shop the collection{' '}
             <span aria-hidden='true'>&rarr;</span>
           </Link>
+          </div>
         ) : null}
       </div>
 

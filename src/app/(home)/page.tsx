@@ -34,13 +34,7 @@ import { BacProductAnimation } from "@/components/bacProducts/BacProductAnimatio
 
 
 export default async function Page() {
-  const newProducts = await fetchNewProducts();
-  const bestSellingProducts = await fetchBestSellingProducts();
-  const user = await getUser();
 
-  // Ensure products are not null or undefined
-  const filteredNewProducts = newProducts ? newProducts.slice(0, 8) : [];
-  const filteredBestSellingProducts = bestSellingProducts ? bestSellingProducts.slice(0, 8) : [];
   
   return (
     <>

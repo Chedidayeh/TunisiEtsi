@@ -96,10 +96,8 @@ const ViewProduct: React.FC<ViewProductProps> = ({ product , user ,categoryProdu
          
 
         <div className='mt-4 lg:col-end-2 lg:row-span-2 lg:mt-0 lg:self-center'>
-        <div className=" rounded-2xl flex items-center justify-center">
-    <div className="w-96 h-96 ">
-      <ImageSlider urls={product.image} />
-    </div>
+        <div className='aspect-square rounded-lg my-4 mx-10'>
+        <ImageSlider urls={product.image} />
   </div>
 
 
