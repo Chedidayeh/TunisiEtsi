@@ -100,6 +100,7 @@ import { deleteOrderById } from "./actions"
 
 interface ExtraOrders extends FripOrder {
     orderItems : FripOrderItem[]
+    user : User
 }
   
   
@@ -301,10 +302,10 @@ interface OrderViewProps {
         <CardContent>
 
 
-        <div className="flex space-x-4 items-center mt-2">
+        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 items-center mt-2">
           <Input
             type="search"
-            className="w-[50%] bg-gray-100"
+            className="w-full sm:w-[50%] bg-gray-100"
             placeholder="Enter the order Id , client Name , client Phone Number to make a search..."
             value={searchQuery}
             onChange={handleSearchChange}
@@ -341,12 +342,13 @@ interface OrderViewProps {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Order Id</TableHead>
-                  <TableHead>Order Status</TableHead>
-                  <TableHead>Order Type</TableHead>
-                  <TableHead>Is Order Paid</TableHead>
-                  <TableHead>Total Items</TableHead>
-                  <TableHead>Order Amount</TableHead>
+                  <TableHead className="hidden sm:table-cell">Order Id</TableHead>
+                  <TableHead className="hidden xl:table-cell">Order Status</TableHead>
+                  <TableHead className="hidden xl:table-cell">Order Type</TableHead>
+                  <TableHead>Creation Date</TableHead>
+                  <TableHead className="hidden xl:table-cell">Is Order Paid</TableHead>
+                  <TableHead className="hidden xl:table-cell">Total Items</TableHead>
+                  <TableHead className="hidden xl:table-cell">Order Amount</TableHead>
                   <TableHead>Actions</TableHead>
                 </TableRow>
               </TableHeader>
@@ -357,8 +359,8 @@ interface OrderViewProps {
                   className={`cursor-pointer ${selectedIndex === index ? 'border-2 border-blue-500' : ''}`}
                   onClick={() => handleRowClick(order, index)}
                 >
-                    <TableCell>{order.id}</TableCell>
-                    <TableCell>
+                    <TableCell className="hidden xl:table-cell">{order.id}</TableCell>
+                    <TableCell className="hidden xl:table-cell">
                       <Badge className={`${{
                               'PROCESSING': 'bg-blue-700',
                               'DELIVERED': 'bg-green-700',
@@ -368,18 +370,21 @@ interface OrderViewProps {
                               {order.status}
                         </Badge>
                       </TableCell>
-                    <TableCell>
+                    <TableCell className="hidden xl:table-cell">
                     <Badge className={`${order.type === 'CONFIRMED' ? 'bg-green-700' : order.type === 'NOT_CONFIRMED' ? 'bg-orange-400' : order.type === 'CANCELED' ? 'bg-red-700' : 'bg-gray-700'} hover:bg-gray-700`}>
                       {order.type}
                     </Badge>
                       </TableCell>
-                    <TableCell>
+                      <TableCell>
+                       {new Date(order.createdAt).toLocaleString()}
+                      </TableCell>
+                    <TableCell className="hidden xl:table-cell">
                       <Badge className={`${order.isPaid ? 'bg-green-700' :  'bg-red-700'} hover:bg-gray-700`}>
                     {order.isPaid ? "Is Paid" : "Not Paid"}
                       </Badge>
                       </TableCell>
-                    <TableCell>{order.orderItems?.length || 0} items</TableCell>
-                    <TableCell>{(order.amount).toFixed(2)} TND</TableCell>
+                    <TableCell className="hidden xl:table-cell">{order.orderItems?.length || 0} items</TableCell>
+                    <TableCell className="hidden xl:table-cell">{(order.amount).toFixed(2)} TND</TableCell>
                     <TableCell>
                     <TooltipProvider>
                     {/* View Icon */}
@@ -428,15 +433,15 @@ interface OrderViewProps {
 
 
       {selectedOrder && (
-         <Card className="xl:col-span-4" x-chunk="dashboard-01-chunk-4">
-         <CardHeader className="flex flex-row items-center">
-           <div className="grid gap-2">
+      <Card className="col-span-full" x-chunk="dashboard-01-chunk-4">
+          <CardHeader className="flex flex-col md:flex-row items-center">
+          <div className="grid gap-2">
              <CardTitle className="font-extrabold">Order Infos :</CardTitle>
              <CardDescription>
-                     <div className="grid grid-cols-5 gap-10 mt-2">
-                         <div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 mt-2">
+                          <div>
                              <p className="font-bold">Order Id:</p>
-                             <p>{selectedOrder?.id}</p>
+                             <p className="text-xs">{selectedOrder?.id}</p>
                          </div>
                          <div>
                              <p className="font-bold">Order Status:</p>
@@ -465,6 +470,10 @@ interface OrderViewProps {
                          <div>
                              <p className="font-bold">Client Name:</p>
                              <p>{selectedOrder.clientName}</p>
+                         </div>
+                         <div>
+                             <p className="font-bold">Client Email:</p>
+                             <p>{selectedOrder.user.email}</p>
                          </div>
                          <div>
                              <p className="font-bold">Client Phone Number:</p>

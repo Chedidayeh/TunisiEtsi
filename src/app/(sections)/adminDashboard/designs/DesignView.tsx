@@ -348,16 +348,16 @@ interface ProductViewProps {
         <CardContent>
 
 
-        <div className="flex space-x-4 mt-2"> 
+        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 mt-2">
           <Input
-              type="search"
-              className="w-[50%] bg-gray-100"
-              placeholder="Enter the design Id, name to make a search..."
-              value={searchQuery}
-              onChange={handleSearchChange}
-            />        
+            type="search"
+            className="w-full sm:w-[50%] bg-gray-100"
+            placeholder="Enter the design Id, name to make a search..."
+            value={searchQuery}
+            onChange={handleSearchChange}
+          />
           <Select onValueChange={handleFilterChange}>
-          <SelectTrigger className="w-[180px] bg-gray-100">
+            <SelectTrigger className="w-full sm:w-[180px] bg-gray-100">
               <SelectValue placeholder="Filter By" />
             </SelectTrigger>
             <SelectContent>
@@ -370,7 +370,8 @@ interface ProductViewProps {
               </SelectGroup>
             </SelectContent>
           </Select>
-      </div>
+        </div>
+
         <ScrollArea className="mt-4 w-full h-72">
         <Table>
   <TableHeader>

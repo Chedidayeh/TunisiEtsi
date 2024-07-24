@@ -31,6 +31,9 @@ import { Separator } from '@/components/ui/separator';
 import { DeleteOrder } from "./actions";
 import { useToast } from "@/components/ui/use-toast"
 import { useRouter } from "next/navigation"
+import ImageSlider from "@/components/fripMarket/ImageSlider"
+import Link from "next/link"
+import { cn } from "@/lib/utils"
 
   
 interface OrderWithItems extends Order {
@@ -243,26 +246,57 @@ const MobileView = ({ordersData}: ViewProps) => {
           </div>
         </dl>
       </div>
+
+      <Separator className="my-4" />
+      <div className="font-semibold">Order Items</div>
+      <div className="p-6 flex items-center justify-center text-sm">
+
+      <ul
+                  className={cn({
+                    'divide-y divide-gray-200 border-b border-t border-gray-200':
+                    currentOrder.orderItems.length > 1,
+                  })}>
+                  {currentOrder.orderItems.map((item) => {
+
+                      return (
+                        <li
+                          key={item.id}
+                          className='flex py-2'>
+                          <div className='flex-shrink-0 mb-10'>
+                            <div className='h-52 w-52'>
+                            <Link
+                            href={`/fripMarket/ProductView/${item.productId}`}>
+                            <ImageSlider urls={item.capturedMockup}/>
+                            </Link>
+                            </div>
+                          </div>
+                        </li>
+                      )
+                    })}
+                </ul>
+                </div>
+        
     </CardContent>
     <CardFooter className="flex flex-row items-center border-t bg-muted/50 px-6 py-3">
       <div className="text-xs text-muted-foreground">
-        Total: {ordersData.length}
+        Total Orders: {ordersData.length}
       </div>
       {ordersData.length > 1 && (
-      <Pagination className="ml-auto mr-0 w-auto">
-            <PaginationContent>
-              <PaginationItem>
-              <Button variant="outline" onClick={showPreviousOrder}>
-                  Previous Order
-                </Button>
-              </PaginationItem>
-              <PaginationItem>
-              <Button variant="outline" onClick={showNextOrder}>
-                  Next Order
-                </Button>
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
+            <Pagination className="ml-2 mr-0 w-auto">
+      <PaginationContent className="flex flex-col sm:flex-row">
+        <PaginationItem className="mb-2 sm:mb-0 sm:mr-2">
+          <Button variant="outline" onClick={showPreviousOrder}>
+            Previous Order
+          </Button>
+        </PaginationItem>
+        <PaginationItem>
+          <Button variant="outline" onClick={showNextOrder}>
+            Next Order
+          </Button>
+        </PaginationItem>
+      </PaginationContent>
+    </Pagination>
+
              )}
     </CardFooter>
   </Card>

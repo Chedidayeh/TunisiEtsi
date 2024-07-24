@@ -262,7 +262,7 @@ const Page = () => {
             type='text' 
             maxLength={20} 
             placeholder='Store Name must be unique !'
-            className='border-gray-300 w-[50%]'
+            className='border-gray-300 w-full sm:w-[50%]'
             onChange={(e) => {
               setStoreName(e.target.value)
             }}/>
@@ -279,7 +279,7 @@ const Page = () => {
                 onBlur={handlePhoneNumberBlur}
                 placeholder="99 999 999" 
                 onChange={handlePhoneNumberChange}
-                className={`${inputClassName} focus:ring-0  w-[50%] focus:border-green-500`}
+                className={`${inputClassName} focus:ring-0  w-full sm:w-[50%] focus:border-green-500`}
                 required 
               />
               {phoneNumberError && (
@@ -299,7 +299,7 @@ const Page = () => {
                 type="file" 
                 accept="image/*" 
                 onChange={handleLogoChange}                
-                className='border-gray-300 w-[50%] text-gray-600'
+                className='border-gray-300 w-full sm:w-[50%] text-gray-600'
                 />
                               <p className="ml-2 text-xs text-gray-600">Minimum Size: 200px * 200px</p>
 
@@ -355,7 +355,7 @@ const Page = () => {
             <p className="mr-3 mb-2 text-sm text-gray-700">Done ? What are waiting for !</p>
             </div>
             <Button disabled={isPending || !logoFile || storeName==="" || !termsAccepted || phoneNumber.length != 8}
-              onClick={createStore} className="w-[30%]">Create Store Now
+              onClick={createStore} className="w-full sm:w-[40%]">Create Store Now
               <MousePointerClick className="ml-2"/>
             </Button>
             </div>

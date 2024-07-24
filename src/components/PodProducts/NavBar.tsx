@@ -57,7 +57,7 @@ const Navbar = async () => {
             <SheetTrigger className="md:hidden">
               <HamburgerMenuIcon />
             </SheetTrigger>
-            <SheetContent side="left" className='w-[40%]'>
+            <SheetContent side="left" className='w-[50%]'>
               {/* Middle Section for small devices */}
               <div className='md:hidden flex flex-col mt-16 space-y-2'>
                 <DialogClose>
@@ -149,6 +149,16 @@ const Navbar = async () => {
                       variant: 'outline',
                     })}>
                     Seller Dashboard ✨
+                  </Link>
+                )}
+                {isUser && (
+                  <Link
+                    href='/PodProducts/create-seller-profile'
+                    className={buttonVariants({
+                      size: 'sm',
+                      variant: 'outline',
+                    })}>
+                    Become a Seller ✨
                   </Link>
                 )}
                 </DialogClose>

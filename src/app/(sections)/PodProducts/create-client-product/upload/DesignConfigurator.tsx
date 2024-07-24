@@ -63,6 +63,7 @@ import LoadingState from "@/components/LoadingState"
 import { getUserPreOrder } from "../preview/actions"
 import { useUploadThing } from "@/lib/uploadthing"
 import ProgressState from "@/components/ProgressState"
+import { Slider } from "@/components/ui/slider"
 
 
 
@@ -826,25 +827,26 @@ const handleFileChange = (file : File) => {
                                   </SheetDescription>
                                 </SheetHeader>
 
-                                <div className="grid grid-cols-6 gap-1  bg-gray-900/5">
-                                    {categories.map((category, index) => (
-                                      <Card onClick={() => handleCatClick (index , category )} 
-                                      key={index} className={cn("border w-48", selectedCat === index && "border-primary")}>
-                                        <CardContent className="flex flex-col items-center justify-center p-2">
-                                          <img 
-                                            src={category.value} 
-                                            alt={category.label} 
-                                            className="mb-2" 
-                                            style={{ width: '100%', height: 'auto', objectFit: 'cover' }} 
-                                          />
-                                          <div className="flex flex-wrap justify-center gap-2">
-                                            <Badge variant="secondary">{category.label}</Badge>
-                                            <Badge variant="secondary">{category.price} TND</Badge>
-                                          </div>
-                                        </CardContent>
-                                      </Card>
-                                    ))}
-                                  </div>
+                                <ScrollArea className="w-full h-96">
+                              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-1 bg-gray-900/5">
+                                {categories.map((category, index) => (
+                                  <Card onClick={() => handleCatClick(index, category)} 
+                                    key={index} className={cn("border w-full", selectedCat === index && "border-primary")}>
+                                    <CardContent className="flex flex-col items-center justify-center p-2">
+                                      <img 
+                                        src={category.value} 
+                                        alt={category.label} 
+                                        className="mb-2 w-full h-auto object-cover" 
+                                      />
+                                      <div className="flex flex-wrap justify-center gap-2">
+                                        <Badge variant="secondary">{category.label}</Badge>
+                                        <Badge variant="secondary">{category.price} TND</Badge>
+                                      </div>
+                                    </CardContent>
+                                  </Card>
+                                ))}
+                              </div>
+                              </ScrollArea>
 
                                 <SheetFooter>
                                   <SheetClose asChild>
@@ -858,7 +860,7 @@ const handleFileChange = (file : File) => {
                                 <h3>Upload a Design:</h3>
                                 <p className='text-xs text-zinc-500 ml-5'>PNG, JPG, JPEG max (15MB)</p>
                                 <p className='text-xs text-zinc-500 ml-5'>One Design will cost 2 TND !</p>
-                                <div className="flex justify-center space-x-4">
+                                <div className="flex flex-wrap justify-center space-x-0 md:space-x-4 space-y-4 md:space-y-0">
 
                                     {/* front design input */}
                                 {addFrontDesign && (
@@ -922,7 +924,7 @@ const handleFileChange = (file : File) => {
                               </div>
 
 
-                              {filteredDesigns.length > 0 && (
+                              {SellersDesignsData.length > 0 && (
                           <>
                             <h3>Or choose an Existing design:</h3>
 
@@ -951,8 +953,8 @@ const handleFileChange = (file : File) => {
                                 isDarkMode ? 'bg-gray-900' : 'bg-gray-100'
                               )}
                               >
-                              <div className="grid grid-cols-3 gap-3 p-2">
-                                {filteredDesigns.map((design, index) => (
+                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 p-2">
+                              {filteredDesigns.map((design, index) => (
                                   <div key={index} className="flex flex-col items-center">
                                     <div
                                       className={`border rounded-md p-1 cursor-pointer ${selectedFrontIndex === index ? 'border-blue-500' : ''}`}
@@ -994,8 +996,8 @@ const handleFileChange = (file : File) => {
                                 isDarkMode ? 'bg-gray-900' : 'bg-gray-100'
                               )}
                               >
-                              <div className="grid grid-cols-3 gap-3 p-2">
-                                {filteredDesigns.map((design, index) => (
+                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 p-2">
+                             {filteredDesigns.map((design, index) => (
                                   <div key={index} className="flex flex-col items-center">
                                     <div
                                       className={`border rounded-md p-1 cursor-pointer ${selectedBackIndex === index ? 'border-blue-500' : ''}`}
@@ -1271,16 +1273,20 @@ const handleFileChange = (file : File) => {
 
                           </div>
 
-                                <div className="text-center">
-                                  <Button className='mt-4'
-                                    onMouseDown={View}
-                                    onMouseUp={notView}
-                                    disabled={!selectedFrontDesign} 
-                                    >
-                                    Hold to Preview
-                                    <MousePointerClick className='ml-1'/>
-                                  </Button>
-                                </div>
+                          <div className="text-center">
+                        <div className="items-center justify-center hidden lg:flex mt-4">
+                          <Button
+                            onMouseDown={View}
+                            onMouseUp={notView}
+                            disabled={!selectedFrontDesign}
+                          >
+                            Hold to Preview
+                            <MousePointerClick className="ml-1" />
+                          </Button>
+                        </div>
+                      </div>
+
+
 
                     <div className='w-full h-px bg-zinc-200 my-5' />
                     </>
@@ -1347,13 +1353,14 @@ const handleFileChange = (file : File) => {
                       )}
 
                     </CardContent>
-                    <CardFooter className='relative flex flex-col items-center justify-center'>
-                                <div className="text-center text-2xl">
-                                  <Label className='text-lg'>
-                                    <span className="text-blue-600 ">Guide</span>: Hold one of the blue edges and drag to resize
-                                  </Label>
-                                </div>
+                    <CardFooter className="relative flex flex-col items-center justify-center">
+                      <div className="text-center text-2xl">
+                        <Label className="text-lg">
+                          <span className="text-blue-600">Guide</span>: Hold one of the blue edges and drag to resize
+                        </Label>
+                      </div>
                     </CardFooter>
+
                     </Card>
 
 

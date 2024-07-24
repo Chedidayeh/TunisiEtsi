@@ -223,7 +223,7 @@ const handleAddProducts = async () => {
                 <Label htmlFor="label" className="w-full text-center">Add Title</Label>
                 <Input
                type="text"
-                className="w-[50%] mb-1"
+                className="w-full sm:w-[50%] mb-1"
                 placeholder="Type the title..."
                 value={title}
                 onChange={handleTitleChange}
@@ -231,7 +231,7 @@ const handleAddProducts = async () => {
                 <Label htmlFor="label" className="w-full text-center">Add Brand</Label>
                 <Input
                type="text"
-                className="w-[50%] mb-1"
+                className="w-full sm:w-[50%] mb-1"
                 placeholder="Type the brand..."
                 value={brand}
                 onChange={handleBrandChange}
@@ -239,7 +239,7 @@ const handleAddProducts = async () => {
                 <Label htmlFor="label" className="w-full text-center">Add Category</Label>
                 <Input
                type="text"
-                className="w-[50%] mb-1"
+                className="w-full sm:w-[50%] mb-1"
                 placeholder="Type the category..."
                 value={category}
                 onChange={handleCategoryChange}
@@ -247,24 +247,27 @@ const handleAddProducts = async () => {
               <Label htmlFor="label" className="w-full text-center">Add Price</Label>
                 <Input
                type="number"
-                className="w-[50%] mb-1"
+                className="w-full sm:w-[50%] mb-1"
                 placeholder="Type the Price..."
                 value={price}
                 onChange={handlePriceChange}
                 /> 
-                <Label htmlFor="label" className="w-full text-center">Select Size</Label>
-                <ToggleGroup type="single" variant="outline">
-                    {availableSizes.map((size) => (
-                      <ToggleGroupItem
-                        key={size.value}
-                        value={size.value}
-                        onClick={() => handleSizeToggle(size.value)}
-                        className={selectedSize === size.value ? 'bg-blue-200' : ''}
-                      >
-                        {size.label}
-                      </ToggleGroupItem>
-                    ))}
-                  </ToggleGroup>
+               <Label htmlFor="label" className="w-full text-center">Select Size</Label>
+                    <ToggleGroup type="single" variant="outline" className="flex flex-col sm:flex-row sm:flex-wrap">
+                      {availableSizes.map((size) => (
+                        <ToggleGroupItem
+                          key={size.value}
+                          value={size.value}
+                          onClick={() => handleSizeToggle(size.value)}
+                          className={`mb-2 sm:mb-0 sm:mr-2 ${
+                            selectedSize === size.value ? 'bg-blue-200' : ''
+                          }`}
+                        >
+                          {size.label}
+                        </ToggleGroupItem>
+                      ))}
+                    </ToggleGroup>
+
 
                   <Label htmlFor="label" className="w-full text-center mb-4">Add Images</Label>
                   {files.map((file, index) => (

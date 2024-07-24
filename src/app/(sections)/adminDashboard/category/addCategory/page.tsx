@@ -369,19 +369,20 @@ const Page = () => {
               </CardFooter>
             </Card>
 
-            {/* category sizes */}
             <Card className="col-span-full" x-chunk="dashboard-01-chunk-4">
               <CardHeader>
                 <CardTitle>Sizes</CardTitle>
               </CardHeader>
               <CardContent>
-                <ToggleGroup type="multiple" variant="outline">
+                <ToggleGroup type="multiple" variant="outline" className="flex flex-col sm:flex-row flex-wrap">
                   {availableSizes.map((size) => (
                     <ToggleGroupItem
                       key={size.value}
                       value={size.value}
                       onClick={() => handleSizeToggle(size.value)}
-                      className={selectedSizes.includes(size.value) ? 'bg-blue-200' : ''}
+                      className={`flex-1 mb-2 sm:mb-0 sm:mr-2 ${
+                        selectedSizes.includes(size.value) ? 'bg-blue-200' : ''
+                      }`}
                     >
                       {size.label}
                     </ToggleGroupItem>
@@ -389,6 +390,7 @@ const Page = () => {
                 </ToggleGroup>
               </CardContent>
             </Card>
+
 
             {/* front borders */}
             <Card className="col-span-full" x-chunk="dashboard-01-chunk-4">

@@ -207,24 +207,25 @@ interface StoresViewProps {
               Toggle Mode
             </Button>
           </div>
-          <div className='mt-2 flex items-center justify-center'>
-            <Input className='w-full sm:w-[60%]' type="text" placeholder="Search for a design by name or by id..." value={searchQuery} onChange={handleSearchChange} />
-            <div className='ml-2'>
-              <Select onValueChange={(value) => setFilterBy(value)}>
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Filter By" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Select</SelectLabel>
-                    <SelectItem value="accepted">Accepted</SelectItem>
-                    <SelectItem value="refused">Refused</SelectItem>
-                    <SelectItem value="action">Awaiting action</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </div>
+          <div className='mt-2 flex flex-col sm:flex-row items-center justify-center'>
+          <Input className='w-full sm:w-[60%] mb-2 sm:mb-0' type="text" placeholder="Search for a design by name or by id..." value={searchQuery} onChange={handleSearchChange} />
+          <div className='w-full sm:w-auto sm:ml-2'>
+            <Select onValueChange={(value) => setFilterBy(value)}>
+              <SelectTrigger className="w-full sm:w-[180px]">
+                <SelectValue placeholder="Filter By" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Select</SelectLabel>
+                  <SelectItem value="accepted">Accepted</SelectItem>
+                  <SelectItem value="refused">Refused</SelectItem>
+                  <SelectItem value="action">Awaiting action</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
           </div>
+        </div>
+
         </CardDescription>
         <CardContent>
           <ScrollArea

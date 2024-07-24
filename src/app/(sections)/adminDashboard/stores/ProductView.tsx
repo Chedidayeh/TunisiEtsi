@@ -200,24 +200,26 @@ interface StoresViewProps {
             <div className="grid gap-2">
               <CardTitle className="font-bold">Store Products :</CardTitle>
               <CardDescription>
-              <div className='mt-2 flex items-center justify-center'>
-              <Input className='w-[40%]' type="text" placeholder="Search for a product by title or by id..." value={searchQuery} onChange={handleSearchChange} />
-              <div className='ml-2'>
-              <Select onValueChange={(value) => setFilterBy(value)}>
-              <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Filter By" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Select</SelectLabel>
-                <SelectItem value="accepted">Accepted</SelectItem>
-                <SelectItem value="refused">Refused</SelectItem>
-                <SelectItem value="action">Awaiting action</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-              </Select>
+              <div className='mt-2 flex flex-col sm:flex-row items-center justify-center'>
+              <Input className='w-full sm:w-1/2 lg:w-[40%] mb-2 sm:mb-0' type="text" placeholder="Search for a product by title or by id..." value={searchQuery} onChange={handleSearchChange} />
+              <div className='w-full sm:w-auto sm:ml-2'>
+                <Select onValueChange={(value) => setFilterBy(value)}>
+                  <SelectTrigger className="w-full sm:w-[180px]">
+                    <SelectValue placeholder="Filter By" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Select</SelectLabel>
+                      <SelectItem value="accepted">Accepted</SelectItem>
+                      <SelectItem value="refused">Refused</SelectItem>
+                      <SelectItem value="action">Awaiting action</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
-            </div>
+
+
               </CardDescription>
               <CardContent>
 
@@ -245,9 +247,10 @@ interface StoresViewProps {
 
   {/* Product Cards */}
     <div key={index} className='flex flex-col items-center mb-4'>
-      <div className='relative h-80 w-80'>
-        <ImageSlider urls={combinedUrls} />
-      </div>
+    <div className='relative h-52 w-52 sm:h-52 sm:w-52 lg:h-80 lg:w-80'>
+  <ImageSlider urls={combinedUrls} />
+</div>
+
       <div className='mt-16 text-center'>
         <Badge>{product.title}</Badge>
       </div>

@@ -191,7 +191,7 @@ const handleAddProducts = async () => {
                 <Label htmlFor="label" className="w-full text-center">Add Title</Label>
                 <Input
                type="search"
-                className="w-[50%] mb-1"
+                className="w-full sm:w-[50%] mb-1"
                 placeholder="Type the title..."
                 value={title}
                 onChange={handleTitleChange}

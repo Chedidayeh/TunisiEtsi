@@ -357,29 +357,30 @@ const downloadMockup = async (imageUrls: string[]) => {
         <CardContent>
 
 
-        <div className="flex space-x-4 mt-2"> 
-          <Input
-              type="search"
-              className="w-[50%] bg-gray-100"
-              placeholder="Enter the product Id, title, store Name to make a search..."
-              value={searchQuery}
-              onChange={handleSearchChange}
-            />        
-          <Select onValueChange={handleFilterChange}>
-          <SelectTrigger className="w-[180px] bg-gray-100">
-              <SelectValue placeholder="Filter By" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Select</SelectLabel>
-                <SelectItem value="accepted">Accepted</SelectItem>
-                <SelectItem value="refused">Refused</SelectItem>
-                <SelectItem value="action">Awaiting action</SelectItem>
-                <SelectItem value="noItems">No Items</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 mt-2">
+        <Input
+          type="search"
+          className="w-full sm:w-[50%] bg-gray-100"
+          placeholder="Enter the product Id, title, store Name to make a search..."
+          value={searchQuery}
+          onChange={handleSearchChange}
+        />
+        <Select onValueChange={handleFilterChange}>
+          <SelectTrigger className="w-full sm:w-[180px] bg-gray-100">
+            <SelectValue placeholder="Filter By" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Select</SelectLabel>
+              <SelectItem value="accepted">Accepted</SelectItem>
+              <SelectItem value="refused">Refused</SelectItem>
+              <SelectItem value="action">Awaiting action</SelectItem>
+              <SelectItem value="noItems">No Items</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
       </div>
+
         <ScrollArea className="mt-4 w-full h-72">
         <Table>
   <TableHeader>

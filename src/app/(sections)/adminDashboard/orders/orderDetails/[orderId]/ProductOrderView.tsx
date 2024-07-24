@@ -323,7 +323,7 @@ const handleUpdate = async (orderId : string , platformProfit : number) =>{
     <div className="grid gap-2">
       <CardTitle className="font-extrabold">Order Infos :</CardTitle>
       <CardDescription>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-7 gap-8 mt-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 mt-2">
           <div>
             <p className="font-bold">Order Id:</p>
             <p className="text-xs">{order?.id}</p>

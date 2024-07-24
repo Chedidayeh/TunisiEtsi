@@ -258,7 +258,6 @@ const handleUpdate = async (orderId : string , platformProfit : number) =>{
         {order && (
             <>
 
-<p className="text-sm text-gray-700 mb-2">AdminDashboard/fripProducts/orders/OrderDetails</p>
            <h1 className="text-2xl font-semibold">Order Details</h1>
      
   
@@ -269,13 +268,13 @@ const handleUpdate = async (orderId : string , platformProfit : number) =>{
   
   
   
-      <Card className="xl:col-span-4" x-chunk="dashboard-01-chunk-4">
-        <CardHeader className="flex flex-row items-center">
-          <div className="grid gap-2">
+      <Card className="col-span-full" x-chunk="dashboard-01-chunk-4">
+      <CardHeader className="flex flex-col md:flex-row items-center">
+            <div className="grid gap-2">
             <CardTitle className="font-extrabold">Order Infos :</CardTitle>
             <CardDescription>
-                    <div className="grid grid-cols-5 gap-10 mt-2">
-                        <div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-7 gap-8 mt-2">
+                       <div>
                             <p className="font-bold">Order Id:</p>
                             <p>{order?.id}</p>
                         </div>
@@ -332,8 +331,8 @@ const handleUpdate = async (orderId : string , platformProfit : number) =>{
         <Separator className="w-full"/>
         <CardContent>
             <p className="text-gray-600 font-extrabold mt-6">Order Items :</p>
-                  <div className="grid grid-cols-3 gap-10 ml-10 mt-6">
-                    {order.orderItems.map((item, index) => (
+                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 ml-2 md:ml-10 mt-6">
+                   {order.orderItems.map((item, index) => (
                       <div
                         key={index}
                         className={cn("aspect-square rounded-xl cursor-pointer", {
@@ -353,12 +352,12 @@ const handleUpdate = async (orderId : string , platformProfit : number) =>{
 
 
         {/* profit infos */}
-      <Card className="xl:col-span-4" x-chunk="dashboard-01-chunk-4">
-            <CardHeader className="flex flex-row items-center">
-              <div className="grid gap-2">
+        <Card className="col-span-full" x-chunk="dashboard-01-chunk-4">
+        <CardHeader className="flex flex-row items-center">
+        <div className="grid gap-2">
                 <CardTitle className="font-extrabold">Profit Infos : <span className="text-sm text-gray-600">Products</span></CardTitle>
                 <CardDescription>
-                        <div className="grid grid-cols-6 gap-10 mt-2">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-7 gap-8 mt-2">
                         <div>
                             <p className="font-bold">Order Amount:</p>
                             <p>{order.amount.toFixed(2)} TND</p>
@@ -401,13 +400,13 @@ const handleUpdate = async (orderId : string , platformProfit : number) =>{
             {/* item infos */}
 
     {selectedItem && (
-      <Card className="xl:col-span-4" x-chunk="dashboard-01-chunk-4">
-        <CardHeader className="flex flex-row items-center">
-          <div className="grid gap-2">
+ <Card className="col-span-full" x-chunk="dashboard-01-chunk-4">
+ <CardHeader className="flex flex-col md:flex-row items-center">
+ <div className="grid gap-2">
             <CardTitle className="font-extrabold">Order Item Infos :</CardTitle>
             <CardDescription>
-                    <div className="grid grid-cols-6 gap-10 mt-2">
-                        <div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 mt-2">
+            <div>
                             <p className="font-bold">Product Category:</p>
                             <p>{selectedItem.productCategory}</p>
                         </div>

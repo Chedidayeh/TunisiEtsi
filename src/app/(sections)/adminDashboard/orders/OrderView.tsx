@@ -100,6 +100,7 @@ import { deleteOrderById } from "./actions"
 
 interface ExtraOrders extends Order {
     orderItems : OrderItem[]
+    user : User
 }
   
   
@@ -308,46 +309,46 @@ interface OrderViewProps {
         </CardHeader>
         <CardContent>
 
+        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 items-center mt-2">
+  <Input
+    type="search"
+    className="w-full sm:w-[50%] bg-gray-100"
+    placeholder="Enter the order Id, client Name, client Phone Number to make a search..."
+    value={searchQuery}
+    onChange={handleSearchChange}
+  />
+  <Select onValueChange={handleFilterChange}>
+    <SelectTrigger className="w-full sm:w-[180px] bg-gray-100">
+      <SelectValue placeholder="Filter By" />
+    </SelectTrigger>
+    <SelectContent>
+      <SelectGroup>
+        <SelectLabel>Select</SelectLabel>
+        <SelectItem value="CONFIRMED">Confirmed</SelectItem>
+        <SelectItem value="NOT_CONFIRMED">Not Confirmed</SelectItem>
+        <SelectItem value="CANCELED">Canceled</SelectItem>
+        <SelectItem value="DELIVERED">Delivered</SelectItem>
+      </SelectGroup>
+    </SelectContent>
+  </Select>
+  <Select onValueChange={handleFilterChange}>
+    <SelectTrigger className="w-full sm:w-[180px] bg-gray-100">
+      <SelectValue placeholder="Filter By" />
+    </SelectTrigger>
+    <SelectContent>
+      <SelectGroup>
+        <SelectLabel>Select</SelectLabel>
+        <SelectItem value="Paid">Paid</SelectItem>
+        <SelectItem value="NOT_Paid">Not Paid</SelectItem>
+        <SelectItem value="Printed">Printed</SelectItem>
+        <SelectItem value="NOT_Printed">Not Printed</SelectItem>
+        <SelectItem value="Sellerorder">Seller Order</SelectItem>
+        <SelectItem value="Clientorder">Client Made Order</SelectItem>
+      </SelectGroup>
+    </SelectContent>
+  </Select>
+</div>
 
-        <div className="flex space-x-4 items-center mt-2">
-          <Input
-            type="search"
-            className="w-[50%] bg-gray-100"
-            placeholder="Enter the order Id , client Name , client Phone Number to make a search..."
-            value={searchQuery}
-            onChange={handleSearchChange}
-          />          
-          <Select onValueChange={handleFilterChange}>
-            <SelectTrigger className="w-[180px] bg-gray-100">
-              <SelectValue placeholder="Filter By" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Select</SelectLabel>
-                <SelectItem value="CONFIRMED">Confirmed</SelectItem>
-                <SelectItem value="NOT_CONFIRMED">Not Confirmed</SelectItem>
-                <SelectItem value="CANCELED">Canceled</SelectItem>
-                <SelectItem value="DELIVERED">Delivered</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-          <Select onValueChange={handleFilterChange}>
-            <SelectTrigger className="w-[180px] bg-gray-100">
-              <SelectValue placeholder="Filter By" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Select</SelectLabel>
-                <SelectItem value="Paid">Paid</SelectItem>
-                <SelectItem value="NOT_Paid">Not Paid</SelectItem>
-                <SelectItem value="Printed">Printed</SelectItem>
-                <SelectItem value="NOT_Printed">Not Printed</SelectItem>
-                <SelectItem value="Sellerorder">Seller Order</SelectItem>
-                <SelectItem value="Clientorder">Client Made Order</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </div>
 
         <ScrollArea className="mt-4 w-full h-96">
         <Table>
@@ -360,7 +361,7 @@ interface OrderViewProps {
       <TableHead className="hidden sm:table-cell">Order Status</TableHead>
 
       {/* Order Type column */}
-      <TableHead>Order Type</TableHead>
+      <TableHead className="hidden sm:table-cell">Order Type</TableHead>
 
       <TableHead>Creation Date</TableHead>
 
@@ -409,7 +410,7 @@ interface OrderViewProps {
         </TableCell>
 
         {/* Order Type cell */}
-        <TableCell>
+        <TableCell className="hidden sm:table-cell">
           <Badge className={`${order.type === 'CONFIRMED' ? 'bg-green-700' : order.type === 'NOT_CONFIRMED' ? 'bg-orange-400' : order.type === 'CANCELED' ? 'bg-red-700' : 'bg-gray-700'} hover:bg-gray-700`}>
             {order.type}
           </Badge>
@@ -496,13 +497,13 @@ interface OrderViewProps {
 
 
       {selectedOrder && (
-         <Card className="xl:col-span-4" x-chunk="dashboard-01-chunk-4">
-         <CardHeader className="flex flex-row items-center">
-           <div className="grid gap-2">
+      <Card className="col-span-full" x-chunk="dashboard-01-chunk-4">
+          <CardHeader className="flex flex-col md:flex-row items-center">
+                 <div className="grid gap-2">
              <CardTitle className="font-extrabold">Order Infos :</CardTitle>
              <CardDescription>
-                     <div className="grid grid-cols-5 gap-10 mt-2">
-                         <div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 mt-2">
+                          <div>
                              <p className="font-bold">Order Id:</p>
                              <p>{selectedOrder?.id}</p>
                          </div>
@@ -541,6 +542,10 @@ interface OrderViewProps {
                          <div>
                              <p className="font-bold">Client Name:</p>
                              <p>{selectedOrder.clientName}</p>
+                         </div>
+                         <div>
+                             <p className="font-bold">Client Email:</p>
+                             <p>{selectedOrder.user.email}</p>
                          </div>
                          <div>
                              <p className="font-bold">Client Phone Number:</p>

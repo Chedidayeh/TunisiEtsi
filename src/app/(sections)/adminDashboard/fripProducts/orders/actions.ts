@@ -8,7 +8,8 @@ export const getAllOrders = async () => {
     try {
       const orders = await db.fripOrder.findMany({
         include: {
-          orderItems : true
+          orderItems : true,
+          user : true
         }
       });
   

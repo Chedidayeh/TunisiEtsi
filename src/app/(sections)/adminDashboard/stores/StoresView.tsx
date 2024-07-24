@@ -227,9 +227,10 @@ interface StoresViewProps {
           </div>
         </CardHeader>
         <CardDescription className='flex items-center justify-center'>
-        <div className='ml-4 w-[50%] mt-2 '>
-          <Input
+        <div className='mt-2 flex flex-wrap items-center justify-center'>
+        <Input
               type="search"
+              className='w-full sm:w-1/2 lg:w-[40%] mb-2 sm:mb-0'
               placeholder="Enter the Store Id, name to make a search..."
               value={storeSearchQuery}
               onChange={handleStoreSearchChange}
