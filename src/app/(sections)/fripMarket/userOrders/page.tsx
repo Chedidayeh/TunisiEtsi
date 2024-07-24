@@ -21,31 +21,6 @@ import { getUserOrders } from './actions';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
-const NoUserFound = () => {
-  return (
-    <AlertDialog open={true} >
-    <AlertDialogContent>
-    <AlertDialogHeader className="flex flex-col items-center">
-        <div className="text-red-500 mb-2">
-            <OctagonAlert className=''/>
-        </div>
-        <AlertDialogTitle className="text-xl font-bold text-center">
-            No User found ! 
-        </AlertDialogTitle>
-        <AlertDialogDescription>
-            Log In to view this page !
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <Link  href="/auth/sign-in" ><Button variant="link">
-          Log In
-            </Button>
-            </Link>
-        </AlertDialogFooter>
-    </AlertDialogContent>
-</AlertDialog>
-  )
-}
 
 const Page = async () => {
 
@@ -53,11 +28,6 @@ try {
 
   const user = await getUser()
 
-  if(!user) {
-    return (
-      NoUserFound()
-    )
-  }
 
 
   const orders = await getUserOrders(user!.id)
