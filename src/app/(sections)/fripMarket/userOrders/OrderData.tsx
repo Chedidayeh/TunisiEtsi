@@ -293,14 +293,40 @@ const OrderData = ({ordersData}: DesignViewProps) => {
                      </AlertDialog> 
 
                            {/* title */}
-        <div className="flex items-center justify-center mt-10">
-        <h1 className='text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl'>
-            Your{' '}
-            <span className='text-blue-600'>
-            Orders
-            </span>
-          </h1>
-        </div>
+                           <div className="flex flex-col items-center justify-center my-10">
+                          <div className="mb-4">
+                            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+                              Your{' '}
+                              <span className="text-blue-600">
+                                Orders
+                              </span>
+                            </h1>
+                          </div>
+                          {ordersData.length === 0 && (
+                            <div className="flex flex-col items-center justify-center space-y-1">
+                              <div
+                                aria-hidden="true"
+                                className="relative mb-4 h-40 w-40 text-muted-foreground">
+                                <img
+                                  src="/hippo-empty-cart.png"
+                                  loading="eager"
+                                  alt="empty shopping cart hippo"
+                                />
+                              </div>
+                              <h3 className="font-semibold text-2xl">
+                                No Orders found!
+                              </h3>
+                              <p className="text-muted-foreground text-center">
+                                Whoops! Nothing to show here yet.
+                              </p>
+                            </div>
+                          )}
+                        </div>
+
+
+         {ordersData.length > 0 && (
+
+        <>
 
           <div className="hidden sm:block">
         <div className="grid grid-cols-2 gap-4 my-4 mx-10">
@@ -584,10 +610,12 @@ const OrderData = ({ordersData}: DesignViewProps) => {
     </div>
     </div>
 
-      {ordersData.length > 0 && (
     <div className=" block sm:hidden mx-10 my-4">
         <MobileView ordersData={ordersData} />
         </div>
+
+        </>
+
           )}
 
     </>

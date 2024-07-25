@@ -556,36 +556,43 @@ const handleUpdate = async (orderId : string , platformProfit : number) =>{
  </CardHeader>
  <Separator className="w-full" />
  <CardContent>
-   <div className="mt-6 space-y-4">
-     <Button onClick={() => { downloadMockup(selectedItem.capturedMockup) }} variant="link">Download Product Mockup</Button>
+  <div className="mt-6 space-y-4">
+    <Button onClick={() => { downloadMockup(selectedItem.capturedMockup) }} variant="link">
+      Download Product Mockup
+    </Button>
 
-     <div className="text-sm">
-       <div className="flex space-x-4 md:space-x-10">
-         <div className="font-bold">Front Design Id:</div>
-         <div className="text-gray-600 font-semibold text-xs">{selectedItem.frontsellerDesignId ?? "N/A"}</div>
-         <div className="font-bold">Front Design Name:</div>
-         <div className="text-gray-600 font-semibold">{selectedItem.frontsellerDesign?.name ?? "N/A"}</div>
-       </div>
-       <Button onClick={() => {
-         const imageUrl = selectedItem.frontsellerDesign?.imageUrl;
-         downloadDesign(imageUrl ?? '')
-       }} variant="link">Download Front Design</Button>
-     </div>
+    <div className="text-sm">
+      <div className="flex flex-col md:flex-row md:space-x-10 space-y-2 md:space-y-0">
+        <div className="font-bold">Front Design Id:</div>
+        <div className="text-gray-600 font-semibold text-xs">{selectedItem.frontsellerDesignId ?? "N/A"}</div>
+        <div className="font-bold">Front Design Name:</div>
+        <div className="text-gray-600 font-semibold">{selectedItem.frontsellerDesign?.name ?? "N/A"}</div>
+      </div>
+      <Button onClick={() => {
+        const imageUrl = selectedItem.frontsellerDesign?.imageUrl;
+        downloadDesign(imageUrl ?? '');
+      }} variant="link">
+        Download Front Design
+      </Button>
+    </div>
 
-     <div className="text-sm">
-       <div className="flex space-x-4 md:space-x-10">
-         <div className="font-bold">Back Design Id:</div>
-         <div className="text-gray-600 font-semibold text-xs ">{selectedItem.backsellerDesignId ?? "N/A"}</div>
-         <div className="font-bold">Back Design Name:</div>
-         <div className="text-gray-600 font-semibold">{selectedItem.backsellerDesign?.name ?? "N/A"}</div>
-       </div>
-       <Button onClick={() => {
-         const imageUrl = selectedItem.backsellerDesign?.imageUrl;
-         downloadDesign(imageUrl ?? '')
-       }} variant="link">Download Back Design</Button>
-     </div>
-   </div>
- </CardContent>
+    <div className="text-sm">
+      <div className="flex flex-col md:flex-row md:space-x-10 space-y-2 md:space-y-0">
+        <div className="font-bold">Back Design Id:</div>
+        <div className="text-gray-600 font-semibold text-xs">{selectedItem.backsellerDesignId ?? "N/A"}</div>
+        <div className="font-bold">Back Design Name:</div>
+        <div className="text-gray-600 font-semibold">{selectedItem.backsellerDesign?.name ?? "N/A"}</div>
+      </div>
+      <Button onClick={() => {
+        const imageUrl = selectedItem.backsellerDesign?.imageUrl;
+        downloadDesign(imageUrl ?? '');
+      }} variant="link">
+        Download Back Design
+      </Button>
+    </div>
+  </div>
+</CardContent>
+
 </Card>
 
         

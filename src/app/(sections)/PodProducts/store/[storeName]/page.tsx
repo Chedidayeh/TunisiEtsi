@@ -53,7 +53,7 @@ export default async function Page({ params }: PageProps) {
           {store && store.products.length > 0 ? (
 
             <>
-              <section className='border-t border-gray-200 bg-white w-full mx-auto' >
+              <section className='border-t border-gray-200 w-full mx-auto' >
                 <div className='w-[85%] mx-auto'>
                 <StoreView  
                      store={store!}

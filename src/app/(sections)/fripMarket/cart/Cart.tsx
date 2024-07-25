@@ -291,7 +291,7 @@ const orderTotal = subtotal + fee
             })}>
 
             {cartProducts.length === 0 ? (
-              <div className='flex h-full flex-col items-center justify-center space-y-1'>
+             <div className='flex h-full flex-col items-center justify-center space-y-1'>
                 <div
                   aria-hidden='true'
                   className='relative mb-4 h-40 w-40 text-muted-foreground'>
@@ -314,17 +314,13 @@ const orderTotal = subtotal + fee
               </div>
             ) : null}
 
-            <ul
-              className={cn({
-                'divide-y divide-gray-200 border-b border-t border-gray-200':
-                cartProducts.length > 0,
-              })}>
+          <ul className={cn({ 'divide-y divide-gray-200 border-b border-t border-gray-200': cartProducts.length > 0 })}>
+
               {cartProducts.map((product) => {
 
                   return (
-                    <li
-                      key={product.cartProductId}
-                      className='flex py-6 sm:py-10'>
+                    <li key={product.cartProductId} className='flex flex-col sm:flex-row py-6 sm:py-10'>
+
                       <div className='flex-shrink-0 mb-10'>
                         <div className='relative h-52 w-52  xl:h-80 xl:w-80'>
                         <ImageSlider urls={product.productImgs!}/>
@@ -332,7 +328,7 @@ const orderTotal = subtotal + fee
                       </div>
                       
                       <div className='ml-4 flex flex-1 flex-col justify-between sm:ml-6'>
-                        <div className='relative pr-9  sm:grid sm:grid-cols-1 sm:gap-x-6 sm:pr-0'>
+                      <div className='relative pr-9  sm:grid sm:grid-cols-1 sm:gap-x-6 sm:pr-0'>
                           <div className='mt-10'>
                             <div className='flex justify-between'>
                               <h3 className='text-lg'>

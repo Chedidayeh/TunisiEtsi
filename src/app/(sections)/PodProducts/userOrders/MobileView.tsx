@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 'use client'
 import {
   AlertDialog,
@@ -125,7 +126,9 @@ const MobileView = ({ordersData}: ViewProps) => {
         <CardTitle className="group flex items-center gap-2 text-lg">
           Id: <p className="text-xs text-gray-600">{currentOrder.id}</p>
         </CardTitle>
-        <CardDescription>Creation Date <time dateTime={currentOrder.createdAt ? currentOrder.createdAt.toISOString() : undefined}>
+        <CardDescription>
+        <span className="text-red-600 text-xs">We'll call you very soon to confirm your orders !</span><br/>
+        Creation Date <time dateTime={currentOrder.createdAt ? currentOrder.createdAt.toISOString() : undefined}>
           {currentOrder.updatedAt ? new Date(currentOrder.updatedAt).toLocaleDateString() : ''}
         </time></CardDescription>
         <CardDescription className="mt-2 flex flex-wrap items-center gap-4"> 

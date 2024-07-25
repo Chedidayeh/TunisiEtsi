@@ -294,7 +294,7 @@ const StoreView = ({ store, user }: ProductReelProps) => {
       alt=""
     />
   </Avatar>
-  <h1 className="text-xl mt-4 font-bold tracking-tight text-gray-900 sm:text-xl">
+  <h1 className="text-xl mt-4 font-bold tracking-tight sm:text-xl">
     <span className="text-blue-600">
       {store?.storeName}{' '}
     </span>
@@ -314,7 +314,7 @@ const StoreView = ({ store, user }: ProductReelProps) => {
   <div className="flex flex-col gap-2 md:flex-row md:items-center">
     <div className="mt-3 flex-1">
       <Select onValueChange={handleSortChange}>
-        <SelectTrigger className="w-[180px] bg-white">
+        <SelectTrigger className="w-[180px] ">
           <SelectValue placeholder="Sort By" />
         </SelectTrigger>
         <SelectContent>
@@ -330,7 +330,7 @@ const StoreView = ({ store, user }: ProductReelProps) => {
     </div>
     <div className="mt-3 flex-1">
       <Select onValueChange={handleCategorySortChange}>
-        <SelectTrigger className="w-[180px] bg-white">
+        <SelectTrigger className="w-[180px] ">
           <SelectValue placeholder="Sort By Category" />
         </SelectTrigger>
         <SelectContent>
@@ -344,7 +344,7 @@ const StoreView = ({ store, user }: ProductReelProps) => {
     </div>
     <div className="mt-3 flex-1">
     <Select onValueChange={handlePriceRangeChange}>
-    <SelectTrigger className="w-[180px] bg-white">
+    <SelectTrigger className="w-[180px] ">
       <SelectValue placeholder="Select Price Range" />
     </SelectTrigger>
     <SelectContent>

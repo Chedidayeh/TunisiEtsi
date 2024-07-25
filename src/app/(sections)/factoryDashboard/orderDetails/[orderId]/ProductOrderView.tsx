@@ -388,8 +388,8 @@ const downloadMockup = async (imageUrls: string[]) => {
         <Button onClick={()=>{downloadMockup(selectedItem.capturedMockup)}} variant={"link"}>Download Product Mockup</Button>
 
           <div className="text-sm">
-          <div className="flex space-x-10">
-            <div className="font-bold text-xs">Front Design Id : <span className="text-gray-600 font-semibold">
+          <div className="flex flex-col md:flex-row md:space-x-10 space-y-2 md:space-y-0">
+          <div className="font-bold text-xs">Front Design Id : <span className="text-gray-600 font-semibold">
                 {selectedItem.frontsellerDesignId ?? "N/A"}
               </span>
             </div>
@@ -407,8 +407,8 @@ const downloadMockup = async (imageUrls: string[]) => {
 
 
           <div className="text-sm">
-          <div className="flex space-x-10">
-            <div className="font-bold text-xs">Back Design Id : <span className="text-gray-600 font-semibold">
+          <div className="flex flex-col md:flex-row md:space-x-10 space-y-2 md:space-y-0">
+          <div className="font-bold text-xs">Back Design Id : <span className="text-gray-600 font-semibold">
                 {selectedItem.backsellerDesignId ?? "N/A"}
               </span>
             </div>

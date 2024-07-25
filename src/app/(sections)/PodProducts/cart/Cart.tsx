@@ -289,180 +289,131 @@ const orderTotal = subtotal + fee
 
 
         <div className='mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16'>
-          <div
-            className={cn('lg:col-span-7', {
-              'rounded-lg border-2 border-dashed border-zinc-200 p-12':
-              cartProducts.length === 0,
-            })}>
-
-            {cartProducts.length === 0 ? (
-              <div className='flex h-full flex-col items-center justify-center space-y-1'>
-                <div
-                  aria-hidden='true'
-                  className='relative mb-4 h-40 w-40 text-muted-foreground'>
-                  <Image
-                    src='/hippo-empty-cart.png'
-                    fill
-                    loading='eager'
-                    alt='empty shopping cart hippo'
-                  />
-                </div>
-                <h3 className='font-semibold text-2xl'>
-                  Your cart is empty
-                </h3>
-                <p className='text-muted-foreground text-center'>
-                  Whoops! Nothing to show here yet.
-                </p>
-                <Link href="/MarketPlace" className='text-blue-600 text-sm'>
-                Add items to your cart
-                </Link>
-              </div>
-            ) : null}
-
-            <ul
-              className={cn({
-                'divide-y divide-gray-200 border-b border-t border-gray-200':
-                cartProducts.length > 0,
-              })}>
-              {cartProducts.map((product) => {
-
-                  return (
-                    <li
-                      key={product.cartProductId}
-                      className='flex py-6 sm:py-10'>
-                      <div className='flex-shrink-0 mb-10'>
-                        <div className='relative h-52 w-52  xl:h-80 xl:w-80'>
-                        <ImageSlider urls={product.productImgs!}/>
-                        </div>
-                      </div>
-                      
-                      <div className='ml-4 flex flex-1 flex-col justify-between sm:ml-6'>
-                        <div className='relative pr-9  sm:grid sm:grid-cols-1 sm:gap-x-6 sm:pr-0'>
-                          <div className='mt-10'>
-                            <div className='flex justify-between'>
-                              <h3 className='text-lg'>
-                                <Link
-                                  href={`/MarketPlace/product/${product.productId}`}
-                                  className='font-medium  hover:text-gray-800'>
-                                  {product.title}
-                                </Link>
-                              </h3>
-                            </div>
-
-                            <div className='mt-2 flex text-sm'>
-                              <p className='text-muted-foreground'>
-                                Category: {product.category}
-                              </p>
-                            </div>
-                            <div className='mt-2 flex text-sm'>
-                              <p className='text-muted-foreground'>
-                                Color: {product.color}
-                              </p>
-                            </div>
-                            <div className='mt-2 flex text-sm'>
-                              <p className='text-muted-foreground'>
-                                Quantity: {product.quantity}
-                              </p>
-                            </div>
-                            <div className='mt-2 flex text-sm'>
-                              <p className='text-muted-foreground'>
-                                Size: {product.size}
-                              </p>
-                            </div>
-                            <div className='mt-2'>
-                            <p className='mt-1 text-lg font-medium text-blue-600'>
-                              Price : {((product.price)?.toFixed(2))} TND
-                            </p>
-                            </div>
-                            
-                          </div>
-
-                          <div className='mt-4 sm:mt-0 sm:pr-9 w-20'>
-                            <div className='absolute  right-0 top-0'>
-                              <Button
-                                className='hover:text-red-500 group'
-                                aria-label='remove product'
-                                onClick={() => removeItem(product.cartProductId)}
-                                variant='secondary'>
-                                <X
-                                  className='h-5 group: w-5 '
-                                  aria-hidden='true'
-                                />
-                                <span className="absolute font-normal bottom-10 left-1/2 transform -translate-x-1/2 w-max px-2 py-1 text-xs bg-black text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
-                                  Remove Item
-                                </span>
-                              </Button>
-                            </div>
-                          </div>
-                        </div>
-
-                        <p className='flex space-x-2 text-sm '>
-                          <X className='h-5 w-5 flex-shrink-0 text-red-500' />
-                          <span>
-                          No product returns allowed!                          
-                          </span>
-                        </p>
-                      </div>
-                    </li>
-                  )
-                })}
-            </ul>
-            
-          </div>
-
-          <section className='mt-16 rounded-lg border-2 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8'>
-            <h2 className='text-lg font-medium'>
-              Order summary
-            </h2>
-
-            <div className='mt-6 space-y-4'>
-              <div className='flex items-center justify-between'>
-                <p className='text-sm '>
-                  Subtotal
-                </p>
-                <p className='text-sm font-medium '>
-                {subtotal.toFixed(2)} TND
-                </p>
-              </div>
-
-              <div className='flex items-center justify-between border-t border-gray-200 pt-4'>
-              <div className='flex text-sm text-muted-foreground'>
-                  <span>Shipping fee</span>
-                </div>
-                <div className='text-sm font-medium '>
-                {fee.toFixed(2)} TND
-                </div>
-              </div>
-              <div className='flex items-center justify-between border-t border-gray-200 pt-4'>
-                <div className='flex text-sm text-muted-foreground'>
-                  <p className='flex space-x-2 text-sm '>
-                    <Check className='h-5 w-5 flex-shrink-0 text-green-500' />
-                    <span>Delivery time: within 3 days!</span>
-                  </p>
-                </div>
-              </div>
-
-              <div className='flex items-center justify-between border-t border-gray-200 pt-4'>
-                <div className='text-base font-medium '>
-                  Order Total
-                </div>
-                <div className='text-base font-medium '>
-                  {cartProducts.length > 0 ? `${orderTotal.toFixed(2)} TND` : `0 TND`}
-                </div>
-              </div>
-            </div>
-
-            <div className='mt-6'>
-              <Button
-                disabled={cartProducts.length === 0 }
-                onClick={()=> setIsConfirmOpen(true)}
-                className='w-full'
-                size='lg'>
-                Continue
-              </Button>
-            </div>
-          </section>
+  <div
+    className={cn('lg:col-span-7', {
+      'rounded-lg border-2 border-dashed border-zinc-200 p-12': cartProducts.length === 0,
+    })}
+  >
+    {cartProducts.length === 0 ? (
+      <div className='flex h-full flex-col items-center justify-center space-y-1'>
+        <div aria-hidden='true' className='relative mb-4 h-40 w-40 text-muted-foreground'>
+          <Image src='/hippo-empty-cart.png' fill loading='eager' alt='empty shopping cart hippo' />
         </div>
+        <h3 className='font-semibold text-2xl'>Your cart is empty</h3>
+        <p className='text-muted-foreground text-center'>Whoops! Nothing to show here yet.</p>
+        <Link href='/MarketPlace' className='text-blue-600 text-sm'>
+          Add items to your cart
+        </Link>
+      </div>
+    ) : null}
+
+    <ul className={cn({ 'divide-y divide-gray-200 border-b border-t border-gray-200': cartProducts.length > 0 })}>
+      {cartProducts.map((product) => {
+        return (
+          <li key={product.cartProductId} className='flex flex-col sm:flex-row py-6 sm:py-10'>
+            <div className='flex-shrink-0 mb-10'>
+              <div className='relative h-52 w-52 xl:h-80 xl:w-80'>
+                <ImageSlider urls={product.productImgs!} />
+              </div>
+            </div>
+
+            <div className='ml-4 flex flex-1 flex-col justify-between sm:ml-6'>
+              <div className='relative pr-9 sm:grid sm:grid-cols-1 sm:gap-x-6 sm:pr-0'>
+                <div className='mt-10'>
+                  <div className='flex justify-between'>
+                    <h3 className='text-lg'>
+                      <Link
+                        href={`/MarketPlace/product/${product.productId}`}
+                        className='font-medium hover:text-gray-800'
+                      >
+                        {product.title}
+                      </Link>
+                    </h3>
+                  </div>
+
+                  <div className='mt-2 flex text-sm'>
+                    <p className='text-muted-foreground'>Category: {product.category}</p>
+                  </div>
+                  <div className='mt-2 flex text-sm'>
+                    <p className='text-muted-foreground'>Color: {product.color}</p>
+                  </div>
+                  <div className='mt-2 flex text-sm'>
+                    <p className='text-muted-foreground'>Quantity: {product.quantity}</p>
+                  </div>
+                  <div className='mt-2 flex text-sm'>
+                    <p className='text-muted-foreground'>Size: {product.size}</p>
+                  </div>
+                  <div className='mt-2'>
+                    <p className='mt-1 text-lg font-medium text-blue-600'>Price : {(product.price)!.toFixed(2)} TND</p>
+                  </div>
+                </div>
+
+                <div className='mt-4 sm:mt-0 sm:pr-9 w-20'>
+                  <div className='absolute right-0 top-0'>
+                    <Button
+                      className='hover:text-red-500 group'
+                      aria-label='remove product'
+                      onClick={() => removeItem(product.cartProductId)}
+                      variant='secondary'
+                    >
+                      <X className='h-5 group: w-5' aria-hidden='true' />
+                      <span className='absolute font-normal bottom-10 left-1/2 transform -translate-x-1/2 w-max px-2 py-1 text-xs bg-black text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity'>
+                        Remove Item
+                      </span>
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
+              <p className='flex space-x-2 text-sm '>
+                <X className='h-5 w-5 flex-shrink-0 text-red-500' />
+                <span>No product returns allowed!</span>
+              </p>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+  </div>
+
+  <section className='mt-16 rounded-lg border-2 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8'>
+    <h2 className='text-lg font-medium'>Order summary</h2>
+
+    <div className='mt-6 space-y-4'>
+      <div className='flex items-center justify-between'>
+        <p className='text-sm '>Subtotal</p>
+        <p className='text-sm font-medium '>{subtotal.toFixed(2)} TND</p>
+      </div>
+
+      <div className='flex items-center justify-between border-t border-gray-200 pt-4'>
+        <div className='flex text-sm text-muted-foreground'>
+          <span>Shipping fee</span>
+        </div>
+        <div className='text-sm font-medium '>{fee.toFixed(2)} TND</div>
+      </div>
+      <div className='flex items-center justify-between border-t border-gray-200 pt-4'>
+        <div className='flex text-sm text-muted-foreground'>
+          <p className='flex space-x-2 text-sm '>
+            <Check className='h-5 w-5 flex-shrink-0 text-green-500' />
+            <span>Delivery time: within 3 days!</span>
+          </p>
+        </div>
+      </div>
+
+      <div className='flex items-center justify-between border-t border-gray-200 pt-4'>
+        <div className='text-base font-medium '>Order Total</div>
+        <div className='text-base font-medium '>{cartProducts.length > 0 ? `${orderTotal.toFixed(2)} TND` : `0 TND`}</div>
+      </div>
+    </div>
+
+    <div className='mt-6'>
+      <Button disabled={cartProducts.length === 0} onClick={() => setIsConfirmOpen(true)} className='w-full' size='lg'>
+        Continue
+      </Button>
+    </div>
+  </section>
+</div>
+
       </div>
     </div>
     </>

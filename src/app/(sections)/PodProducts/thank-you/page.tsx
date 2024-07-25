@@ -42,7 +42,7 @@ const ThankYouPage = async ({
       <p className='text-sm font-medium text-blue-600'>
         Order not found
       </p>
-      <h1 className='mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl'>
+      <h1 className='mt-2 text-4xl font-bold tracking-tight sm:text-5xl'>
         You didn't made any order !
       </h1>
 
@@ -83,7 +83,7 @@ const ThankYouPage = async ({
             <p className='text-sm font-medium text-blue-600'>
               Order successful
             </p>
-            <h1 className='mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl'>
+            <h1 className='mt-2 text-4xl font-bold tracking-tight sm:text-5xl'>
               Thanks for ordering
             </h1>
               <p className='mt-2 text-base text-muted-foreground'>
@@ -94,7 +94,7 @@ const ThankYouPage = async ({
               <div className=' mt-2 text-left'>
                 <Link
                   href='/PodProducts/userOrders'
-                  className='text-sm hidden xl:block font-medium text-blue-600 hover:text-blue-500'>
+                  className='text-sm font-medium text-blue-600 hover:text-blue-500'>
                   View your orders &rarr;
                 </Link>
               </div>
@@ -104,9 +104,9 @@ const ThankYouPage = async ({
 
             <div className='mt-16 text-sm font-medium'>
               <div className='text-muted-foreground'>
-                Order nr.
+                Order Id
               </div>
-              <div className='mt-2 text-gray-900'>
+              <div className='mt-2 '>
               {orderId}
               </div>
 
@@ -117,19 +117,19 @@ const ThankYouPage = async ({
               <div className='space-y-6 border-t border-gray-200 pt-6 text-sm font-medium text-muted-foreground'>
                 <div className='flex justify-between'>
                   <p>Subtotal</p>
-                  <p className='text-gray-900'>
+                  <p className=''>
                   {(order.amount - fee).toFixed(2) } TND
                   </p>
                 </div>
 
                 <div className='flex justify-between'>
                   <p>Shipping Fee</p>
-                  <p className='text-gray-900'>
+                  <p className=''>
                     {fee.toFixed(2)} TND
                   </p>
                 </div>
 
-                <div className='flex items-center justify-between border-t border-gray-200 pt-6 text-gray-900'>
+                <div className='flex items-center justify-between border-t border-gray-200 pt-6 '>
                   <p className='text-base'>Total</p>
                   <p className='text-base'>
                   {order?.amount.toFixed(2)} TND
