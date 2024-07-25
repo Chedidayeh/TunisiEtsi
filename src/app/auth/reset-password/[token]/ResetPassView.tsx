@@ -112,7 +112,7 @@ const ResetPassView = ({status , user} : {status : string , user? : User}) => {
                 <Input
                   placeholder="********"
                   type="password" 
-                  className="bg-white"
+                  className=""
                   value={newPassword}
                   onChange={handlePasswordChange}
                 />

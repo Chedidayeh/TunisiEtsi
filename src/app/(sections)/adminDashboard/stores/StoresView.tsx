@@ -230,7 +230,7 @@ interface StoresViewProps {
         <div className='mt-2 flex flex-wrap items-center justify-center'>
         <Input
               type="search"
-              className='w-full sm:w-1/2 lg:w-[40%] mb-2 sm:mb-0'
+              className='w-full sm:w-auto mb-2 sm:mb-0'
               placeholder="Enter the Store Id, name to make a search..."
               value={storeSearchQuery}
               onChange={handleStoreSearchChange}

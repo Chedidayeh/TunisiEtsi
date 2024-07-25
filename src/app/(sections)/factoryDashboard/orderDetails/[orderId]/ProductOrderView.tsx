@@ -316,6 +316,9 @@ const downloadMockup = async (imageUrls: string[]) => {
         <Separator className="w-full"/>
         <CardContent>
             <p className="text-gray-600 font-extrabold mt-6">Order Items :</p>
+            <p className="text-red-600 text-sm">
+        <span className="text-blue-600 font-medium">Guide :</span> Click on the product!
+      </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 ml-2 md:ml-10 mt-6">
             {order.orderItems.map((item, index) => (
                       <div

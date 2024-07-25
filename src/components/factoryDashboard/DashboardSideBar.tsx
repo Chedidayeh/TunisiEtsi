@@ -70,7 +70,7 @@ export default function DashboardSideBar() {
             <Button
               variant="ghost"
               className={cn("flex items-center gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                "flex items-center gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/factoryDashboard"
+                "flex items-center gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/factoryDashboard"
               })}
               onClick={()=>router.push("/factoryDashboard")}
             >
@@ -86,7 +86,7 @@ export default function DashboardSideBar() {
             <div className="mb-2">
             <Button
               className={cn("flex items-center gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                "flex items-center gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/factoryDashboard/orders"
+                "flex items-center gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/factoryDashboard/orders"
               })}              
               onClick={()=>router.push("/factoryDashboard/orders")}
               variant="ghost"
@@ -103,7 +103,7 @@ export default function DashboardSideBar() {
             <div className="mb-2">
             <Button
               className={cn("flex items-center gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                "flex items-center gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/factoryDashboard/stock"
+                "flex items-center gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/factoryDashboard/stock"
               })}              
               onClick={()=>router.push("/factoryDashboard/stock")}
               variant="ghost"
@@ -118,7 +118,7 @@ export default function DashboardSideBar() {
             <div className="mb-2">
             <Button
               className={cn("flex items-center gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                "flex items-center gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/factoryDashboard/notifications"
+                "flex items-center gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/factoryDashboard/notifications"
               })}              
               onClick={()=>router.push("/factoryDashboard/notifications")}
               variant="ghost"
@@ -135,7 +135,7 @@ export default function DashboardSideBar() {
             <div className="mb-2">
             <Button
               className={cn("flex items-center gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                "flex items-center gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/factoryDashboard/"
+                "flex items-center gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/factoryDashboard/"
               })}              
               onClick={()=>router.push("/factoryDashboard")}            variant="ghost"
 
@@ -150,7 +150,7 @@ export default function DashboardSideBar() {
             <div className="mb-2">
             <Button
               className={cn("flex items-center gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                "flex items-center gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/factoryDashboard/"
+                "flex items-center gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/factoryDashboard/"
               })}              
               onClick={()=>router.push("/PodProducts")}            variant="ghost"
 

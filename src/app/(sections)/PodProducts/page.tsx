@@ -55,7 +55,7 @@ export default async function Page() {
         </div>
 
 
-        <section className='border-2 rounded-2xl border-gray-300 bg-white w-[90%] mx-auto my-10'>
+        <section className='bg-muted/50 border-2 rounded-2xl border-slate-50 w-[90%] mx-auto my-8'>
         <div className='flex flex-col items-center justify-center mt-2'>
     <p className='mt-4 text-sm max-w-prose text-muted-foreground'>
       Discover our Trending Style collection!
@@ -80,7 +80,7 @@ export default async function Page() {
 
       {/* Top selled section */}
 
-      <section className='border-2 rounded-2xl border-gray-300 bg-white w-[90%] mx-auto my-10'>
+      <section className='bg-muted/50 border-2 rounded-2xl border-slate-50 w-[90%] mx-auto my-8'>
       <div className='w-[85%] mx-auto'>
       <ProductReel
             user={user!}
@@ -93,7 +93,7 @@ export default async function Page() {
       </section>
 
       {/* Newly released section */}
-<section className='border-2 rounded-2xl border-gray-300 bg-white w-[90%] mx-auto my-10'>
+      <section className='bg-muted/50 border-2 rounded-2xl border-slate-50 w-[90%] mx-auto my-8'>
       <div className='w-[85%] mx-auto'>
       <ProductReel
             user={user!}

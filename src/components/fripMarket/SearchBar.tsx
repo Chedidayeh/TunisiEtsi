@@ -65,7 +65,7 @@ const SearchBar = () => {
   };
 
   return (
-    <nav className='sticky z-[50] h-14 inset-x-0 top-0 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all'>
+    <nav className='sticky z-[50] h-14 inset-x-0 top-0 w-full border-b border-gray-200 backdrop-blur-lg transition-all'>
       <MaxWidthWrapper>
 
         <>
@@ -87,7 +87,7 @@ const SearchBar = () => {
           <div className='flex gap-4 items-center justify-center mt-2'>
             <Input
               type="search"
-              className="w-[500px] border-2 border-blue-500 bg-gray-100"
+              className="w-[500px] border-2 border-blue-500"
               placeholder="Search for products..."
               value={searchQuery}
               onChange={handleChange}
@@ -101,7 +101,7 @@ const SearchBar = () => {
 
           {isSearching && searchQuery !== '' && data.length === 0 && (
             <div className="flex items-center justify-center">
-            <ul className="bg-white border w-[60%] h-[10%] border-gray-300 mt-2 rounded-md shadow-lg">              <li
+            <ul className="bg-gray-50 border text-gray-800 w-[60%] h-[10%] border-gray-300 mt-2 rounded-md shadow-lg">              <li
                 className="px-4 py-2 justify-center items-center flex text-blue-500">
                 <Loader className="animate-spin"/>
               </li>
@@ -111,7 +111,7 @@ const SearchBar = () => {
 
           {searchQuery !== '' && data.length > 0 && (
             <div className="flex items-center justify-center">
-            <ul className="bg-white border w-[60%] border-gray-300 mt-2 rounded-md shadow-lg">
+            <ul className="bg-gray-50 border text-gray-800 w-[60%] border-gray-300 mt-2 rounded-md shadow-lg">
               {data.map((option, index) => (
                 <li
                   key={index}

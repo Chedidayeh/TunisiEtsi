@@ -360,13 +360,13 @@ const downloadMockup = async (imageUrls: string[]) => {
         <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 mt-2">
         <Input
           type="search"
-          className="w-full sm:w-[50%] bg-gray-100"
+          className="w-full sm:w-[50%] "
           placeholder="Enter the product Id, title, store Name to make a search..."
           value={searchQuery}
           onChange={handleSearchChange}
         />
         <Select onValueChange={handleFilterChange}>
-          <SelectTrigger className="w-full sm:w-[180px] bg-gray-100">
+          <SelectTrigger className="w-full sm:w-[180px] ">
             <SelectValue placeholder="Filter By" />
           </SelectTrigger>
           <SelectContent>

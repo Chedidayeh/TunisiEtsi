@@ -55,8 +55,8 @@ export default async function Page() {
 
 
 
-<section className='border-2 rounded-2xl border-gray-200 bg-white w-[90%] mx-auto my-10'>
-  <div className='flex flex-col items-center justify-center mt-2'>
+<section className='bg-muted/50 border-2 rounded-2xl border-slate-50 w-[90%] mx-auto my-8'>
+<div className='flex flex-col items-center justify-center mt-2'>
     <p className='mt-4 text-sm max-w-prose text-muted-foreground'>
       Discover our Pod Styled collection!
     </p>
@@ -80,7 +80,7 @@ export default async function Page() {
 </section>
 
 
-<section className='border-2 rounded-2xl border-gray-200 bg-white w-[90%] mx-auto my-10'>
+<section className='bg-muted/50 border-2 rounded-2xl border-slate-50 w-[90%] mx-auto my-8'>
 <div className='flex flex-col items-center justify-center mt-2'>
     <p className='mt-4 text-sm max-w-prose text-muted-foreground'>
       Discover our unique Bac collection!
@@ -97,7 +97,7 @@ export default async function Page() {
 </section>
 
 
-<section className='border-2 rounded-2xl border-gray-200 bg-white w-[90%] mx-auto my-10'>
+<section className='bg-muted/50 border-2 rounded-2xl border-slate-50 w-[90%] mx-auto my-8'>
 <div className='flex flex-col items-center justify-center mt-2'>
     <p className='mt-4 text-sm max-w-prose text-muted-foreground'>
       Discover our unique Frip collection!

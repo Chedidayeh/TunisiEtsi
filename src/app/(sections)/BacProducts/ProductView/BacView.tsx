@@ -179,7 +179,7 @@ const BacView = ({ products, user }: ProductReelProps) => {
     <section className='py-4'>
      
      <div className='bg-muted/50 rounded-xl py-10 mx-auto text-center flex flex-col items-center max-w-1xl'>
-          <h1 className='text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl'>
+          <h1 className='text-4xl font-bold tracking-tight sm:text-5xl'>
             Bac{' '}
             <span className='text-yellow-500'>
             Edition ✨
@@ -191,7 +191,7 @@ const BacView = ({ products, user }: ProductReelProps) => {
             <div className="flex">
     <div className="mt-3 mr-3 flex-1">
         <Select onValueChange={handleSortChange}>
-            <SelectTrigger className="w-[180px] bg-white">
+            <SelectTrigger className="w-[180px] ">
                 <SelectValue placeholder="Sort By" />
             </SelectTrigger>
             <SelectContent>

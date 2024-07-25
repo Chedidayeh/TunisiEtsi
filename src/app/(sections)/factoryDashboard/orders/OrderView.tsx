@@ -254,26 +254,29 @@ interface OrderViewProps {
   
   
       <Card className="xl:col-span-4" x-chunk="dashboard-01-chunk-4">
-        <CardHeader className="flex flex-row items-center">
-          <div className="grid gap-2">
+      <CardHeader className="flex flex-row items-center bg-muted/50">
+      <div className="grid gap-2">
             <CardTitle>Orders</CardTitle>
             <CardDescription>Total: {orders.length}</CardDescription>
+            <p className="text-red-600 text-sm">
+        <span className="text-blue-600 font-medium">Guide :</span> Click on the order row to view its details or use the Eye action!
+      </p>
           </div>
         </CardHeader>
         <CardContent>
 
 
-        <div className="flex space-x-4 items-center">
+        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 items-center mt-2">
           <Input
             type="search"
-            className="w-[50%] bg-gray-100"
+            className="w-full sm:w-[50%] "
             placeholder="Enter the order Id , client Name , client Phone Number to make a search..."
             value={searchQuery}
             onChange={handleSearchChange}
           />          
           <Select onValueChange={handleFilterChange}>
-            <SelectTrigger className="w-[180px] bg-gray-100">
-              <SelectValue placeholder="Filter By" />
+          <SelectTrigger className="w-full sm:w-[180px] ">
+          <SelectValue placeholder="Filter By" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
@@ -286,8 +289,8 @@ interface OrderViewProps {
             </SelectContent>
           </Select>
           <Select onValueChange={handleFilterChange}>
-            <SelectTrigger className="w-[180px] bg-gray-100">
-              <SelectValue placeholder="Filter By" />
+          <SelectTrigger className="w-full sm:w-[180px] ">
+          <SelectValue placeholder="Filter By" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
@@ -308,8 +311,8 @@ interface OrderViewProps {
                 <TableRow>
                   <TableHead className="hidden sm:table-cell">Order Id</TableHead>
                   <TableHead className="hidden sm:table-cell">Order Status</TableHead>
-                  <TableHead>Order Type</TableHead>
-                  <TableHead>Is Order Printed</TableHead>
+                  <TableHead className="hidden sm:table-cell">Order Type</TableHead>
+                  <TableHead className="hidden sm:table-cell">Is Order Printed</TableHead>
                   <TableHead className="hidden sm:table-cell">Is Order Paid</TableHead>
                   <TableHead>Total Items</TableHead>
                   <TableHead className="hidden sm:table-cell">Order Amount</TableHead>
@@ -334,12 +337,12 @@ interface OrderViewProps {
                               {order.status}
                         </Badge>
                       </TableCell >
-                    <TableCell>
+                    <TableCell className="hidden sm:table-cell">
                     <Badge className={`${order.type === 'CONFIRMED' ? 'bg-green-700' : order.type === 'NOT_CONFIRMED' ? 'bg-orange-400' : order.type === 'CANCELED' ? 'bg-red-700' : 'bg-gray-700'} hover:bg-gray-700`}>
                       {order.type}
                     </Badge>
                       </TableCell>
-                    <TableCell>
+                    <TableCell className="hidden sm:table-cell">
                       <Badge className={`${order.printed ? 'bg-green-700' :  'bg-red-700'} hover:bg-gray-700`}>
                     {order.printed ? "Printed" : "Not Printed"}
                       </Badge>
@@ -384,13 +387,13 @@ interface OrderViewProps {
 
 
       {selectedOrder && (
-         <Card className="xl:col-span-4" x-chunk="dashboard-01-chunk-4">
-         <CardHeader className="flex flex-row items-center">
-           <div className="grid gap-2">
+      <Card className="col-span-full" x-chunk="dashboard-01-chunk-4">
+          <CardHeader className="flex flex-col md:flex-row items-center">
+          <div className="grid gap-2">
              <CardTitle className="font-extrabold">Order Infos :</CardTitle>
              <CardDescription>
-                     <div className="grid grid-cols-5 gap-10 mt-2">
-                         <div>
+             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 mt-2">
+             <div>
                              <p className="font-bold">Order Id:</p>
                              <p>{selectedOrder?.id}</p>
                          </div>

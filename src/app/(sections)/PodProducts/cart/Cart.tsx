@@ -233,7 +233,7 @@ const orderTotal = subtotal + fee
             <Label htmlFor="name" className="text-left">
               Your Name :
             </Label>
-            <Input id="name" type="text" className="col-span-3 bg-gray-100" value={name} onChange={handleNameChange} />
+            <Input id="name" type="text" className="col-span-3" value={name} onChange={handleNameChange} />
           </div>
           <div className="grid items-center grid-cols-4 gap-4">
             <Label htmlFor="phoneNumber">Phone Number:</Label>
@@ -245,7 +245,7 @@ const orderTotal = subtotal + fee
                 onBlur={handlePhoneNumberBlur}
                 placeholder="99 999 999" 
                 onChange={handlePhoneNumberChange}
-                className={`${inputClassName} focus:ring-0 bg-gray-100 focus:border-green-500`}
+                className={`${inputClassName} focus:ring-0 focus:border-green-500`}
                 required 
               />
               {phoneNumberError && (
@@ -260,7 +260,7 @@ const orderTotal = subtotal + fee
             <Label htmlFor="address" className="text-left">
               Your Address:
             </Label>
-            <Input id="address" placeholder='Region And City | الولاية و المدينة' maxLength={20} type="text" className="col-span-3 bg-gray-100" value={address} onChange={handleAddressChange} />
+            <Input id="address" placeholder='Region And City | الولاية و المدينة' maxLength={20} type="text" className="col-span-3" value={address} onChange={handleAddressChange} />
           </div>
         </div>
         <AlertDialogFooter>
@@ -276,15 +276,15 @@ const orderTotal = subtotal + fee
 
 
 
-        <div className='bg-white'>
+        <div className=''>
       <div className='mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8'>
       <div className='flex items-center justify-between'>
-          <h1 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
+          <h1 className='text-3xl font-bold tracking-tight sm:text-4xl'>
             Shopping Cart
           </h1>
         </div>
         <div className='left-2 justify-center items-center flex'>
-          <p className='text-md text-gray-600'>Total Items: {cartProducts.length}</p>
+          <p className='text-md '>Total Items: {cartProducts.length}</p>
         </div>
 
 
@@ -343,7 +343,7 @@ const orderTotal = subtotal + fee
                               <h3 className='text-lg'>
                                 <Link
                                   href={`/MarketPlace/product/${product.productId}`}
-                                  className='font-medium text-gray-700 hover:text-gray-800'>
+                                  className='font-medium  hover:text-gray-800'>
                                   {product.title}
                                 </Link>
                               </h3>
@@ -396,7 +396,7 @@ const orderTotal = subtotal + fee
                           </div>
                         </div>
 
-                        <p className='flex space-x-2 text-sm text-gray-700'>
+                        <p className='flex space-x-2 text-sm '>
                           <X className='h-5 w-5 flex-shrink-0 text-red-500' />
                           <span>
                           No product returns allowed!                          
@@ -410,17 +410,17 @@ const orderTotal = subtotal + fee
             
           </div>
 
-          <section className='mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8'>
-            <h2 className='text-lg font-medium text-gray-900'>
+          <section className='mt-16 rounded-lg border-2 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8'>
+            <h2 className='text-lg font-medium'>
               Order summary
             </h2>
 
             <div className='mt-6 space-y-4'>
               <div className='flex items-center justify-between'>
-                <p className='text-sm text-gray-600'>
+                <p className='text-sm '>
                   Subtotal
                 </p>
-                <p className='text-sm font-medium text-gray-900'>
+                <p className='text-sm font-medium '>
                 {subtotal.toFixed(2)} TND
                 </p>
               </div>
@@ -429,13 +429,13 @@ const orderTotal = subtotal + fee
               <div className='flex text-sm text-muted-foreground'>
                   <span>Shipping fee</span>
                 </div>
-                <div className='text-sm font-medium text-gray-900'>
+                <div className='text-sm font-medium '>
                 {fee.toFixed(2)} TND
                 </div>
               </div>
               <div className='flex items-center justify-between border-t border-gray-200 pt-4'>
                 <div className='flex text-sm text-muted-foreground'>
-                  <p className='flex space-x-2 text-sm text-gray-700'>
+                  <p className='flex space-x-2 text-sm '>
                     <Check className='h-5 w-5 flex-shrink-0 text-green-500' />
                     <span>Delivery time: within 3 days!</span>
                   </p>
@@ -443,10 +443,10 @@ const orderTotal = subtotal + fee
               </div>
 
               <div className='flex items-center justify-between border-t border-gray-200 pt-4'>
-                <div className='text-base font-medium text-gray-900'>
+                <div className='text-base font-medium '>
                   Order Total
                 </div>
-                <div className='text-base font-medium text-gray-900'>
+                <div className='text-base font-medium '>
                   {cartProducts.length > 0 ? `${orderTotal.toFixed(2)} TND` : `0 TND`}
                 </div>
               </div>

@@ -31,13 +31,14 @@ import { getAllCategories, getAllFripCategories, getUser } from '@/actions/actio
 import { HamburgerMenuIcon } from '@radix-ui/react-icons'
 import MaxWidthWrapper from '../MaxWidthWrapper'
 import UserProfile from './UserProfile'
+import { ModeToggle } from '../ModeToggle'
 
 const Navbar = async () => {
 
   const categories = await getAllFripCategories()
   const user = await getUser()
   return (
-    <nav className='sticky z-[100] h-14 inset-x-0 top-0 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all'>
+    <nav className='sticky z-[100] h-14 inset-x-0 top-0 w-full border-b border-gray-200 backdrop-blur-lg transition-all'>
       <MaxWidthWrapper>
         <div className='flex h-14 items-center justify-between'>
           {/* Logo */}
@@ -209,12 +210,16 @@ const Navbar = async () => {
           {/* Right Section */}
           <div className='hidden md:flex items-center space-x-4'>
             <UserProfile user={user!} />
+            <ModeToggle/>
           </div>
 
           {/* User Profile for small devices */}
-          <div className='md:hidden flex items-center'>
+          <div className='md:hidden flex items-center space-x-4'>
             <UserProfile user={user!} />
+            <ModeToggle/>
           </div>
+
+          
         </div>
       </MaxWidthWrapper>
     </nav>

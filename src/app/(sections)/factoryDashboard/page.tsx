@@ -164,7 +164,7 @@ const Page =  async () => {
                   <TableHead className="hidden sm:table-cell">Order Status</TableHead>
                   <TableHead>Order Type</TableHead>
                   <TableHead>Order Creation Date</TableHead>
-                  <TableHead>Is Order Printed</TableHead>
+                  <TableHead className="hidden sm:table-cell">Is Order Printed</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -188,7 +188,7 @@ const Page =  async () => {
                       </Badge>
                     </TableCell>
                     <TableCell>{order.createdAt ? new Date(order.createdAt).toLocaleDateString() : ''}</TableCell>
-                    <TableCell>
+                    <TableCell className="hidden sm:table-cell">
                       <Badge className={`${order.printed ? 'bg-green-700' :  'bg-red-700'} hover:bg-gray-700`}>
                             {order.printed ? "Is Printed" : "Not Printed"}
                       </Badge>

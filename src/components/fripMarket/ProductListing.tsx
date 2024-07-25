@@ -236,7 +236,7 @@ const ProductListing = ({
         <p className="text-sm text-gray-600">{product.category}</p>
     </div>
         {/* add to fav list icon */}
-    <div onClick={saveToFavList} className="relative group rounded-full p-2 bg-gray-50 text-gray-600 cursor-pointer ">
+    <div onClick={saveToFavList} className="relative group rounded-full p-2  text-gray-600 cursor-pointer ">
         <Heart className={`${isFavSaved ? 'text-red-600 fill-current' : 'text-gray-600 hover:text-red-600'}`} />
         <span className="absolute bottom-12 left-1/2 transform -translate-x-1/2 w-max px-2 py-1 text-xs bg-black text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
         {isFavSaved ? 'Saved!' : 'Save in fav list'}
@@ -254,7 +254,7 @@ const ProductListing = ({
         </div>
         {/* add to cart list icon */}
         <Link onClick={openDialog} href={`/fripMarket/ProductView/${product.id}`}>
-        <div className="relative group rounded-full p-2 bg-gray-50 text-gray-600 cursor-pointer ">
+        <div className="relative group rounded-full p-2  text-gray-600 cursor-pointer ">
           <ShoppingBag className='text-gray-600 hover:text-blue-600' />
           <span className="absolute bottom-4 right-2 transform -translate-x-1/2 w-max px-2 py-1 text-xs bg-black text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
             Add to cart

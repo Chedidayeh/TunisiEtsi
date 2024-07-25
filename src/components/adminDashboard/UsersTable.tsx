@@ -115,13 +115,13 @@ const UsersTable = () => {
       <CardDescription className="flex items-center justify-center gap-2">
         <Input
           type="search"
-          className="w-[40%] bg-gray-100"
+          className="w-[40%] "
           placeholder="Enter users Id, username, email to make a search..."
           value={searchQuery}
           onChange={handleSearchChange}
         />
         <Select onValueChange={handleFilterChange}>
-          <SelectTrigger className="w-[180px] bg-gray-100">
+          <SelectTrigger className="w-[180px] ">
             <SelectValue placeholder="Filter By" />
           </SelectTrigger>
           <SelectContent>

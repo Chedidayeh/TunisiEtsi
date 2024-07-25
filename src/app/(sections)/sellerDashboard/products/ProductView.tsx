@@ -213,7 +213,7 @@ const ProductView = ({
       <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
         {/* Sorting select */}
         <Select value={sortOption} onValueChange={handleSortChange}>
-          <SelectTrigger className="w-full sm:w-[180px] bg-gray-100">
+          <SelectTrigger className="w-full sm:w-[180px]">
             <SelectValue placeholder="Sort By" />
           </SelectTrigger>
           <SelectContent>
@@ -229,7 +229,7 @@ const ProductView = ({
 
         <Input
           type="search"
-          className="w-full sm:w-[50%] bg-gray-100"
+          className="w-full sm:w-[50%] "
           placeholder="Search for your products..."
           value={searchQuery}
           onChange={handleSearchChange}
@@ -321,7 +321,7 @@ const ProductView = ({
                       </div>
 
                       <div className="absolute bottom-8 left-0 right-0 z-10 text-center">
-                        <Badge variant="secondary" className="bg-gray-200">
+                        <Badge variant="secondary" className="bg-gray-200 text-gray-700">
                           {product.title}
                         </Badge>
                       </div>

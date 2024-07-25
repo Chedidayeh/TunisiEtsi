@@ -98,7 +98,7 @@ const Page = () => {
                 placeholder="username" 
                 {...field} 
                 type="text" 
-                className="bg-gray-100"/>
+                className=""/>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -116,7 +116,7 @@ const Page = () => {
                 placeholder="example@gmail.com" 
                 {...field} 
                 type="email" 
-                className="bg-gray-100"/>
+                className=""/>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -134,7 +134,7 @@ const Page = () => {
                 placeholder="********" 
                 {...field} 
                 type="password" 
-                className="bg-gray-100"/>
+                className=""/>
               </FormControl>
               <FormMessage />
             </FormItem>

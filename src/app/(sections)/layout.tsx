@@ -7,6 +7,7 @@ import Providers from "@/components/Providers";
 import { StoreProvider } from "@/store/StoreProvider";
 import Navbar from "@/components/HomeNavBar";
 import HomeNavBar from "@/components/HomeNavBar";
+import { ThemeProvider } from "@/components/theme-provider";
 const recursive = Recursive({ subsets: ["latin-ext"] });
 
 
@@ -29,10 +30,18 @@ export default function RootLayout({
 
     <html lang="en">
       <body className={recursive.className}>
+      <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
       <StoreProvider>
       <main className='flex flex-col min-h-[calc(100vh-3.5rem-1px)]'>
         <div className='flex-1 flex flex-col h-full'>
+
            <Providers>
+
            {children}
            <Footer/>
             <Toaster/>
@@ -40,6 +49,7 @@ export default function RootLayout({
           </div>
         </main> 
       </StoreProvider>
+      </ThemeProvider>
       </body>
     </html>
 

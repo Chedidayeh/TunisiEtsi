@@ -181,7 +181,7 @@ const DesignView = ({
       <div className="flex flex-wrap space-x-0 space-y-2 md:space-y-0 md:space-x-4"> {/* Flex container with space between items */}
         {/* Sorting select */}
         <Select value={sortOption} onValueChange={handleSortChange}>
-          <SelectTrigger className="w-full md:w-[180px] bg-gray-100">
+          <SelectTrigger className="w-full md:w-[180px] ">
             <SelectValue placeholder="Sort By" />
           </SelectTrigger>
           <SelectContent>
@@ -196,14 +196,14 @@ const DesignView = ({
 
         <Input
           type="search"
-          className="w-full md:w-[50%] bg-gray-100"
+          className="w-full md:w-[50%] "
           placeholder="Search for your design..."
           value={searchQuery}
           onChange={handleSearchChange}
         />
         <Link href="/sellerDashboard/createDesign">
           <Button
-            className="w-full md:w-auto mb-4 md:mt-2"
+            className="w-full md:w-auto mb-4"
             type="submit"
             loadingText='Redirecting'
             isLoading={isClicked}

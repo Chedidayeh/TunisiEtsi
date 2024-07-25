@@ -45,7 +45,7 @@ const ContactView = ()=>{
     return (
         <section className='border-t border-gray-200 bg-muted/50'>
           <div className='text-center mt-4'>
-        <h1 className='text-1xl font-bold tracking-tight text-gray-900 sm:text-2xl'>
+        <h1 className='text-1xl font-bold tracking-tight  sm:text-2xl'>
             Contact {' '}
             <span className='text-yellow-500'>
             Info
@@ -66,7 +66,7 @@ const ContactView = ()=>{
                 </div>
 
                 <div className='mt-6 md:ml-4 md:mt-0 lg:ml-0 lg:mt-6'>
-                  <h3 className='text-base font-medium text-gray-900'>
+                  <h3 className='text-base font-medium '>
                     {perk.name}
                   </h3>
                 </div>

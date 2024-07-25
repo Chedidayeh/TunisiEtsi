@@ -240,7 +240,7 @@ const OrderData = ({ordersData}: DesignViewProps) => {
 
                            {/* title */}
         <div className="flex items-center justify-center mt-10">
-        <h1 className='text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl'>
+        <h1 className='text-4xl font-bold tracking-tight  sm:text-5xl'>
             Your{' '}
             <span className='text-blue-600'>
             Orders
@@ -261,7 +261,7 @@ const OrderData = ({ordersData}: DesignViewProps) => {
                   <div className="flex items-center space-x-2 mb-4 sm:mb-0 sm:mr-4">
                     {/* First Select */}
                     <Select onValueChange={handleFilterChange}>
-                      <SelectTrigger className="w-[180px] bg-white">
+                      <SelectTrigger className="w-[180px]">
                         <SelectValue placeholder="Filter By" />
                       </SelectTrigger>
                       <SelectContent>
@@ -278,7 +278,7 @@ const OrderData = ({ordersData}: DesignViewProps) => {
                   <div className="flex items-center space-x-2">
                     {/* Second Select */}
                     <Select onValueChange={handleFilterChange}>
-                      <SelectTrigger className="w-[180px] bg-white">
+                      <SelectTrigger className="w-[180px]">
                         <SelectValue placeholder="Filter By" />
                       </SelectTrigger>
                       <SelectContent>

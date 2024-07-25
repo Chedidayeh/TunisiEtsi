@@ -222,7 +222,7 @@ const ProductsByCategory = ({ products, user , category , brands }: ProductReelP
     <section className='py-4'>
      
      <div className='bg-muted/50 rounded-xl py-10 mx-auto text-center flex flex-col items-center max-w-1xl'>
-          <h1 className='text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl'>
+          <h1 className='text-4xl font-bold tracking-tight  sm:text-5xl'>
             {category}{' '}
             <span className='text-blue-600'>
             Products
@@ -235,7 +235,7 @@ const ProductsByCategory = ({ products, user , category , brands }: ProductReelP
             <div className="flex flex-col gap-2 md:flex-row">
             <div className="mt-3 flex-1">
         <Select onValueChange={handleSortChange}>
-            <SelectTrigger className="w-[180px] bg-white">
+            <SelectTrigger className="w-[180px] ">
                 <SelectValue placeholder="Sort By" />
             </SelectTrigger>
             <SelectContent>
@@ -249,7 +249,7 @@ const ProductsByCategory = ({ products, user , category , brands }: ProductReelP
     </div>
     <div className="mt-3 flex-1 ">
             <Select onValueChange={handleBrandSortChange}>
-            <SelectTrigger className="w-[180px] bg-white">
+            <SelectTrigger className="w-[180px] ">
                 <SelectValue placeholder="Filter By Brand" />
             </SelectTrigger>
             <SelectContent>
@@ -266,7 +266,7 @@ const ProductsByCategory = ({ products, user , category , brands }: ProductReelP
     </div>
     <div className="mt-3 flex-1">
     <Select onValueChange={handlePriceRangeChange}>
-    <SelectTrigger className="w-[180px] bg-white">
+    <SelectTrigger className="w-[180px] ">
       <SelectValue placeholder="Select Price Range" />
     </SelectTrigger>
     <SelectContent>

@@ -32,6 +32,7 @@ import {
 import { getAllCategories, getUser } from '@/actions/actions'
 import { HamburgerMenuIcon } from '@radix-ui/react-icons'
 import UserProfile from './UserProfile'
+import { ModeToggle } from './ModeToggle'
 
 const Navbar = async () => {
 
@@ -43,11 +44,11 @@ const Navbar = async () => {
   const isFactoryAdmin = user?.userType === "FACTORY"
 
   return (
-    <nav className='sticky z-[100] h-14 inset-x-0 top-0 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all'>
+    <nav className='sticky z-[100] h-14 inset-x-0 top-0 w-full border-b border-gray-200  backdrop-blur-lg transition-all'>
       <MaxWidthWrapper>
         <div className='flex h-14 items-center justify-between'>
           {/* Logo */}
-          <div className='ml-4 flex lg:ml-0'>
+          <div className='mr-4 flex lg:ml-0'>
             <Link href='/' className='flex z-40 font-semibold'>
             Tunisi<span className='text-blue-600'>Etsi</span>
             </Link>
@@ -236,13 +237,16 @@ const Navbar = async () => {
                  {/* User Profile */}
 
                         <UserProfile user={user!} />
+                        <ModeToggle/>
 
           </div>
 
           {/* User Profile for small devices */}
-          <div className='md:hidden flex items-center'>
+          <div className='md:hidden flex items-center space-x-4'>
             <UserProfile user={user!} />
+            <ModeToggle/>
           </div>
+
         </div>
       </MaxWidthWrapper>
     </nav>

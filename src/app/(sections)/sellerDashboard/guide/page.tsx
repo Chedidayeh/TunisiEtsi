@@ -71,7 +71,7 @@ const Page = () => {
           <div className='mx-auto mb-32 mt-20 max-w-5xl sm:mt-20'>
             <div className='mb-12 px-6 lg:px-8'>
               <div className='mx-auto max-w-2xl sm:text-center'>
-                <h2 className='mt-2 font-bold text-3xl text-gray-900 sm:text-2xl'>
+                <h2 className='mt-2 font-bold text-3xl  sm:text-2xl'>
                   1-Product Creation
                 </h2>
               </div>

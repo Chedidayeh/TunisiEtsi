@@ -362,7 +362,7 @@ const CreateOrder = ({
             <Label htmlFor="name" className="text-left">
               Client Name :
             </Label>
-            <Input id="name" type="text" className="col-span-3 bg-gray-100" value={name} onChange={handleNameChange} />
+            <Input id="name" type="text" className="col-span-3 " value={name} onChange={handleNameChange} />
           </div>
           <div className="grid grid-cols-4 gap-4">
               <Label htmlFor="phoneNumber">Phone Number:</Label>
@@ -374,7 +374,7 @@ const CreateOrder = ({
                   onBlur={handlePhoneNumberBlur}
                   placeholder="99 999 999" 
                   onChange={handlePhoneNumberChange}
-                  className={`${inputClassName} focus:ring-0 bg-gray-100 focus:border-green-500`}
+                  className={`${inputClassName} focus:ring-0  focus:border-green-500`}
                   required 
                 />
                 {phoneNumberError && (
@@ -388,14 +388,14 @@ const CreateOrder = ({
             <Label htmlFor="address" className="text-left">
               Client Address:
             </Label>
-            <Input id="address" maxLength={20} type="text" className="col-span-3 bg-gray-100" value={address} onChange={handleAddressChange} />
+            <Input id="address" maxLength={20} type="text" className="col-span-3 " value={address} onChange={handleAddressChange} />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
           <Label htmlFor="username" className="text-left">
             Product Size :
           </Label>
           <Select value={selectedSize} onValueChange={handleSizeChange}>
-            <SelectTrigger className="w-[180px] bg-gray-100">
+            <SelectTrigger className="w-[180px] ">
               <SelectValue placeholder="Select a size" />
             </SelectTrigger>
             <SelectContent>
@@ -412,7 +412,7 @@ const CreateOrder = ({
             <Label htmlFor="quantity" className="text-left">
               Product Quantity :
             </Label>
-            <Input id="quantity" type="number" min={1} max={5} value={quantity} onChange={handleQuantityChange} className="w-[180px] col-span-3 bg-gray-100" />
+            <Input id="quantity" type="number" min={1} max={5} value={quantity} onChange={handleQuantityChange} className="w-[180px] col-span-3 " />
           </div>
         </div>
         <AlertDialogFooter>
@@ -444,7 +444,7 @@ const CreateOrder = ({
           value={sortOption}
           onValueChange={handleSortChange}
         >
-          <SelectTrigger className="w-full sm:w-[180px] bg-gray-100">
+          <SelectTrigger className="w-full sm:w-[180px] ">
           <SelectValue placeholder="Sort By" />
           </SelectTrigger>
           <SelectContent>
@@ -461,7 +461,7 @@ const CreateOrder = ({
 
           <Input
               type="search"
-              className="w-full sm:w-[50%] bg-gray-100"
+              className="w-full sm:w-[50%] "
               placeholder="Search for your products..."
               value={searchQuery}
               onChange={handleSearchChange}
@@ -603,7 +603,7 @@ const CreateOrder = ({
                                   />
 
                             <div className="absolute bottom-2 left-0 right-0 z-10 text-center">
-                                <Badge variant="secondary" className="bg-gray-200">
+                                <Badge variant="secondary" className="bg-gray-200 text-gray-800">
                                   {product.title}
                                 </Badge>
                               </div>

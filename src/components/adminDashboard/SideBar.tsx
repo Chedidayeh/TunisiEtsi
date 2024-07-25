@@ -92,7 +92,7 @@ const SideBar = () => {
           <Button
               variant="ghost"
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                "gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/adminDashboard"
+                "gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/adminDashboard"
               })}
               onClick={()=>router.push("/adminDashboard")}
             >
@@ -105,7 +105,7 @@ const SideBar = () => {
             <Button
             variant="ghost"
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/adminDashboard/stores"
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/adminDashboard/stores"
               })}
               onClick={()=>router.push("/adminDashboard/stores")}
             >
@@ -125,7 +125,7 @@ const SideBar = () => {
             <Button
             variant="ghost"
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/adminDashboard/products"
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/adminDashboard/products"
               })}
               onClick={()=>router.push("/adminDashboard/products")}
             >
@@ -137,7 +137,7 @@ const SideBar = () => {
 
             <Button
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/adminDashboard/designs"
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/adminDashboard/designs"
               })}              
               onClick={()=>router.push("/adminDashboard/designs")}
               variant="ghost"
@@ -150,7 +150,7 @@ const SideBar = () => {
             
             <Button
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname.startsWith("/adminDashboard/orders")
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname.startsWith("/adminDashboard/orders")
               })}              
               onClick={()=>router.push("/adminDashboard/orders")}
               variant="ghost"
@@ -171,7 +171,7 @@ const SideBar = () => {
             
             <Button
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/adminDashboard/stock"
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/adminDashboard/stock"
               })}              
               onClick={()=>router.push("/adminDashboard/stock")}
               variant="ghost"
@@ -184,7 +184,7 @@ const SideBar = () => {
 
             <Button
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname.startsWith("/adminDashboard/category")
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname.startsWith("/adminDashboard/category")
               })}              
               onClick={()=>router.push("/adminDashboard/category")}
               variant="ghost"
@@ -198,7 +198,7 @@ const SideBar = () => {
             
             <Button
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname.startsWith("/adminDashboard/bacProducts")
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname.startsWith("/adminDashboard/bacProducts")
               })}              
               onClick={()=>router.push("/adminDashboard/bacProducts")}
               variant="ghost"
@@ -212,7 +212,7 @@ const SideBar = () => {
 
             <Button
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/adminDashboard/notifications"
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/adminDashboard/notifications"
               })}              
               onClick={()=>router.push("/adminDashboard/notifications")}
               variant="ghost"
@@ -227,7 +227,7 @@ const SideBar = () => {
 
             <Button
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname.startsWith("/adminDashboard/fripProducts")
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname.startsWith("/adminDashboard/fripProducts")
               })}              
               onClick={()=>router.push("/adminDashboard/fripProducts")}
               variant="ghost"
@@ -241,7 +241,7 @@ const SideBar = () => {
 
             <Button
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/adminDashboard/"
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/adminDashboard/"
               })}              
               onClick={()=>router.push("/adminDashboard")}            variant="ghost"
 
@@ -254,7 +254,7 @@ const SideBar = () => {
 
             <Button
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/adminDashboard/"
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/adminDashboard/"
               })}              
               onClick={()=>router.push("/PodProducts")}            variant="ghost"
 

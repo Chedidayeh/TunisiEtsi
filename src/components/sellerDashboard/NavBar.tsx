@@ -51,6 +51,7 @@ import { ScrollArea } from "../ui/scroll-area"
 import { useEffect, useState } from "react"
 import { getSideBarTotalCounts, getStoreByUserId, getUnreadNotificationsForStore, getUser } from "@/actions/actions"
 import { Notification } from "@prisma/client"
+import { ModeToggle } from "../ModeToggle"
 
 interface Count {
   printedOrdersCount: number;
@@ -98,7 +99,7 @@ const NavBar = () => {
           <Button
               variant="ghost"
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/sellerDashboard"
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/sellerDashboard"
               })}
               onClick={()=>router.push("/sellerDashboard")}
             >
@@ -111,7 +112,7 @@ const NavBar = () => {
             <Button
             variant="ghost"
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/sellerDashboard/products"
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/sellerDashboard/products"
               })}
               onClick={()=>router.push("/sellerDashboard/products")}
             >
@@ -123,7 +124,7 @@ const NavBar = () => {
 
             <Button
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/sellerDashboard/designs"
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/sellerDashboard/designs"
               })}              
               onClick={()=>router.push("/sellerDashboard/designs")}
               variant="ghost"
@@ -136,7 +137,7 @@ const NavBar = () => {
 
             <Button
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/sellerDashboard/orders"
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/sellerDashboard/orders"
               })}              
               onClick={()=>router.push("/sellerDashboard/orders")}
               variant="ghost"
@@ -149,7 +150,7 @@ const NavBar = () => {
             
             <Button
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/sellerDashboard/"
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/sellerDashboard/"
               })}             
                onClick={()=>router.push("/sellerDashboard")}
                variant="ghost"
@@ -162,7 +163,7 @@ const NavBar = () => {
             
             <Button
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/sellerDashboard/"
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/sellerDashboard/"
               })}              
               onClick={()=>router.push("/sellerDashboard")}            variant="ghost"
 
@@ -175,7 +176,7 @@ const NavBar = () => {
 
             <Button
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/sellerDashboard/notifications"
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/sellerDashboard/notifications"
               })}              
               onClick={()=>router.push("/sellerDashboard/notifications")}
               variant="ghost"
@@ -196,7 +197,7 @@ const NavBar = () => {
             
             <Button
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/sellerDashboard/guide"
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/sellerDashboard/guide"
               })}              
               onClick={()=>router.push("/sellerDashboard/guide")}            
               variant="ghost"
@@ -211,7 +212,7 @@ const NavBar = () => {
 
             <Button
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/sellerDashboard/"
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/sellerDashboard/"
               })}              
               onClick={()=>router.push("/sellerDashboard")}            variant="ghost"
 
@@ -226,7 +227,7 @@ const NavBar = () => {
 
             <Button
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/sellerDashboard/settings"
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/sellerDashboard/settings"
               })}              
               onClick={()=>router.push("/sellerDashboard/settings")}            variant="ghost"
 
@@ -280,6 +281,7 @@ const NavBar = () => {
           <DropdownMenuItem>Logout</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+      <ModeToggle/>
     </header>
   );
 };

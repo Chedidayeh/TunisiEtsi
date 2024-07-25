@@ -43,7 +43,7 @@ const PerkSection = ()=>{
       ]
 
     return (
-        <section className='border-t border-gray-200 bg-gray-50'>
+        <section className='border-t border-gray-200'>
         <MaxWidthWrapper className='py-4'>
           <div className='grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 lg:gap-x-8 lg:gap-y-0'>
             {perks.map((perk) => (
@@ -57,7 +57,7 @@ const PerkSection = ()=>{
                 </div>
 
                 <div className='mt-6 md:ml-4 md:mt-0 lg:ml-0 lg:mt-6'>
-                  <h3 className='text-base font-medium text-gray-900'>
+                  <h3 className='text-base font-medium'>
                     {perk.name}
                   </h3>
                   <p className='mt-3 text-sm text-muted-foreground'>

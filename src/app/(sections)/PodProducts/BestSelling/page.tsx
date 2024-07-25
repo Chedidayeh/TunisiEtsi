@@ -36,7 +36,7 @@ export default async function Page() {
     <>
 
           {/* best selling section */}
-              <section className='border-t border-gray-200 bg-white w-full mx-auto' >
+              <section className='border-t border-gray-200 w-full mx-auto' >
                 <div className='w-[85%] mx-auto'>
                 <BestSelling
                      user={user!}

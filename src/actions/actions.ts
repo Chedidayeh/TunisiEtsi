@@ -1248,7 +1248,9 @@ export async function getSideBarTotalCounts() {
     awaitingActionDesignCount,
   ] = await Promise.all([
     db.order.count({
-      where : {printed : true}
+      where : {printed : true , status: {
+        not: "DELIVERED"
+      }}
     }),
     db.product.count({
       where : {isProductAccepted : false , isProductRefused : false}
@@ -1270,18 +1272,21 @@ export async function getSideBarTotalCounts() {
 
 // get the count for factory dashboard
 export async function getFactoryDashboardCounts() {
-  const [confirmedOrdersCount, deliveredOrdersCount, canceledOrdersCount , totalOrdersCount] = await Promise.all([
-    db.order.count({where : { type : "CONFIRMED"}}),
+  const [confirmedOrdersCount, deliveredOrdersCount, canceledOrdersCount , totalOrdersCount , notPrintedOrders] = await Promise.all([
+    db.order.count({where : { type : "CONFIRMED" }}),
     db.order.count({where : { status : "DELIVERED"}}),
     db.order.count({where : { status : "CANCELED"}}),
-    db.order.count()
+    db.order.count(),
+    db.order.count({where : { type : "CONFIRMED" , printed:false }}),
+
   ]);
 
   return {
     confirmedOrdersCount,
     deliveredOrdersCount,
     canceledOrdersCount,
-    totalOrdersCount
+    totalOrdersCount,
+    notPrintedOrders
   };
 }
 

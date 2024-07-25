@@ -50,7 +50,7 @@ export default function Page() {
 
     <div className="py-4 mx-auto text-center flex flex-col w-full items-center ">
 
-    <h1 className='text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl'>
+    <h1 className='text-2xl font-bold tracking-tight  sm:text-3xl'>
       لوج على القطعة الي 
       <span className='text-blue-600'> تواتيك
       </span>
@@ -71,22 +71,22 @@ export default function Page() {
     <section className="w-[60%]">
     <div className="mt-4 flex items-center justify-center">
       <Marquee>
-      <div className="border-2 rounded-md border-gray-400 mx-8 px-4">
+      <div className="border-2 rounded-md border-gray-400 mx-8 px-4 bg-white">
       <NextImage src={"/nike.png"} alt="" width={70} height={70} />
       </div>
-      <div className="border-2 rounded-md border-gray-400 mx-8 px-4">
+      <div className="border-2 rounded-md border-gray-400 mx-8 px-4 bg-white">
       <NextImage src={"/fila.png"} alt="" width={70} height={70} />
       </div>
-      <div className="border-2 rounded-md border-gray-400 mx-8 px-4">
+      <div className="border-2 rounded-md border-gray-400 mx-8 px-4 bg-white">
       <NextImage src={"/dolce-gabbana.png"} alt="" width={70} height={70} />
       </div>
-      <div className="border-2 rounded-md border-gray-400 mx-8 px-4">
+      <div className="border-2 rounded-md border-gray-400 mx-8 px-4 bg-white">
       <NextImage src={"/puma.png"} alt="" width={70} height={70} />
       </div>
-      <div className="border-2 rounded-md border-gray-400 mx-8 px-4">
+      <div className="border-2 rounded-md border-gray-400 mx-8 px-4 bg-white">
       <NextImage src={"/adidas.png"} alt="" width={70} height={70} />
       </div>
-      <div className="border-2 rounded-md border-gray-400 mx-8 px-4">
+      <div className="border-2 rounded-md border-gray-400 mx-8 px-4 bg-white">
       <NextImage src={"/tommy.png"} alt="" width={70} height={70} />
       </div>
       </Marquee>
@@ -97,7 +97,7 @@ export default function Page() {
     </div>
 
 
-    <section className='border-2 rounded-2xl border-gray-200 bg-white w-[90%] mx-auto my-8'>
+    <section className='bg-muted/50 border-2 rounded-2xl border-slate-50 w-[90%] mx-auto my-8'>
   <div className='mx-auto text-center flex flex-col w-full items-center'>
     {/* frip product animation */}
     <FripProductAnimation />

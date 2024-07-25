@@ -81,7 +81,7 @@ const ViewProduct: React.FC<ViewProductProps> = ({ product , user ,categoryProdu
 
 
       <div className='py-10 mx-auto text-center flex flex-col items-center max-w-1xl'>
-          <h1 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
+          <h1 className='text-3xl font-bold tracking-tight sm:text-4xl'>
                 Product{' '}
             <span className='text-blue-600'>
               Details
@@ -92,7 +92,7 @@ const ViewProduct: React.FC<ViewProductProps> = ({ product , user ,categoryProdu
 
 
 
-        <div className='bg-white border-gray-400 border-2 rounded-2xl mx-auto max-w-2xl px-4 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8'>
+        <div className=' border-gray-400 border-2 rounded-2xl mx-auto max-w-2xl px-4 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8'>
          
 
         <div className='mt-4 lg:col-end-2 lg:row-span-2 lg:mt-0 lg:self-center'>
@@ -162,7 +162,7 @@ const ViewProduct: React.FC<ViewProductProps> = ({ product , user ,categoryProdu
             
 
             <div className='mt-4'>
-              <p className=' text-xl font-bold tracking-tight text-gray-900'>
+              <p className=' text-xl font-bold tracking-tight'>
                 {product.title}
               </p>
             </div>
@@ -181,9 +181,9 @@ const ViewProduct: React.FC<ViewProductProps> = ({ product , user ,categoryProdu
 
               <Separator className='mt-2 '/>
 
-              <div className='mt-6 flex items-center'>
-              <Label htmlFor="username" className="text-left">
-                Size : <p className="text-sm text-gray-600">{product.size}</p>
+              <div className='mt-6'>
+              <Label >
+                Size : <p className="text-lg text-gray-600">{product.size}</p>
              </Label>
             </div>
             </section>

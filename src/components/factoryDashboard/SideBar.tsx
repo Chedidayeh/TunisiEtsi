@@ -54,6 +54,8 @@ interface Count {
   deliveredOrdersCount: number;
   canceledOrdersCount: number;
   totalOrdersCount: number;
+  notPrintedOrders: number;
+
 }
 const SideBar = () => {
 
@@ -93,7 +95,7 @@ const SideBar = () => {
           <Button
               variant="ghost"
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                "gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/factoryDashboard"
+                "gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/factoryDashboard"
               })}
               onClick={()=>router.push("/factoryDashboard")}
             >
@@ -106,7 +108,7 @@ const SideBar = () => {
 
             <Button
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/factoryDashboard/orders"
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/factoryDashboard/orders"
               })}              
               onClick={()=>router.push("/factoryDashboard/orders")}
               variant="ghost"
@@ -116,18 +118,18 @@ const SideBar = () => {
               </div>
               
               Manage Orders
-              {/* {(count?.printedOrdersCount ?? 0) > 0 && (
+              {(count?.notPrintedOrders ?? 0) > 0 && (
                 <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
                   {
-                  (count?.printedOrdersCount ?? 0)
+                  (count?.notPrintedOrders ?? 0)
                     }
                 </Badge>
-                )} */}
+                )}
             </Button>
             
             <Button
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/factoryDashboard/stock"
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/factoryDashboard/stock"
               })}              
               onClick={()=>router.push("/factoryDashboard/stock")}
               variant="ghost"
@@ -143,7 +145,7 @@ const SideBar = () => {
 
             <Button
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/factoryDashboard/notifications"
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/factoryDashboard/notifications"
               })}              
               onClick={()=>router.push("/factoryDashboard/notifications")}
               variant="ghost"
@@ -160,7 +162,7 @@ const SideBar = () => {
 
             <Button
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/factoryDashboard/"
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/factoryDashboard/"
               })}              
               onClick={()=>router.push("/factoryDashboard")}            variant="ghost"
 
@@ -173,7 +175,7 @@ const SideBar = () => {
 
             <Button
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-600 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/adminDashboard/"
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/adminDashboard/"
               })}              
               onClick={()=>router.push("/PodProducts")}            variant="ghost"
             >

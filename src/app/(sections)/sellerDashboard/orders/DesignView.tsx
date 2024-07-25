@@ -226,13 +226,13 @@ const DesignView: React.FC<DesignViewProps> = ({ orderedDesigns }) => {
       <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
         <Input
           type="search"
-          className="w-full md:w-[80%] bg-gray-100"
+          className="w-full md:w-[80%] "
           placeholder="Enter the order Id to make a search..."
           value={searchQuery}
           onChange={handleSearchChange}
         />
           <Select onValueChange={handleFilterChange}>
-          <SelectTrigger className="w-full md:w-[180px] bg-gray-100">
+          <SelectTrigger className="w-full md:w-[180px] ">
           <SelectValue placeholder="Filter By" />
           </SelectTrigger>
           <SelectContent>
@@ -246,7 +246,7 @@ const DesignView: React.FC<DesignViewProps> = ({ orderedDesigns }) => {
           </SelectContent>
         </Select>
         <Select onValueChange={handleFilterChange}>
-        <SelectTrigger className="w-full md:w-[180px] bg-gray-100">
+        <SelectTrigger className="w-full md:w-[180px] ">
         <SelectValue placeholder="Filter By" />
         </SelectTrigger>
           <SelectContent>

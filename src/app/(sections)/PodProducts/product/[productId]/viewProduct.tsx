@@ -53,8 +53,8 @@ import LoadingState from "@/components/LoadingState"
   
 
 const BREADCRUMBS = [
-  { id: 1, name: 'Home', href: '/' },
-  { id: 2, name: 'Products', href: '/products' },
+  { id: 1, name: 'Home', href: '/PodProducts' },
+  { id: 2, name: 'Products', href: '/PodProducts/ProductsView' },
 ]
 
 interface Productswithstore extends Product {
@@ -135,7 +135,7 @@ const combinedUrls = interleaveArrays(product.croppedFrontProduct, product.cropp
 
 
       <div className='py-10 mx-auto text-center flex flex-col items-center max-w-1xl'>
-          <h1 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
+          <h1 className='text-3xl font-bold tracking-tight sm:text-4xl'>
                 Product{' '}
             <span className='text-blue-600'>
               Details
@@ -146,7 +146,7 @@ const combinedUrls = interleaveArrays(product.croppedFrontProduct, product.cropp
 
 
 
-        <div className='bg-white border-gray-400 border-2 rounded-xl mx-auto max-w-2xl px-4 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8'>
+        <div className=' border-gray-400 border-2 rounded-xl mx-auto max-w-2xl px-4 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8'>
            {/* Product images */}
            <div className='mt-4 lg:col-end-2 lg:row-span-2 lg:mt-0 lg:self-center'>
             <div className='aspect-square rounded-lg'>
@@ -220,7 +220,7 @@ const combinedUrls = interleaveArrays(product.croppedFrontProduct, product.cropp
             
 
             <div className='mt-4'>
-              <p className=' text-xl font-bold tracking-tight text-gray-900'>
+              <p className=' text-xl font-bold tracking-tight'>
                 {product.title}
               </p>
             </div>
@@ -251,7 +251,7 @@ const combinedUrls = interleaveArrays(product.croppedFrontProduct, product.cropp
              </Label>
              <div className='ml-3'>
              <Select value={selectedSize} onValueChange={handleSizeChange}>
-            <SelectTrigger className="w-[180px] bg-gray-100">
+            <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Select a size" />
             </SelectTrigger>
             <SelectContent>
@@ -280,7 +280,6 @@ const combinedUrls = interleaveArrays(product.croppedFrontProduct, product.cropp
              <div className='ml-3'>
              <Input type='number'           
               onChange={handleQuantityChange}  // Handle change
-              className='bg-gray-100' 
               defaultValue={1} min={1} max={5}/>
              </div>
              </div>

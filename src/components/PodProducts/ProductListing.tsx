@@ -197,7 +197,7 @@ const ProductListing = ({
       <div className="mb-2 mt-0 flex items-center"> {/* Added flex container */}
   <div className="flex-grow"> {/* Added flex-grow to take remaining space */}
     <Badge variant="secondary">
-      <Link href={`/PodProducts/store/${product.store.storeName}`} className="text-gray-600 group text-xs hover:text-blue-500 cursor-pointer relative block">
+      <Link href={`/PodProducts/store/${product.store.storeName}`} className=" group text-xs hover:text-blue-500 cursor-pointer relative block">
         {product.store.storeName}
         <span className="absolute font-normal bottom-5 left-1/2 transform -translate-x-1/2 w-max px-2 py-1 text-xs bg-black text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
           View store
@@ -238,7 +238,7 @@ const ProductListing = ({
         <p className="text-sm text-gray-600">{product.category}</p>
     </div>
         {/* add to fav list icon */}
-    <div onClick={saveToFavList} className="relative group rounded-full p-2 bg-gray-50 text-gray-600 cursor-pointer ">
+    <div onClick={saveToFavList} className="relative group rounded-full p-2  text-gray-600 cursor-pointer ">
         <Heart className={`${isFavSaved ? 'text-red-600 fill-current' : 'text-gray-600 hover:text-red-600'}`} />
         <span className="absolute bottom-12 left-1/2 transform -translate-x-1/2 w-max px-2 py-1 text-xs bg-black text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
         {isFavSaved ? 'Saved!' : 'Save in fav list'}
@@ -256,7 +256,7 @@ const ProductListing = ({
         </div>
         {/* add to cart list icon */}
         <Link onClick={openDialog} href={`/PodProducts/product/${product.id}`}>
-        <div className="relative group rounded-full p-2 bg-gray-50 text-gray-600 cursor-pointer ">
+        <div className="relative group rounded-full p-2  text-gray-600 cursor-pointer ">
           <ShoppingBag className='text-gray-600 hover:text-blue-600' />
           <span className="absolute bottom-4 right-2 transform -translate-x-1/2 w-max px-2 py-1 text-xs bg-black text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
             Add to cart

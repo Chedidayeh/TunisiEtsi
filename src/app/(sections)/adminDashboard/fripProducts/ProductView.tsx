@@ -149,7 +149,7 @@ const handleDelete = async (productId: string) => {
           value={sortOption}
           onValueChange={handleSortChange}
         >
-          <SelectTrigger className="w-full sm:w-[180px] bg-gray-100">
+          <SelectTrigger className="w-full sm:w-[180px] ">
             <SelectValue placeholder="Sort By" />
           </SelectTrigger>
           <SelectContent>
@@ -162,7 +162,7 @@ const handleDelete = async (productId: string) => {
 
         <Input
           type="search"
-          className="w-full sm:w-[50%] bg-gray-100"
+          className="w-full sm:w-[50%] "
           placeholder="Search for your products by title..."
           value={searchQuery}
           onChange={handleSearchChange}
