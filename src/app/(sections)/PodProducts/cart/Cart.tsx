@@ -95,7 +95,7 @@ const Cart: React.FC<CartProps> = ({ products , user}) => {
                           title: 'Order Was Successfully Created',
                           variant: 'default',
                         });
-                        router.push("/MarketPlace/thank-you?orderId="+result.orderId)
+                        router.push("/PodProducts/thank-you?orderId="+result.orderId)
                       }
                       else {
                         closeDialog()
