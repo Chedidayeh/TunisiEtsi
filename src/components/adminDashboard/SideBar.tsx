@@ -53,6 +53,7 @@ interface Count {
   printedOrdersCount: number;
   awaitingActionProductCount: number;
   awaitingActionDesignCount: number;
+  storeRequestsCount: number;
 }
 const SideBar = () => {
 
@@ -75,7 +76,7 @@ const SideBar = () => {
     }, []);
 
   return (
-    <div className="hidden w-[210px] border-r bg-muted/40 md:block">
+    <div className="hidden w-[240px] border-r bg-muted/40 md:block">
       <div className="flex h-full max-h-screen flex-col gap-2">
         <div className="flex h-14  items-center border-b px-4 lg:h-[60px] lg:px-6">
           <Link href="/" className="flex items-center gap-2 font-semibold">
@@ -105,7 +106,7 @@ const SideBar = () => {
             <Button
             variant="ghost"
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/adminDashboard/stores"
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname.startsWith("/adminDashboard/stores")
               })}
               onClick={()=>router.push("/adminDashboard/stores")}
             >
@@ -120,6 +121,26 @@ const SideBar = () => {
                   }
               </Badge>
                )}
+            </Button>
+
+            <Button
+            variant="ghost"
+              className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname.startsWith("/adminDashboard/requests")
+              })}
+              onClick={()=>router.push("/adminDashboard/requests")}
+            >
+              <div className="border rounded-lg dark:bg-black dark:border-gray-800 border-gray-400 p-1 bg-white">
+                <Store className="h-3 w-3" />
+              </div>
+              Manage Requests
+              {(count?.storeRequestsCount ?? 0) > 0 && (
+                <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+                  {
+                  (count?.storeRequestsCount ?? 0)
+                    }
+                </Badge>
+                )}
             </Button>
 
             <Button

@@ -239,7 +239,7 @@ interface OrderViewProps {
       
   
   
-  <p className="text-sm text-gray-700 mb-2">AdminDashboard/Orders</p>
+  <p className="text-sm text-gray-700 mb-2">factoryDashboard/Orders</p>
            <h1 className="text-2xl font-semibold">Manage Orders</h1>
   
   

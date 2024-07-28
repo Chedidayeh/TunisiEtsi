@@ -218,7 +218,7 @@ const closeDialog = () => {
 
               {!preOrder &&(
               <div className='mt-6 text-center sm:col-span-9 md:row-end-1'>
-              <h3 className='text-3xl font-bold tracking-tight text-gray-900'>
+              <h3 className='text-3xl font-bold tracking-tight '>
               Your don't have any preOrders for now ! try to create one.
               </h3>
               <Link href="/PodProducts/create-client-product/upload">
@@ -237,7 +237,7 @@ const closeDialog = () => {
   <>
 
 <div className="mt-6 flex flex-col justify-center items-center sm:col-span-9 md:row-end-1">
-<h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900">
+<h3 className="text-2xl sm:text-3xl font-bold tracking-tight ">
   Your preOrder is safely saved
 </h3>
 <div className="text-center">
@@ -334,21 +334,21 @@ const closeDialog = () => {
     </div>
 
     <div className="mt-8">
-      <div className="bg-gray-50 p-6 sm:rounded-lg sm:p-8">
+      <div className=" p-6 sm:rounded-lg sm:p-8">
         <div className="flow-root text-sm">
           <div className="my-2 h-px bg-gray-200" />
           <div className="flex items-center justify-between py-2">
-            <p className="font-semibold text-gray-900">SubTotal</p>
-            <p className="font-semibold text-gray-900">{preOrder?.amount.toFixed(2)} TND</p>
+            <p className="font-semibold ">SubTotal</p>
+            <p className="font-semibold ">{preOrder?.amount.toFixed(2)} TND</p>
           </div>
           <div className="flex items-center justify-between py-2">
-            <p className="font-semibold text-gray-900">Shipping fee</p>
-            <p className="font-semibold text-gray-900">{fee.toFixed(2)} TND</p>
+            <p className="font-semibold ">Shipping fee</p>
+            <p className="font-semibold ">{fee.toFixed(2)} TND</p>
           </div>
           <div className="my-2 h-px bg-gray-200" />
           <div className="flex items-center justify-between py-2">
-            <p className="font-semibold text-gray-900">Order total</p>
-            <p className="font-semibold text-gray-900">{orderTotal.toFixed(2)} TND</p>
+            <p className="font-semibold ">Order total</p>
+            <p className="font-semibold ">{orderTotal.toFixed(2)} TND</p>
           </div>
         </div>
       </div>

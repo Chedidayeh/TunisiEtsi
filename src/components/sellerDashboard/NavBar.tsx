@@ -5,6 +5,7 @@ import {
   Bell,
   BookOpenCheck,
   CircleUser,
+  ExternalLink,
   Home,
   Layers3,
   LayoutDashboard,
@@ -14,6 +15,7 @@ import {
   Package,
   Package2,
   Palette,
+  Receipt,
   Search,
   Settings,
   Shirt,
@@ -64,7 +66,7 @@ const NavBar = () => {
   const pathname = usePathname();
   const router = useRouter()
   const [notifications, setnotifications] = useState<Notification[]>(); // Initialize count state
-
+  const [storeName, setStore] = useState(""); // Initialize count state
 
   useEffect(() => {
     const fetchCounts = async () => {
@@ -72,6 +74,7 @@ const NavBar = () => {
         const user = await getUser()
         if(!user) return
         const store = await getStoreByUserId(user!.id!)
+        setStore(store.storeName)
         const notifications = await getUnreadNotificationsForStore(store.id)
         setnotifications(notifications); // Update count state with fetched data
       } catch (error) {
@@ -81,8 +84,16 @@ const NavBar = () => {
 
     fetchCounts();
   }, []);
+
+  const handleButtonClick = () => {
+    const url = `/PodProducts/store/${storeName}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
+
+
       <Sheet>
         <SheetTrigger asChild>
           <Button variant="outline" size="icon" className="shrink-0 md:hidden">
@@ -150,9 +161,9 @@ const NavBar = () => {
             
             <Button
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/sellerDashboard/"
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/sellerDashboard/wallet"
               })}             
-               onClick={()=>router.push("/sellerDashboard")}
+               onClick={()=>router.push("/sellerDashboard/wallet")}
                variant="ghost"
             >
               <div className="border rounded-lg dark:bg-black dark:border-gray-800 border-gray-400 p-1 bg-white">
@@ -163,15 +174,15 @@ const NavBar = () => {
             
             <Button
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/sellerDashboard/"
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/sellerDashboard/requests"
               })}              
-              onClick={()=>router.push("/sellerDashboard")}            variant="ghost"
+              onClick={()=>router.push("/sellerDashboard/requests")}            variant="ghost"
 
             >
               <div className="border rounded-lg dark:bg-black dark:border-gray-800 border-gray-400 p-1 bg-white">
-                <TrendingUp className="h-3 w-3" />
+                <Receipt className="h-3 w-3" />
               </div>
-              Statistics
+              Requested Payments
             </Button>
 
             <Button
@@ -257,11 +268,15 @@ const NavBar = () => {
 
         </SheetContent>
       </Sheet>
+
+
       <div className="w-full flex-1">
         <form>
           <div className="relative">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input type="search" placeholder="Search products..." className="w-full appearance-none bg-background pl-8 shadow-none md:w-2/3 lg:w-1/3" />
+          <Button variant={"secondary"} size={"sm"} onClick={handleButtonClick}>
+      View your store               
+      <ExternalLink className="ml-1 w-4 h-4"/>
+    </Button>
           </div>
         </form>
       </div>

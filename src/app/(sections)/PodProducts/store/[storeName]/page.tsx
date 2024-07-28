@@ -31,7 +31,7 @@ import {  fetchProductsByCategory, getUser } from '@/actions/actions'
 import ProductsByCategory from './StoreView'
 import StoreView from './StoreView'
 import PerkSection from '@/components/PodProducts/PerkSection'
-import { getStoreProductsAndDesigns } from './actions'
+import { getDesignsByStoreId, getStoreProductsAndDesigns } from './actions'
 
 
 interface PageProps {
@@ -46,11 +46,12 @@ export default async function Page({ params }: PageProps) {
   const decodedCategory = decodeURIComponent(storeName)
   const user = await getUser()
   const store = await getStoreProductsAndDesigns(decodedCategory)  
+  const storeDesigns = await getDesignsByStoreId(store?.id ?? "")
   return (
     <>
 
           {/* store section */}
-          {store && store.products.length > 0 ? (
+          {store ? (
 
             <>
               <section className='border-t border-gray-200 w-full mx-auto' >
@@ -58,6 +59,7 @@ export default async function Page({ params }: PageProps) {
                 <StoreView  
                      store={store!}
                      user={user!}
+                     designs={storeDesigns!}
                 />
                 </div>
               </section>
@@ -80,7 +82,7 @@ export default async function Page({ params }: PageProps) {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <Link  href="/MarketPlace" ><Button variant="link">
+          <Link  href="/PodProducts" ><Button variant="link">
                   Return
                     </Button>
                     </Link>

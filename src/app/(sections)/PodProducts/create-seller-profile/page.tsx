@@ -238,7 +238,7 @@ const Page = () => {
               />
             </div>
 
-    <div className='bg-white'>
+    <div className=''>
       <div className='mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8'>
         <div className='max-w-xl'>
           <p className='text-base font-medium text-primary'>Work With Us !</p>
@@ -255,7 +255,7 @@ const Page = () => {
 
         <div className='mt-10 border-t col-span-2 flex flex-col border-zinc-200'>
           <div className='mt-10 flex space-y-3 flex-col'>
-            <h4 className='font-semibold text-zinc-900'>
+            <h4 className='font-semibold '>
               1- Choose your store Name : 
             </h4>
             <Input 
@@ -269,7 +269,7 @@ const Page = () => {
           </div>
 
           <div className='mt-10 flex space-y-3 flex-col'>
-            <h4 className='font-semibold text-zinc-900'>
+            <h4 className='font-semibold '>
               2- Add your phone number : 
             </h4>
             <Input 
@@ -291,7 +291,7 @@ const Page = () => {
 
           <div className='mt-10 flex flex-col space-y-3'>
           <div className="flex items-center">
-            <h4 className="font-semibold text-zinc-900">
+            <h4 className="font-semibold ">
                 3- Upload your store Logo:
             </h4>
           </div>
@@ -299,9 +299,9 @@ const Page = () => {
                 type="file" 
                 accept="image/*" 
                 onChange={handleLogoChange}                
-                className='border-gray-300 w-full sm:w-[50%] text-gray-600'
+                className='border-gray-300 w-full sm:w-[50%] text-gray-500'
                 />
-                              <p className="ml-2 text-xs text-gray-600">Minimum Size: 200px * 200px</p>
+                              <p className="ml-2 text-xs text-gray-500">Minimum Size: 200px * 200px</p>
 
             </div>
             <div className='flex flex-col-2 flex-row mt-4'>
@@ -316,7 +316,7 @@ const Page = () => {
         <Separator className="my-8"/>
 
            <div className="items-center justify-center flex">
-         <h4 className="font-semibold text-zinc-900">
+         <h4 className="font-semibold ">
         Make Sure to Read our Selling Terms and Policy !
           </h4>
           </div>
@@ -352,7 +352,7 @@ const Page = () => {
 
             <div className=" flex justify-end items-end mt-[10%]">
             <div>
-            <p className="mr-3 mb-2 text-sm text-gray-700">Done ? What are waiting for !</p>
+            <p className="mr-3 mb-2 text-sm text-gray-500">Done ? What are waiting for !</p>
             </div>
             <Button disabled={isPending || !logoFile || storeName==="" || !termsAccepted || phoneNumber.length != 8}
               onClick={createStore} className="w-full sm:w-[40%]">Create Store Now

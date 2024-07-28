@@ -243,8 +243,8 @@ const handleChange = async () =>{
         {order && (
             <>
 
-<p className="text-sm text-gray-700 mb-2">AdminDashboard/OrderDetails</p>
-           <h1 className="text-2xl font-semibold">Order Details</h1>
+<p className="text-sm text-gray-700 mb-2">factoryDashboard/Orders</p>
+<h1 className="text-2xl font-semibold">Order Details</h1>
      
   
   

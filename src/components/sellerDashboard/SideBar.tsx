@@ -15,6 +15,7 @@ import {
   Package,
   Package2,
   Palette,
+  Receipt,
   Search,
   Settings,
   Shirt,
@@ -79,16 +80,12 @@ const SideBar = () => {
     }, []);
 
   return (
-    <div className="hidden w-[210px] border-r bg-muted/40 md:block">
+    <div className="hidden w-[230px] border-r bg-muted/40 md:block">
       <div className="flex h-full max-h-screen flex-col gap-2">
         <div className="flex h-14  items-center border-b px-4 lg:h-[60px] lg:px-6">
           <Link href="/" className="flex items-center gap-2 font-semibold">
             <span className="">TunisiEtsi</span>
           </Link>
-          <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
-            <Bell className="h-4 w-4" />
-            <span className="sr-only">Toggle notifications</span>
-          </Button>
         </div>
         <div className="flex-1">
           <nav className="grid items-start space-y-2 px-2 text-sm font-medium lg:px-4">
@@ -147,9 +144,9 @@ const SideBar = () => {
             
             <Button
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/sellerDashboard/"
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/sellerDashboard/wallet"
               })}             
-               onClick={()=>router.push("/sellerDashboard")}
+               onClick={()=>router.push("/sellerDashboard/wallet")}
                variant="ghost"
             >
               <div className="border rounded-lg dark:bg-black dark:border-gray-800 border-gray-400 p-1 bg-white">
@@ -160,15 +157,15 @@ const SideBar = () => {
             
             <Button
               className={cn("justify-start gap-2 rounded-lg px-3 py-2 text-zinc-900 transition-all hover:text-blue-600 dark:text-zinc-400 dark:hover:text-gray-50", {
-                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/sellerDashboard/"
+                " gap-2 rounded-lg bg-gray-100 px-3 py-2 text-blue-600  transition-all hover:text-blue-600 dark:bg-blue-200 dark:text-blue-600 dark:hover:text-blue-600": pathname === "/sellerDashboard/requests"
               })}              
-              onClick={()=>router.push("/sellerDashboard")}            variant="ghost"
+              onClick={()=>router.push("/sellerDashboard/requests")}            variant="ghost"
 
             >
               <div className="border rounded-lg dark:bg-black dark:border-gray-800 border-gray-400 p-1 bg-white">
-                <TrendingUp className="h-3 w-3" />
+                <Receipt className="h-3 w-3" />
               </div>
-              Statistics
+              Requested Payments
             </Button>
 
             <Button

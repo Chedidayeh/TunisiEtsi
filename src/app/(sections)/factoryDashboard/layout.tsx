@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import DashboardSideBar from "@/components/factoryDashboard/DashboardSideBar";
 import SideBar from "@/components/factoryDashboard/SideBar";
 import NavBar from "@/components/factoryDashboard/NavBar";
+import "@/app/globals.css";
 
 
 const Layout = ({ children }: { children: ReactNode }) => {

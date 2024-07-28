@@ -9,17 +9,6 @@ import { getAllCategories } from '@/actions/actions';
 import { BackBorder, Category, Color, FrontBorder, Size } from '@prisma/client';
 
 
-interface SellersDesignsData {
-  id: string;
-  width: number ;
-  height: number;
-  imageUrl: string;
-  name: string;
-  price: number;
-  likes : number;
-  tags : string[]
-  storeName : string
-}
 
 interface PageProps {
   searchParams: {
@@ -56,23 +45,12 @@ const Page = async ({ searchParams }: PageProps) => {
     }
 
   
-  const SellersDesignsData: SellersDesignsData[] = (sellersDesigns).map(design => ({
-    id: design.id,
-    name: design.name,
-    width: design.width,
-    height: design.height ,
-    imageUrl: design.imageUrl,
-    likes : design.likes,
-    price : design.price,
-    tags : design.tags,
-    storeName : design.store.storeName
-  }));
 
 
   return (
 
    <DesignConfigurator
-    SellersDesignsData={SellersDesignsData}
+    SellersDesignsData={sellersDesigns}
     product={product!}
     selectedCategory = {selectedCat}
   />

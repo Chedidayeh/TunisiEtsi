@@ -25,7 +25,7 @@ import {
   CardHeader,
 } from "@/components/ui/card"
 import { useToast } from '@/components/ui/use-toast'
-import {  ChangeEvent, useEffect, useRef, useState } from 'react';
+import {  ChangeEvent, useEffect, useMemo, useRef, useState } from 'react';
 import { Rnd } from 'react-rnd';
 import { cn } from '@/lib/utils';
 import { Label } from '@/components/ui/label';
@@ -58,25 +58,15 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { savePreOrderB, savePreOrderF, savePreOrderFB1, savePreOrderFB2, savePreOrderFBClient, savePreOrderFBSeller } from "./actions"
 import { getAllCategories, getUser } from "@/actions/actions"
 import Link from "next/link"
-import { BackBorder, Category, Color, FrontBorder, Size, User } from "@prisma/client"
+import { BackBorder, Category, Color, FrontBorder, SellerDesign, Size, Store, User } from "@prisma/client"
 import LoadingState from "@/components/LoadingState"
 import { getUserPreOrder } from "../preview/actions"
-import { useUploadThing } from "@/lib/uploadthing"
-import ProgressState from "@/components/ProgressState"
-import { Slider } from "@/components/ui/slider"
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 
 
-interface SellersDesignsData {
-  id: string;
-  width: number ;
-  height: number;
-  imageUrl: string;
-  name: string;
-  price: number;
-  likes : number;
-  tags : string[]
-  storeName : string
+interface SellersDesignsData extends SellerDesign {
+    store : Store
 }
 
 interface DesignConfiguratorProps {
@@ -135,6 +125,9 @@ const DesignConfigurator: React.FC<DesignConfiguratorProps> = ({ SellersDesignsD
   // to capture the mockups
   let FrontcontainerRef= useRef<HTMLDivElement>(null)
   let BackcontainerRef= useRef<HTMLDivElement>(null)
+  // to trigger the alert dialog
+  const alertDialogTriggerRef = useRef<HTMLButtonElement>(null);
+  const alertDialogCancelRef = useRef<HTMLButtonElement>(null);
 
   const [isBorderHidden, setIsBorderHidden] = useState(true);
   const [isBackBorderHidden, setisBackBorderHidden] = useState(true);
@@ -426,30 +419,48 @@ const handleFileChange = (file : File) => {
 
 
 
-      // search query
-    const [searchQuery, setSearchQuery] = useState('');
-    const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
-      setSearchQuery(event.target.value);
-    };
+// Search query for designs
+const [searchQuery, setSearchQuery] = useState('');
+const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
+  setSearchQuery(event.target.value);
+};
+
+// Sorting function based on sortBy criteria
+const [sortBy, setSortBy] = useState<string>(''); // State for selected sort option
+
+const filteredAndSortedDesigns = useMemo(() => {
+  // Filter designs based on search query
+  const filteredDesigns = (SellersDesignsData || []).filter(design =>
+    design.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    design.id.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    design.store.storeName.toLowerCase().startsWith(searchQuery.toLowerCase())
+  );
+
+// Sort the filtered designs based on the selected sort option
+return filteredDesigns.sort((a, b) => {
+  switch (sortBy) {
+    case 'low':
+      return a.price - b.price;
+    case 'high':
+      return b.price - a.price;
+    case 'likes':
+      return b.likes - a.likes;
+    case 'sales':
+      return b.totalSales - a.totalSales;
+    default:
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+  }
+});
+
+
+}, [SellersDesignsData, searchQuery , sortBy]);
+
+const handleSortChange = (event: string) => {
+  setSortBy(event);
+};
   
-    const filteredDesigns = SellersDesignsData.filter((design) =>
-      design.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      design.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      design.storeName.toLowerCase().includes(searchQuery.toLowerCase())
-
-    );
-
-    
-  
-
-    const [uploadProgress, setUploadProgress] = useState<number>(0)
 
 
-    const { startUpload, isUploading } = useUploadThing('imageUploader', {
-      onUploadProgress: (progressEvent) => {
-        setUploadProgress(progressEvent);
-        },
-    });
 
 
 
@@ -554,6 +565,19 @@ const handleFileChange = (file : File) => {
               } 
               
               
+                
+                const openDialog = () => {
+                  if (alertDialogTriggerRef.current) {
+                    alertDialogTriggerRef.current.click();
+                  }
+                };
+
+                // function will cancel the dialog
+                const closeDialog = () => {
+                  if (alertDialogCancelRef.current) {
+                    alertDialogCancelRef.current.click();
+                  }
+                };
      
 
 
@@ -573,6 +597,7 @@ const handleFileChange = (file : File) => {
                       );
                       return;
                     }
+                    openDialog();
                     setIsBorderHidden(true);
                     setisBackBorderHidden(true);
                 
@@ -587,6 +612,7 @@ const handleFileChange = (file : File) => {
                   } catch (error) {
                     console.error(error);
                     showToast('Error!', 'Please try again later!', 'destructive');
+                    closeDialog();
             
                   }
                 };
@@ -596,8 +622,7 @@ const handleFileChange = (file : File) => {
                   img.src = selectedCatColors.frontImageUrl;
                 
                   if (frontDesignPrice === 0) {
-                    const uploadedFile = await startUpload([FrontDesignFile!]);
-                    const frontDesignPath = uploadedFile![0].url
+                    const frontDesignPath = await uploadDesign(FrontDesignFile!);
                     await saveCapturedFrontDesign(user, frontDesignPath, 'front', false);
                   } else {
                     const design = document.querySelector(".front-design") as HTMLImageElement;
@@ -613,8 +638,7 @@ const handleFileChange = (file : File) => {
                   img.src = selectedCatColors.backImageUrl;
                 
                   if (backDesignPrice === 0) {
-                    const uploadedFile = await startUpload([BackDesignFile!]);
-                    const backDesignPath = uploadedFile![0].url
+                    const backDesignPath = await uploadDesign(BackDesignFile!);
                     await saveCapturedBackDesign(user, backDesignPath, 'back', false);
                   } else {
                     const design = document.querySelector(".back-design") as HTMLImageElement;
@@ -632,8 +656,7 @@ const handleFileChange = (file : File) => {
                   backImg.src = selectedCatColors.backImageUrl;
             
                   if (frontDesignPrice === 0 && backDesignPrice !== 0) {
-                    const uploadedFile = await startUpload([FrontDesignFile!]);
-                    const frontDesignPath = uploadedFile![0].url
+                    const frontDesignPath = await uploadDesign(FrontDesignFile!);
                     const design = document.querySelector(".back-design") as HTMLImageElement;
                     if (design) {
                       design.src = selectedBackDesign;
@@ -643,8 +666,7 @@ const handleFileChange = (file : File) => {
                     handleSaveResult(result);
                   }
                   else if (frontDesignPrice !== 0 && backDesignPrice === 0) {
-                    const uploadedFile = await startUpload([BackDesignFile!]);
-                    const backDesignPath = uploadedFile![0].url
+                    const backDesignPath = await uploadDesign(BackDesignFile!);
                     const design = document.querySelector(".front-design") as HTMLImageElement;
                     if (design) {
                       design.src = selectedFrontDesign;
@@ -667,14 +689,8 @@ const handleFileChange = (file : File) => {
                     handleSaveResult(result);
                   }
                   else if (frontDesignPrice === 0 && backDesignPrice === 0) {
-
-                    const uploadedFile1 = await startUpload([FrontDesignFile!]);
-                    const frontDesignPath = uploadedFile1![0].url
-
-                    const uploadedFile2 = await startUpload([BackDesignFile!]);
-                    const backDesignPath = uploadedFile2![0].url
-
-
+                    const frontDesignPath = await uploadDesign(FrontDesignFile!);
+                    const backDesignPath = await uploadDesign(BackDesignFile!);
                     const paths = await saveCapturedBothDesigns();
                     const result = await savePreOrderFBClient(user?.id!,frontDesignPath,backDesignPath,totalPrice,productPrice,quantity,selectedColor,selectedSize,selectedP.label,paths)
                     handleSaveResult(result);
@@ -685,11 +701,10 @@ const handleFileChange = (file : File) => {
             
                 const saveCapturedFrontDesign = async (user : User, designPath : string, designType : string, isSellerDesign : boolean) => {
                   const containerRef = designType === 'front' ? FrontcontainerRef : BackcontainerRef;
-                  const dataUrl = await toPng(containerRef.current!, { cacheBust: false, pixelRatio: 5 });
+                  const dataUrl = await toPng(containerRef.current!, { cacheBust: false, pixelRatio: 10 });
                 
                   const file = getFile(dataUrl);
-                  const uploadedFile = await startUpload([file!]);
-                  const capturedProductPath = uploadedFile![0].url
+                  const capturedProductPath = await uploadCapturedMockup(file);
                   const paths = [capturedProductPath!];
                 
                   const result = await savePreOrderF(user?.id!, designPath, totalPrice,productPrice, quantity, selectedColor, selectedSize, selectedP.label, paths, isSellerDesign);
@@ -700,11 +715,10 @@ const handleFileChange = (file : File) => {
             
                 const saveCapturedBackDesign = async (user : User, designPath : string, designType : string, isSellerDesign : boolean) => {
                   const containerRef = designType === 'front' ? FrontcontainerRef : BackcontainerRef;
-                  const dataUrl = await toPng(containerRef.current!, { cacheBust: false, pixelRatio: 5 });
+                  const dataUrl = await toPng(containerRef.current!, { cacheBust: false, pixelRatio: 10 });
                 
                   const file = getFile(dataUrl);
-                  const uploadedFile = await startUpload([file!]);
-                  const capturedProductPath = uploadedFile![0].url
+                  const capturedProductPath = await uploadCapturedMockup(file);
                   const paths = [capturedProductPath!];
                 
                   const result = await savePreOrderB(user?.id!, designPath, totalPrice,productPrice, quantity, selectedColor, selectedSize, selectedP.label, paths, isSellerDesign);
@@ -714,17 +728,14 @@ const handleFileChange = (file : File) => {
                 
             
                 const saveCapturedBothDesigns = async () => {
-                  const frontDataUrl = await toPng(FrontcontainerRef.current!, { cacheBust: false, pixelRatio: 5 });
-                  const backDataUrl = await toPng(BackcontainerRef.current!, { cacheBust: false, pixelRatio: 5 });
+                  const frontDataUrl = await toPng(FrontcontainerRef.current!, { cacheBust: false, pixelRatio: 10 });
+                  const backDataUrl = await toPng(BackcontainerRef.current!, { cacheBust: false, pixelRatio: 10 });
                 
                   const frontFile = getFile(frontDataUrl);
                   const backFile = getFile(backDataUrl);
                 
-
-                  const uploadedFile1 = await startUpload([frontFile!]);
-                  const frontCapturedPath = uploadedFile1![0].url
-                  const uploadedFile2 = await startUpload([backFile!]);
-                  const backCapturedPath = uploadedFile2![0].url
+                  const frontCapturedPath = await uploadCapturedMockup(frontFile);
+                  const backCapturedPath = await uploadCapturedMockup(backFile);
                 
                   return [frontCapturedPath!, backCapturedPath!];
                 };
@@ -734,6 +745,7 @@ const handleFileChange = (file : File) => {
                     showToast('Great!', 'PreOrder Saved successfully.', 'default');
                     router.push("/PodProducts/create-client-product/preview?preOrderId=" + result.preOrderId);
                   } else {
+                    closeDialog();
                     showToast('Error', 'Failed to Save preOrder! Please try again later.', 'destructive');
                   }
                 };
@@ -775,9 +787,28 @@ const handleFileChange = (file : File) => {
 
     <>
     <LoadingState isOpen={open} />
-    <ProgressState isOpen={isUploading} progress={uploadProgress} />
 
 
+                      {/* The AlertDialog component */}
+                      <AlertDialog>
+                          <AlertDialogTrigger asChild ref={alertDialogTriggerRef}>
+                            <button className="hidden">Hidden Trigger</button>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader className="flex flex-col items-center">
+                              <div></div>
+                              <AlertDialogTitle className="text-2xl text-blue-700 font-bold text-center">
+                                Passing to shipping informations !
+                              </AlertDialogTitle>
+                              <AlertDialogDescription className="flex flex-col items-center">
+                                This will take a moment.
+                                {/* Replace Loader2 with your loader component */}
+                                <Loader2 className="text-blue-700 h-[50%] w-[50%] animate-spin mt-3" />
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogCancel className="hidden" ref={alertDialogCancelRef}>Cancel</AlertDialogCancel>
+                          </AlertDialogContent>
+                        </AlertDialog>
 
 
 
@@ -827,26 +858,25 @@ const handleFileChange = (file : File) => {
                                   </SheetDescription>
                                 </SheetHeader>
 
-                                <ScrollArea className="w-full h-96">
-                              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-1 bg-gray-900/5">
-                                {categories.map((category, index) => (
-                                  <Card onClick={() => handleCatClick(index, category)} 
-                                    key={index} className={cn("border w-full", selectedCat === index && "border-primary")}>
-                                    <CardContent className="flex flex-col items-center justify-center p-2">
-                                      <img 
-                                        src={category.value} 
-                                        alt={category.label} 
-                                        className="mb-2 w-full h-auto object-cover" 
-                                      />
-                                      <div className="flex flex-wrap justify-center gap-2">
-                                        <Badge variant="secondary">{category.label}</Badge>
-                                        <Badge variant="secondary">{category.price} TND</Badge>
-                                      </div>
-                                    </CardContent>
-                                  </Card>
-                                ))}
-                              </div>
-                              </ScrollArea>
+                                <div className="grid grid-cols-6 gap-1  bg-gray-900/5">
+                                    {categories.map((category, index) => (
+                                      <Card onClick={() => handleCatClick (index , category )} 
+                                      key={index} className={cn("border w-48", selectedCat === index && "border-primary")}>
+                                        <CardContent className="flex flex-col items-center justify-center p-2">
+                                          <img 
+                                            src={category.value} 
+                                            alt={category.label} 
+                                            className="mb-2" 
+                                            style={{ width: '100%', height: 'auto', objectFit: 'cover' }} 
+                                          />
+                                          <div className="flex flex-wrap justify-center gap-2">
+                                            <Badge variant="secondary">{category.label}</Badge>
+                                            <Badge variant="secondary">{category.price} TND</Badge>
+                                          </div>
+                                        </CardContent>
+                                      </Card>
+                                    ))}
+                                  </div>
 
                                 <SheetFooter>
                                   <SheetClose asChild>
@@ -860,67 +890,60 @@ const handleFileChange = (file : File) => {
                                 <h3>Upload a Design:</h3>
                                 <p className='text-xs text-zinc-500 ml-5'>PNG, JPG, JPEG max (15MB)</p>
                                 <p className='text-xs text-zinc-500 ml-5'>One Design will cost 2 TND !</p>
-                                <div className="flex flex-wrap justify-center space-x-0 md:space-x-4 space-y-4 md:space-y-0">
-
-                                    {/* front design input */}
+                                <div className="flex flex-col lg:flex-row justify-center lg:space-x-4 space-y-4 lg:space-y-0">
+                                {/* front design input */}
                                 {addFrontDesign && (
-                                    <>
                                   <div>
-                                  <SingleImageDropzone
-                                    className="border border-blue-800"
-                                    width={200}
-                                    height={200}
-                                    value={FrontDesignFile}
-                                    onChange={(file) => {
-                                      setFrontDesignFile(file);
-                                      setclientFrontDesignPrice(2)
-                                      if (!file) {
-                                        setFrontDesignPrice(0)
-                                        setclientFrontDesignPrice(0)
-                                        setIsBorderHidden(true);
-                                        setselectedFrontDesign("");
-                                        setSelectedFrontIndex(null);
-                                      }
-                                      if (file) {
-                                        handleFileChange(file);
-                                      }
-                                    }}
-                                  />
+                                    <SingleImageDropzone
+                                      className="border border-blue-800"
+                                      width={200}
+                                      height={200}
+                                      value={FrontDesignFile}
+                                      onChange={(file) => {
+                                        setFrontDesignFile(file);
+                                        setclientFrontDesignPrice(2);
+                                        if (!file) {
+                                          setFrontDesignPrice(0);
+                                          setclientFrontDesignPrice(0);
+                                          setIsBorderHidden(true);
+                                          setselectedFrontDesign("");
+                                          setSelectedFrontIndex(null);
+                                        }
+                                        if (file) {
+                                          handleFileChange(file);
+                                        }
+                                      }}
+                                    />
                                   </div>
-
-                                  </>
                                 )}
+                                
+                                {/* back design input */}
+                                {addBackDesign && (
+                                  <div>
+                                    <SingleImageDropzone
+                                      className="border border-blue-800"
+                                      width={200}
+                                      height={200}
+                                      value={BackDesignFile}
+                                      onChange={(file) => {
+                                        setBackDesignFile(file);
+                                        setclientBackDesignPrice(2);
+                                        if (!file) {
+                                          setBackDesignPrice(0);
+                                          setclientBackDesignPrice(0);
+                                          setisBackBorderHidden(true);
+                                          setselectedBackDesign("");
+                                          setSelectedBackIndex(null);
+                                        }
+                                        if (file) {
+                                          handleBackFileChange(file);
+                                        }
+                                      }}
+                                    />
+                                  </div>
+                                )}
+                              </div>
 
-                                  {/* back design input */}
-                                  {addBackDesign && (
-                                        <>
-                                        <div>
-                                        <SingleImageDropzone
-                                        className="border border-blue-800"
-                                        width={200}
-                                        height={200}
-                                        value={BackDesignFile}
-                                        onChange={(file) => {
-                                          setBackDesignFile(file);
-                                          setclientBackDesignPrice(2)
-                                          if (!file) {
-                                            setBackDesignPrice(0)
-                                            setclientBackDesignPrice(0)
-                                            setisBackBorderHidden(true);
-                                            setselectedBackDesign("");
-                                            setSelectedBackIndex(null)
-                                          }
-                                          if (file) {
-                                            handleBackFileChange(file);
-                                          }
-                                        }}
-                                        />
-                                        </div>
-
-                                        </>
-                                        )}
-
-                                </div>
                               </div>
 
 
@@ -936,6 +959,22 @@ const handleFileChange = (file : File) => {
                             <div>
                             <Input type="text" placeholder="Search for a design by name or by store name..." value={searchQuery} onChange={handleSearchChange} />
                             </div>
+                            <div className="mt-3 flex flex-col sm:flex-row items-center justify-center sm:mt-0 lg:mt-0 lg:flex-1">
+                            <Select onValueChange={handleSortChange}>
+                              <SelectTrigger className="w-full md:w-[180px]">
+                                <SelectValue placeholder="Sort By" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectGroup>
+                                  <SelectLabel>Select</SelectLabel>
+                                  <SelectItem value="high">Highest Price</SelectItem>
+                                  <SelectItem value="low">Lowest Price</SelectItem>
+                                  <SelectItem value="likes">Most Liked</SelectItem>
+                                  <SelectItem value="sales">Most Selled</SelectItem>
+                                </SelectGroup>
+                              </SelectContent>
+                            </Select>
+                          </div>
                             
                             {addFrontDesign && (
 
@@ -953,8 +992,8 @@ const handleFileChange = (file : File) => {
                                 isDarkMode ? 'bg-gray-900' : 'bg-gray-100'
                               )}
                               >
-                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 p-2">
-                              {filteredDesigns.map((design, index) => (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 p-2">
+                          {filteredAndSortedDesigns.map((design, index) => (
                                   <div key={index} className="flex flex-col items-center">
                                     <div
                                       className={`border rounded-md p-1 cursor-pointer ${selectedFrontIndex === index ? 'border-blue-500' : ''}`}
@@ -996,8 +1035,8 @@ const handleFileChange = (file : File) => {
                                 isDarkMode ? 'bg-gray-900' : 'bg-gray-100'
                               )}
                               >
-                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 p-2">
-                             {filteredDesigns.map((design, index) => (
+                       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 p-2">
+                          {filteredAndSortedDesigns.map((design, index) => (
                                   <div key={index} className="flex flex-col items-center">
                                     <div
                                       className={`border rounded-md p-1 cursor-pointer ${selectedBackIndex === index ? 'border-blue-500' : ''}`}
@@ -1074,12 +1113,13 @@ const handleFileChange = (file : File) => {
                                         )
                                       }
                                     >
-                                      <span
-                                        className={cn(
-                                          `bg-${color.tw}`,
-                                          'h-8 w-8 rounded-full border border-black border-opacity-10'
-                                        )}
-                                      />
+                                  <span
+                                  className={cn(
+                                    `bg-${color.tw}`,
+                                    color.label === 'White' ? 'dark:bg-white' : `dark:bg-${color.tw}`,
+                                    'h-8 w-8 rounded-full border border-black border-opacity-10'
+                                  )}
+                                />
                                     </RadioGroup.Option>
                                   ))}
                                 </div>
@@ -1213,12 +1253,13 @@ const handleFileChange = (file : File) => {
                                       )
                                     }
                                   >
-                                    <span
-                                      className={cn(
-                                        `bg-${color.tw}`,
-                                        'h-8 w-8 rounded-full border border-black border-opacity-10'
-                                      )}
-                                    />
+                                   <span
+                                  className={cn(
+                                    `bg-${color.tw}`,
+                                    color.label === 'White' ? 'dark:bg-white' : `dark:bg-${color.tw}`,
+                                    'h-8 w-8 rounded-full border border-black border-opacity-10'
+                                  )}
+                                />
                                   </RadioGroup.Option>
                                 ))}
                               </div>
@@ -1273,20 +1314,16 @@ const handleFileChange = (file : File) => {
 
                           </div>
 
-                          <div className="text-center">
-                        <div className="items-center justify-center hidden lg:flex mt-4">
-                          <Button
-                            onMouseDown={View}
-                            onMouseUp={notView}
-                            disabled={!selectedFrontDesign}
-                          >
-                            Hold to Preview
-                            <MousePointerClick className="ml-1" />
-                          </Button>
-                        </div>
-                      </div>
-
-
+                                <div className="text-center">
+                                  <Button className='mt-4'
+                                    onMouseDown={View}
+                                    onMouseUp={notView}
+                                    disabled={!selectedFrontDesign} 
+                                    >
+                                    Hold to Preview
+                                    <MousePointerClick className='ml-1'/>
+                                  </Button>
+                                </div>
 
                     <div className='w-full h-px bg-zinc-200 my-5' />
                     </>
@@ -1353,14 +1390,13 @@ const handleFileChange = (file : File) => {
                       )}
 
                     </CardContent>
-                    <CardFooter className="relative flex flex-col items-center justify-center">
-                      <div className="text-center text-2xl">
-                        <Label className="text-lg">
-                          <span className="text-blue-600">Guide</span>: Hold one of the blue edges and drag to resize
-                        </Label>
-                      </div>
+                    <CardFooter className='relative flex flex-col items-center justify-center'>
+                                <div className="text-center text-2xl">
+                                  <Label className='text-lg'>
+                                    <span className="text-blue-600 ">Guide</span>: Hold one of the blue edges and drag to resize
+                                  </Label>
+                                </div>
                     </CardFooter>
-
                     </Card>
 
 

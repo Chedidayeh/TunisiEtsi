@@ -121,6 +121,7 @@ model Store {
   storeUrl        String? @unique
 
   revenue         Float         @default(0)
+  receivedPayments  Float         @default(0)
   totalSales      Int           @default(0)
 
   products        Product[]
@@ -135,9 +136,12 @@ model Store {
 
   likes           Like[]
 
+  paymentRequest  PaymentRequest[]
+
   createdAt       DateTime       @default(now())
   updatedAt      DateTime?      @updatedAt
 }
+
 
 
 
@@ -551,6 +555,41 @@ model FripOrderItem {
   createdAt             DateTime @default(now())
   updatedAt             DateTime? @updatedAt
 }
+
+
+// payment schema : 
+model PaymentRequest {
+  id             String      @id @default(cuid())
+  storeId        String      
+  store            Store     @relation(fields: [storeId], references: [id] , onDelete: Cascade)
+
+
+  method         PaymentMethod
+  cardHolder     String?
+  cardPhoneNumber String?
+  bankAccount    String?
+  bankName       String?
+  accountHolder  String?
+  requestedAmount Float      @default(0)
+  status         PaymentStatus @default(PENDING)
+
+
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime?   @updatedAt
+}
+
+enum PaymentMethod {
+  D17
+  Flouci
+  BankDeposit
+}
+
+enum PaymentStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
 
 
 

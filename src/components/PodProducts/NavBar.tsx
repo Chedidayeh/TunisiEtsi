@@ -47,7 +47,7 @@ const Navbar = async () => {
       <MaxWidthWrapper>
         <div className='flex h-14 items-center justify-between'>
           {/* Logo */}
-          <div className='ml-4 flex lg:ml-0'>
+          <div className='mr-4 flex lg:ml-0'>
             <Link href='/' className='flex z-40 font-semibold'>
             Tunisi<span className='text-blue-600'>Etsi</span>
             </Link>
@@ -291,15 +291,19 @@ const Navbar = async () => {
               Create your product
               <ArrowRight className='ml-1.5 h-5 w-5' />
             </Link>
+
+            <ModeToggle/>
+
           </div>
 
+
           {/* User Profile for small devices */}
-          <div className='md:hidden flex items-center'>
+          <div className='md:hidden flex items-center space-x-2'>
             <UserProfile user={user!} />
+            <ModeToggle/>
           </div>
 
           <div>
-            <ModeToggle/>
           </div>
         </div>
       </MaxWidthWrapper>

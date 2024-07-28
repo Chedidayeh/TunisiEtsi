@@ -1246,18 +1246,28 @@ export async function getSideBarTotalCounts() {
     printedOrdersCount,
     awaitingActionProductCount,
     awaitingActionDesignCount,
+    storeRequestsCount
   ] = await Promise.all([
     db.order.count({
       where : {printed : true , status: {
         not: "DELIVERED"
       }}
     }),
+
+
     db.product.count({
       where : {isProductAccepted : false , isProductRefused : false}
     }),
+
+
     db.sellerDesign.count({
       where : {isDesignAccepted : false , isDesignRefused : false , isDesignForSale : true} 
+    }),
+
+    db.paymentRequest.count({
+      where : { status : "PENDING"}
     })
+
 
   ])
 
@@ -1265,7 +1275,8 @@ export async function getSideBarTotalCounts() {
   return {
     printedOrdersCount,
     awaitingActionProductCount,
-    awaitingActionDesignCount
+    awaitingActionDesignCount,
+    storeRequestsCount
   };
 }
 

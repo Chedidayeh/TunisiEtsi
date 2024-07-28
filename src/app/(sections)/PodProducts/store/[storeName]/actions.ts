@@ -88,7 +88,6 @@ export async function getStoreProductsAndDesigns(storeName: string) {
             store : true
           }
         },
-        designs: true,
       },
     });
 
@@ -103,4 +102,22 @@ export async function getStoreProductsAndDesigns(storeName: string) {
     console.error("Error fetching store's products and designs:", error);
     throw error; // Propagate the error for handling elsewhere
   }
+}
+
+
+export async function getDesignsByStoreId(storeId: string) {
+  try {
+    const sellersDesigns = await db.sellerDesign.findMany({
+      where: {
+        storeId: storeId,
+        isDesignForSale: true,
+        isDesignAccepted: true,
+      },
+    });
+
+    return sellersDesigns;
+  } catch (error) {
+    console.log(error)
+  }
+
 }

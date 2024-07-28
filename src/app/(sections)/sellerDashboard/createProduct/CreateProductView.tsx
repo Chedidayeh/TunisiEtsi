@@ -1246,12 +1246,13 @@ const handleFileChange = (file : File) => {
                                     )
                                   }
                                 >
-                                  <span
-                                    className={cn(
-                                      `bg-${color.tw}`,
-                                      'h-8 w-8 rounded-full border border-black border-opacity-10'
-                                    )}
-                                  />
+                                 <span
+                                  className={cn(
+                                    `bg-${color.tw}`,
+                                    color.label === 'White' ? 'dark:bg-white' : `dark:bg-${color.tw}`,
+                                    'h-8 w-8 rounded-full border border-black border-opacity-10'
+                                  )}
+                                />
                                 </RadioGroup.Option>
                               ))}
                             </div>
@@ -1361,12 +1362,13 @@ const handleFileChange = (file : File) => {
                                         )
                                       }
                                     >
-                                      <span
-                                        className={cn(
-                                          `bg-${color.tw}`,
-                                          'h-8 w-8 rounded-full border border-black border-opacity-10'
-                                        )}
-                                      />
+                                  <span
+                                  className={cn(
+                                    `bg-${color.tw}`,
+                                    color.label === 'White' ? 'dark:bg-white' : `dark:bg-${color.tw}`,
+                                    'h-8 w-8 rounded-full border border-black border-opacity-10'
+                                  )}
+                                />
                                     </RadioGroup.Option>
                                   ))}
                                 </div>

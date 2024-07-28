@@ -11,7 +11,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
     return (
       <>
 
-    <div className="grid min-h-screen w-full md:grid-cols-[210px_1fr]"> {/* Updated grid columns */}
+    <div className="grid min-h-screen w-full md:grid-cols-[240px_1fr]"> {/* Updated grid columns */}
     <SideBar />
       <div className="flex flex-col">
         <NavBar />
