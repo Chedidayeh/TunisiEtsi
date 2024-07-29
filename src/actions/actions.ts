@@ -21,6 +21,30 @@ export async function getUser() {
   
 }
 
+// Manage new added products : 
+export async function updateNewProductStatus(): Promise<void> {
+  const oneWeekInMillis = 7 * 24 * 60 * 60 * 1000; // One week in milliseconds
+  const currentDate = new Date();
+
+  // Fetch all products
+  const products: Product[] = await db.product.findMany({
+    where: {NewProduct : true}
+  });
+
+  // Iterate over each product
+  for (const product of products) {
+    const productAgeInMillis = currentDate.getTime() - new Date(product.createdAt).getTime();
+    
+    if (productAgeInMillis > oneWeekInMillis) {
+      // Update the NewProduct field to false if more than a week has passed
+      await db.product.update({
+        where: { id: product.id },
+        data: { NewProduct: false },
+      });
+    }
+  }
+}
+
 
 // get user by type 
 export async function getUsersByType() {
@@ -589,7 +613,7 @@ export async function fetchProducts(): Promise<Productswithstore[] | null> {
  export async function fetchNewProducts(): Promise<Productswithstore[] | null> {
     try {
       const products = await db.product.findMany({
-        where : {isProductAccepted : true},
+        where : {isProductAccepted : true , NewProduct : true},
         orderBy: {
           createdAt: 'desc'
         },
@@ -597,6 +621,11 @@ export async function fetchProducts(): Promise<Productswithstore[] | null> {
           store : true
         }
       });
+
+      if(products!.length>16) {
+        updateNewProductStatus()
+      }
+
   
       return products;
     } catch (error) {
@@ -607,21 +636,40 @@ export async function fetchProducts(): Promise<Productswithstore[] | null> {
 
 
     // for the best selling products
- export async function fetchBestSellingProducts(): Promise<Productswithstore[] | null> {
-  try {
-    const products = await db.product.findMany({
-      where:{ topSales : true , isProductAccepted : true},
-      include : {
-        store : true
+    export async function fetchBestSellingProducts() {
+      try {
+        // Fetch all products
+        const products = await db.product.findMany({
+          include: {
+            store: true,
+          },
+        });
+    
+        // Iterate through each product to check totalSales
+        for (const product of products) {
+          if (product.totalSales >= 10 && product.isProductAccepted) {
+            // Update the topSales field to true
+            await db.product.update({
+              where: { id: product.id },
+              data: { topSales: true },
+            });
+          }
+        }
+    
+        // Fetch the products again to get the updated topSales values
+        const bestSellingProducts = await db.product.findMany({
+          where: { topSales: true, isProductAccepted: true },
+          include: {
+            store: true,
+          },
+        });
+    
+        return bestSellingProducts;
+      } catch (error) {
+        console.error('Error fetching products:', error);
+        return null;
       }
-    });
-
-    return products;
-  } catch (error) {
-    console.error('Error fetching products:', error);
-    return null;
-  }
-}
+    }
 
 
   // fetch products by category

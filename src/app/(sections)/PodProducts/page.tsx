@@ -24,7 +24,7 @@ import { cn } from '@/lib/utils'
 import { Input } from '@/components/ui/input'
 import SearchQuery from '@/components/PodProducts/SearchQuery'
 import PerkSection from '@/components/PodProducts/PerkSection'
-import { fetchBestSellingProducts, fetchNewProducts, getUser } from '@/actions/actions'
+import { fetchBestSellingProducts, fetchNewProducts, fetchProducts, getUser } from '@/actions/actions'
 import NextImage from 'next/image'
 import Marquee from 'react-fast-marquee'
 import ProductSlider from '@/components/PodProducts/ProductSlider'
@@ -36,9 +36,11 @@ import HeroSection from '@/components/PodProducts/HeroSection'
 export default async function Page() {
   const newProducts = await fetchNewProducts();
   const bestSellingProducts = await fetchBestSellingProducts();
+  const allProducts = await fetchProducts()
   const user = await getUser();
 
   // Ensure products are not null or undefined
+  const filteredAllProducts = allProducts ? allProducts.slice(0, 8) : [];
   const filteredNewProducts = newProducts ? newProducts.slice(0, 8) : [];
   const filteredBestSellingProducts = bestSellingProducts ? bestSellingProducts.slice(0, 8) : [];
   
@@ -55,7 +57,7 @@ export default async function Page() {
         </div>
 
 
-        <section className='bg-muted/50 border-2 rounded-2xl border-slate-50 w-[90%] mx-auto my-8'>
+        <section className='bg-muted/50 border-2 rounded-2xl dark:border-slate-50 border-slate-500 w-[90%] mx-auto my-8'>
         <div className='flex flex-col items-center justify-center mt-2'>
     <p className='mt-4 text-sm max-w-prose text-muted-foreground'>
       Discover our Trending Style collection!
@@ -71,7 +73,7 @@ export default async function Page() {
           {/* trending products */}
        <ProductSlider 
             user={user!}
-            products={filteredNewProducts} />
+            products={filteredAllProducts} />
 
 </section>
 
@@ -80,7 +82,7 @@ export default async function Page() {
 
       {/* Top selled section */}
 
-      <section className='bg-muted/50 border-2 rounded-2xl border-slate-50 w-[90%] mx-auto my-8'>
+      <section className='bg-muted/50 border-2 rounded-2xl dark:border-slate-50 border-slate-500 w-[90%] mx-auto my-8'>
       <div className='w-[85%] mx-auto'>
       <ProductReel
             user={user!}
@@ -92,8 +94,10 @@ export default async function Page() {
       </div>
       </section>
 
+      
+
       {/* Newly released section */}
-      <section className='bg-muted/50 border-2 rounded-2xl border-slate-50 w-[90%] mx-auto my-8'>
+      <section className='bg-muted/50 border-2 rounded-2xl dark:border-slate-50 border-slate-500 w-[90%] mx-auto my-8'>
       <div className='w-[85%] mx-auto'>
       <ProductReel
             user={user!}

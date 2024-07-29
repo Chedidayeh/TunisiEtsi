@@ -97,7 +97,7 @@ export default function Page() {
     </div>
 
 
-    <section className='bg-muted/50 border-2 rounded-2xl border-slate-50 w-[90%] mx-auto my-8'>
+    <section className='bg-muted/50 border-2 rounded-2xl dark:border-slate-50 border-slate-500 w-[90%] mx-auto my-8'>
   <div className='mx-auto text-center flex flex-col w-full items-center'>
     {/* frip product animation */}
     <FripProductAnimation />

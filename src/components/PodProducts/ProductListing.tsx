@@ -33,7 +33,7 @@ import { auth } from "@/auth"
 import { useToast } from "../ui/use-toast"
 
 import session from "redux-persist/lib/storage/session"
-import { addProductToFavList, checkProductInFavList, getUser, removeProductFromFavList } from "@/actions/actions"
+import { addProductToFavList, checkAndUpdateProductStatus, checkProductInFavList, getUser, removeProductFromFavList } from "@/actions/actions"
 import { useRouter } from "next/navigation"
 
 interface Productswithstore extends Product {
@@ -69,7 +69,7 @@ const ProductListing = ({
   useEffect(() => {
     const checkFavStatus = async () => {
       try {
-        
+
         const isProductSaved = await checkProductInFavList(product!.id , user.id)
         setIsFavSaved(isProductSaved!);
         
@@ -208,6 +208,11 @@ const ProductListing = ({
   {product.topSales && (
   <div className="ml-2"> {/* Added margin for separation */}
   <Badge variant="outline" className="bg-emerald-700 text-white">Best sell</Badge>
+</div>
+  )}
+  {product.NewProduct && (
+  <div className="ml-2"> {/* Added margin for separation */}
+  <Badge variant="outline" className="bg-blue-700 text-white">New</Badge>
 </div>
   )}
 </div>

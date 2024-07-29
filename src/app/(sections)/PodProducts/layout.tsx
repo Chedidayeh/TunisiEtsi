@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "@/app/globals.css"
 import Navbar from "@/components/PodProducts/NavBar";
 import SearchBar from "@/components/PodProducts/SearchBar";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "TunisiEtsi",
@@ -21,8 +22,8 @@ export default function RootLayout({
             <Navbar/>
             <SearchBar/>
             {children}
+            <Footer/>
            </div>
-   
 
   );
 }

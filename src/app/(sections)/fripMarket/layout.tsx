@@ -3,6 +3,7 @@ import "@/app/globals.css";
 
 import Navbar from "@/components/fripMarket/NavBar";
 import SearchBar from "@/components/fripMarket/SearchBar";
+import Footer from "@/components/Footer";
 
 
 export const metadata: Metadata = {
@@ -27,6 +28,7 @@ export default function RootLayout({
           <Navbar/>
           <SearchBar/>
             {children}
+            <Footer/>
           </div>
 
   );

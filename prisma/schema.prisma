@@ -180,6 +180,9 @@ model Product {
   likes           Int           @default(0)
 
   topSales        Boolean       @default(false)
+  NewProduct      Boolean       @default(true)
+
+
   topLikes        Boolean       @default(false)
 
   frontDesignId   String? 

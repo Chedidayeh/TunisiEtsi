@@ -48,7 +48,7 @@ export default function Page() {
     <HeroSection/>
 
 
-    <section className='bg-muted/50 border-2 rounded-2xl border-slate-50 w-[90%] mx-auto my-8'>
+    <section className='bg-muted/50 border-2 rounded-2xl dark:border-slate-50 border-slate-500 w-[90%] mx-auto my-8'>
         <div className='py-4 mx-auto text-center flex flex-col w-full items-center'>
           <h1 className='text-2xl font-bold tracking-tight  sm:text-3xl'>
           Discover the best <span className="text-yellow-400">Products</span>

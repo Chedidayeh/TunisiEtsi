@@ -196,7 +196,7 @@ const combinedUrls = interleaveArrays(product.croppedFrontProduct, product.cropp
                 <div className='text-muted-foreground border-gray-300 '>
                   Store : <span className='cursor-pointer hover:text-blue-700'>
                     <Link
-                    href={`/MarketPlace/store/${product.store.storeName}`}>
+                    href={`/PodProducts/store/${product.store.storeName}`}>
                     {product.store.storeName}
                     </Link>
                     </span>
@@ -204,7 +204,7 @@ const combinedUrls = interleaveArrays(product.croppedFrontProduct, product.cropp
                 <div className='ml-4 border-l text-muted-foreground border-gray-300 pl-4'>
                   Category : <span className='cursor-pointer hover:text-blue-700'>
                     <Link
-                    href={`/MarketPlace/category/${product.category}`}>
+                    href={`/PodProducts/category/${product.category}`}>
                     {product.category}
                     </Link>
                     </span>
@@ -227,7 +227,14 @@ const combinedUrls = interleaveArrays(product.croppedFrontProduct, product.cropp
 
               <div className='flex items-center mt-2'>
                 <p className=' text-gray-900'>
-                <span className='text-xl font-bold text-blue-700'>{(product.price).toFixed(2)} TND {product.topSales && (
+                <span className='text-xl font-bold text-blue-700'>
+                  {(product.price).toFixed(2)} TND 
+                  {product.NewProduct && (
+                <div className="ml-2"> {/* Added margin for separation */}
+                <Badge variant="outline" className="bg-blue-700 text-white">New</Badge>
+              </div>
+                )}
+                 {product.topSales && (
                 <div className="ml-2"> {/* Added margin for separation */}
                 <Badge variant="outline" className="bg-emerald-700 text-white">Best sell</Badge>
               </div>

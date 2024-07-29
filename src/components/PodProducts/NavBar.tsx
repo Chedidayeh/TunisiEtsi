@@ -278,7 +278,7 @@ const Navbar = async () => {
 
             {/* User Profile */}
             <UserProfile user={user!} />
-            
+            <ModeToggle/>
 
             {/* create product section */}
             <div className='h-8 w-px bg-zinc-200 hidden sm:block' />
@@ -292,18 +292,13 @@ const Navbar = async () => {
               <ArrowRight className='ml-1.5 h-5 w-5' />
             </Link>
 
-            <ModeToggle/>
-
           </div>
 
 
           {/* User Profile for small devices */}
-          <div className='md:hidden flex items-center space-x-2'>
+          <div className='md:hidden flex items-center space-x-4'>
             <UserProfile user={user!} />
             <ModeToggle/>
-          </div>
-
-          <div>
           </div>
         </div>
       </MaxWidthWrapper>

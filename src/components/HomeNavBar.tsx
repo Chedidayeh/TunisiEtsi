@@ -236,8 +236,8 @@ const Navbar = async () => {
             )}       
                  {/* User Profile */}
 
-                        <UserProfile user={user!} />
-                        <ModeToggle/>
+            <UserProfile user={user!} />
+            <ModeToggle/>
 
           </div>
 
