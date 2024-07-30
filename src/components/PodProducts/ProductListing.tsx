@@ -33,7 +33,7 @@ import { auth } from "@/auth"
 import { useToast } from "../ui/use-toast"
 
 import session from "redux-persist/lib/storage/session"
-import { addProductToFavList, checkAndUpdateProductStatus, checkProductInFavList, getUser, removeProductFromFavList } from "@/actions/actions"
+import { addProductToFavList, checkProductInFavList, getUser, removeProductFromFavList } from "@/actions/actions"
 import { useRouter } from "next/navigation"
 
 interface Productswithstore extends Product {
