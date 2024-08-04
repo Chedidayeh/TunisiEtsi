@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Loader2 } from 'lucide-react'
 import { addFripProductToCart } from '@/actions/actions'
+import LoginModal from '../LoginModal'
 const AddToCartButton = ({
   user,
   product,
@@ -41,6 +42,7 @@ const AddToCartButton = ({
     const price = product.price
     const category = product.category
   
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false)
 
 
 
@@ -48,6 +50,7 @@ const AddToCartButton = ({
 
     try {
       if (!user) {
+        setIsLoginModalOpen(true)
         toast({
           title: 'No logged in user found !',
           description: 'Try to login first!',
@@ -145,6 +148,8 @@ const AddToCartButton = ({
       className='w-[60%]'>
       {isSuccess ? 'Added !' : 'Add to cart'}
     </Button>
+    
+    <LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen} />
 
       </>
 

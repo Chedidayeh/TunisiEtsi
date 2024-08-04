@@ -12,7 +12,7 @@ import crypto from 'crypto';
 import { sendResetPassEmail } from "@/lib/mailer"
 
 
-export const login = async (values: z.infer<typeof LoginSchema>) => {
+export const login = async (values: z.infer<typeof LoginSchema> , redirectUrl : string | null) => {
     // Validate the fields using Zod schema
     const validatedFields = LoginSchema.safeParse(values);
 
@@ -41,8 +41,10 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
             await signIn("credentials", {
                 email: email,
                 password: password,
-                redirectTo: DEFAULT_LOGIN_REDIRECT
+                redirect : false
             });
+
+
 
             // Return success if signIn doesn't throw an error
             return { success: "Login successful!", error : ""};

@@ -23,7 +23,6 @@ import { useRef, useState } from 'react'
 import { useRouter } from 'next/navigation' // Import useRouter from next/router
 import { Button } from '@/components/ui/button'
 import { ArrowLeft, ArrowRight, Check, Loader2, X } from 'lucide-react'
-import LoginModal from '@/components/LoginModal'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import {
   Card,
@@ -37,8 +36,6 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import {  useToast } from '@/components/ui/use-toast'
-import { useSelector } from 'react-redux'
-import { RootState } from '@/store/reducers/reducers'
 import { PreOrderPreview, User } from '@prisma/client'
 import Link from 'next/link'
 import { deletePreOrder, saveOrder } from "./actions"

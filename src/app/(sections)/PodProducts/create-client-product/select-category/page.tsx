@@ -11,12 +11,13 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { useRouter } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { useDispatch } from "react-redux";
-import { saveSelectedProduct } from "@/store/actions/action";
 import { getAllCategories, getUser } from "@/actions/actions";
 import { useToast } from "@/components/ui/use-toast";
 import { BackBorder, Category, Color, FrontBorder, Size } from "@prisma/client";
 import LoadingState from "@/components/LoadingState";
 import ImageSlider from "@/components/fripMarket/ImageSlider";
+import LoginModal from '@/components/LoginModal';
+import { useState } from 'react';
 
 interface fetchedCat extends Category {
   colors : Color[]
@@ -64,12 +65,14 @@ const Page = () => {
   }, [selectedCard]);
 
 
- 
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false)
+
 
   const handleButtonClick = async (index: number | null) => {
     if (index !== null && index !== undefined) {
       const user = await getUser()
       if(!user){
+        setIsLoginModalOpen(true)
         toast({
           title: 'No logged in user found !',
           description: 'You need to log In first !',
@@ -100,6 +103,9 @@ const Page = () => {
 
   return (
     <>
+
+<LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen} />
+
     <LoadingState isOpen={open} />
 
     <div className={cn(

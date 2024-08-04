@@ -5,8 +5,6 @@
 export const privateRoutes = [
     "/create-client-product/upload",
     "/create-client-product/preview",
-    "/MarketPlace/thank-you",
-    "/MarketPlace/userOrders",
 ]
 
 

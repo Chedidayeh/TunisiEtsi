@@ -40,6 +40,9 @@ import { ArrowRight, Loader } from "lucide-react"
 import { login, resetPassword } from "./actions"
 import { useRouter } from "next/navigation"
 import { getUserByEmail } from "@/userData/user"
+import { useDispatch, useSelector } from "react-redux"
+import { RootState } from "@/store/reducers/reducers"
+import { saveRedirectUrl } from "@/store/actions/action"
 const emailSchema = z.string().email("Invalid email address");
 
 const Page = () => {
@@ -70,6 +73,9 @@ const Page = () => {
   const [success , setSuccess] = useState<string>("")
   const [isPending , stratTranstion ] = useTransition()
 
+  const redirectUrl = useSelector((state: RootState) => state.url);
+  const dispatch = useDispatch();
+
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -81,10 +87,12 @@ const Page = () => {
   function onSubmit(values: z.infer<typeof LoginSchema>) {
 
     stratTranstion(()=> {
-      login(values)
+      login(values , redirectUrl)
       .then((data)=>{
+        dispatch(saveRedirectUrl(null));
         setError(data?.error);
         setSuccess(data?.success);
+        router.push(redirectUrl ? redirectUrl : DEFAULT_LOGIN_REDIRECT);
       })
     })
   }

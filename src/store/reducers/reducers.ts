@@ -1,30 +1,39 @@
-import {  SAVE_ORDER_DATA, SELECTED_PRODUCT } from "../actions/action";
+import { SAVE_REDIRECT_URL } from "../actions/action";
 
 
 
-// Define the initial state with selectedProduct included
-const initialState = {
-  orderData: null,
-  selectedProduct: null,
+interface SaveRedirectUrlAction {
+  type: typeof SAVE_REDIRECT_URL;
+  payload: string;
+}
+
+type RedirectActionTypes = SaveRedirectUrlAction;
+
+interface RedirectState {
+  url: string | null;
+}
+
+const initialState: RedirectState = {
+  url: null,
 };
-export type RootState = ReturnType<typeof rootReducer>;
 
-const rootReducer = (state = initialState, action : any) => {
+const rootReducer = (state = initialState, action: RedirectActionTypes): RedirectState => {
   switch (action.type) {
-    case SAVE_ORDER_DATA:
+    case SAVE_REDIRECT_URL:
       return {
         ...state,
-        orderData: action.payload,
+        url: action.payload,
       };
-    case SELECTED_PRODUCT:
-        return {
-          ...state,
-          selectedProduct: action.payload,
-        };
-        
     default:
       return state;
   }
 };
 
 export default rootReducer;
+
+
+
+
+
+export type RootState = ReturnType<typeof rootReducer>;
+
